@@ -1,0 +1,17 @@
+[background arg="res://bgs/core.jpg" fade="1.8" transition="dissolve"]
+audio music "res://audio/ost/nexus_heartbeat.ogg"
+player: The core of the Chrono Nexus. A massive sphere of rotating crystal, humming with the raw power of space and time.
+join aurora (gorgeous) center [animation="Bounce In"]
+aurora (blush): Ren... you came back to me. The subsystem matrices are completely synchronized now.
+aurora: Look at the crystal... it's mirroring your shadow form, wrapping us both in a soft, twilight glow.
+join kira (neutral) left [animation="Slide From Left"]
+kira: I told you we'd make it! The sunfire power is at maximum!
+join elara (neutral) right [animation="Slide From Right"]
+elara (happy): The rifts are calm. The light from the core feels warm and welcoming.
+join selene (neutral) right [animation="Slide From Right"]
+selene (tease): And look at us... gathered at the heart of existence itself. Quite a romantic view for a shadowy foreign exchange student, don't you think?
+aurora (gorgeous): Ren... as long as you are with us, the Nexus will never fracture again. Our souls are woven together, across every horizon, across every lifetime.
+player: (The warmth of their presence, the soft blushes, the memories we've forged... the Chrono Nexus is no longer a prison. It is our sanctuary.)
+[background arg="res://bgs/festival_night.jpg" fade="2.5" transition="dissolve"]
+[wait time="1.5"]
+[jump timeline="TL_001_Opening_RiftSchool"]

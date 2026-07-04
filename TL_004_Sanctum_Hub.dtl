@@ -1,0 +1,24 @@
+[background arg="res://bgs/beach_sunset.jpg" fade="1.5" transition="dissolve"]
+audio music "res://audio/ost/sanctum_whispers.ogg"
+player: The rift currents release us with a gentle, warm breath of air. The cold starlight of the sanctuary is replaced by a vast, glowing sunset over an endless, surreal sea.
+join elara (neutral) left [animation="Slide From Left"]
+join selene (neutral) right [animation="Slide From Right"]
+elara: The Nexus has guided us to the Shore of Whispers... The tide here carries the memories of civilizations long before the rifts began.
+selene: A beach at sunset... How incredibly cliché of this dimension. Yet, under this light, the way the waves reflect off your shadow-cloak, Ren, is quite beautiful.
+elara (blush): Selene! Please... the tropical warm front is already making my healing robes cling. The salt air makes the fabric so heavy... and translucent.
+selene (tease): Oh, my dear healer. If the traveler didn't want to look, they would have turned their glowing eyes away by now. Look at how they watch you.
+- Comfort Elara and adjust her shawl
+  elara (extreme_blush): A-Ah... your shadow-touch is surprisingly cool against the salt heat. Thank you...
+  elara (happy): My heart... the waves are whispering of ancient bonds. Being near you makes me feel so safe.
+  selene (blush): My, how tender. Perhaps I should feel a bit jealous?
+- Stand with Selene and watch the tide
+  selene (happy): The horizon seems to stretch into infinity, doesn't it? But with you standing next to me, Ren, the infinite feels perfectly within reach.
+  selene (ecchi): Look, a warm breeze is picking up. My twilight robes aren't built for ocean winds... see how they sway?
+  elara (blush): S-Selene! You're letting the wind pull your shoulder straps down on purpose!
+selene (neutral): Closeness in the Nexus is never accidental. The dimensions shape themselves around what our souls desire most.
+elara (blush): Let's continue forward before the tide rises too high. The path ahead is leading into the core of the Nexus itself.
+[background arg="res://bgs/core.jpg" fade="2.0" transition="dissolve"]
+leave elara [animation="Fade Out Down"]
+leave selene [animation="Slide To Right"]
+[wait time="0.5"]
+[jump timeline="TL_005_Core_Resonance"]

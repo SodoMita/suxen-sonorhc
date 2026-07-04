@@ -15,10 +15,5 @@ The distant sound grows softer, almost playful, as glowing petals drift between 
 player: [i]Every glance, every accidental touch… the Nexus is turning fear into something warmer, but that sound reminds me we’re not alone in here. Still, their blushes and the way their outfits keep betraying them make it hard to pull away.[/i]
 kira (happy): The whispers say the next sanctum is calling. But staying here a little longer… with you… feels like the real adventure starting.
 aurora (smile): Ren, whatever happens next, remember these moments. The grove is watching, and it loves when we let the tension build.
-[background arg="res://bgs/nexus_chamber.jpg" fade="1.5" transition="dissolve"]
-The rift pulls you back to the crystal sanctum, the familiar pillars floating in soft starlight once more. The air feels thicker here, like a gentle hub pulling everyone together after each jump.
-join elara (neutral) left [animation="Slide From Left"]
-elara: Welcome back, Ren… the sanctum always feels calmer when you return.
-join selene (neutral) right [animation="Slide From Right"]
-selene: Indeed. Shall we linger a while before the next pull?
+[wait time="1.0"]
 [jump timeline="TL_004_Sanctum_Hub"]
