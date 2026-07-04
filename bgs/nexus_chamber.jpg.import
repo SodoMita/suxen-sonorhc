@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5xc6fwachph3"
-path="res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"
+uid="uid://cao4hs88e08tp"
+path="res://.godot/imported/nexus_chamber.jpg-fb7dc70222894a1fe26c0f7a5a1d8ed7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/aurora_serious_face.webp"
-dest_files=["res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"]
+source_file="res://bgs/nexus_chamber.jpg"
+dest_files=["res://.godot/imported/nexus_chamber.jpg-fb7dc70222894a1fe26c0f7a5a1d8ed7.ctex"]
 
 [params]
 

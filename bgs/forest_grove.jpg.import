@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5xc6fwachph3"
-path="res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"
+uid="uid://btmtxlxqsjcng"
+path="res://.godot/imported/forest_grove.jpg-6d8a9ea2d990fe59570432860c02e6fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/aurora_serious_face.webp"
-dest_files=["res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"]
+source_file="res://bgs/forest_grove.jpg"
+dest_files=["res://.godot/imported/forest_grove.jpg-6d8a9ea2d990fe59570432860c02e6fb.ctex"]
 
 [params]
 

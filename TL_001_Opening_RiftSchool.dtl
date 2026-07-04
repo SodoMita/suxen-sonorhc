@@ -1,0 +1,32 @@
+[background arg="res://bgs/japanese_school_class.jpg" fade="1.2" transition="dissolve"]
+audio music "res://audio/ost/nexus_heartbeat.ogg"
+join aurora center [animation="Slide From Right" length="2.0"]
+aurora (neutral): U-Um… system integrity at 84%… The rift waves are making everything feel all tingly and unstable…
+aurora (blush): S-Stranger…? You just appeared in my classroom dimension. I’m Aurora… the one who’s supposed to keep this place from falling apart. But your presence is… making my holographic layers glitch…
+aurora (surprised): W-Wait! Your bio-signature is resonating with my core! The interference is fading… but why is my skirt suddenly becoming see-through?!
+join kira (neutral) left [animation="Slide From Left"]
+kira (neutral): Yahoo~! Don’t hog all the fun, Aurora-chan! My sunfire sensors went crazy from the next dimension over!
+kira (tease): Hehe, is this the traveler everyone’s whispering about? You look kinda tasty up close~
+
+aurora (blush): <Empty Text Event>
+aurora: K-Kira! Physical boundary protocols! The traveler’s proximity is making my outfit phases flip!
+
+kira (blush): <Empty Text Event>
+kira (neutral): Aww, your holographic skirt is flickering again! Let me get reaaally close and check~
+kira: Whoa—! The floor just tilted!
+- Step closer to steady Aurora
+  aurora (extreme_blush): Ahh—! Your hand went right through my waist… It feels warm… like my core is melting…
+  aurora (smile): Thank you… The instability dropped… but now my heart is the one glitching…
+  kira (pout): No fair! I want some of that traveler warmth too!
+
+- Reach toward Kira instead
+  kira (blush): H-Hey! Those eyes are way too intense from this close! My tail’s puffing up!
+  kira (ecchi): Eek—! My skirt just flipped from the rift wind! Don’t look, don’t look!
+  aurora (sad_blush): Traveler… please don’t ignore my calibration… It feels lonely when you’re far…
+
+[background arg="res://bgs/rift.jpg" fade="1.8" transition="glitch"]
+aurora: L-Look out! The rift is pulling us again!
+leave kira [animation="Slide To Left"]
+leave aurora [animation="Fade Out Down"]
+[wait time="0.6"]
+[jump timeline="TL_002_Sanctum_Arrival"]

@@ -1,0 +1,34 @@
+[background arg="res://bgs/nexus_chamber.jpg" fade="1.8" transition="dissolve"]
+audio music "res://audio/ost/sanctum_whispers.ogg"
+player: You blink hard as the rift spits you out, the classroom fading behind you like a half-remembered dream. Floating crystal pillars drift in soft starlight, and the air feels thick enough to touch. Your pulse hasn’t slowed since the pull began.
+player: (This silence… it’s beautiful, but it presses against my skin like it’s alive. Every breath feels like it’s being watched. And why does it feel like the walls are leaning in closer the longer I stand here?)
+join elara (neutral) left [animation="Slide From Left"]
+elara: May the starlight guide us… The Nexus has drawn us into a sanctum of pure silence. I am Elara, healer of the moonlit groves. Aurora’s last message spoke of a traveler whose presence could steady the rifts. That must be you.
+elara (blush): Oh—! The moment you arrived the air grew warmer. My healing vestments are already reacting, the silk clinging tighter with every shift in the atmosphere.
+player: (She looks gentle, almost fragile, but there’s a quiet strength in how she holds herself. Still, that blush is spreading fast, and the way the fabric moves with her breathing is… distracting.)
+join selene (neutral) right [animation="Slide From Right"]
+selene: Quiet indeed, Elara. But with our new guest this sanctuary might become rather… exquisite. I am Selene, keeper of twilight spells. Welcome to the outer sanctums, traveler. Few arrive without panic in their eyes.
+selene (tease): Look at you already fidgeting, Elara. The sheer silk is clinging in all the right ways~ Your cheeks glow brighter than the crystals around us.
+elara (extreme_blush): S-Selene! Please show some restraint… The rift wind keeps lifting everything again! Traveler, please don’t stare too long… it’s embarrassing when the fabric behaves like this.
+selene (blush): Mmm, and your glowing energy is radiating straight toward the traveler. How adorable. I wonder if our guest feels the same pull I do.
+player: (These two already feel like they’ve known each other forever, yet the air between us crackles with something new. Elara’s vestments are nearly translucent at the edges, and Selene’s robe keeps sliding off her shoulder with every little movement. This dimension really doesn’t believe in personal space.)
+elara (blush): The rift energy is making my vestments almost translucent in places… I can feel every shift when you move closer. It’s as if the sanctum itself wants us nearer.
+selene (ecchi): Careful, healer. If you keep blushing like that the traveler might think you want them even nearer. My own robe is already slipping from the unstable gravity here.
+- Speak softly to Elara while gently steadying her hand
+  elara (smile): Your voice… it carries the calming power of ancient lunar waters. My heart is beating so fast it might burst through the silk.
+  elara (extreme_blush): The fabric is settling… but being this close to you feels even more dangerous than the rift. Your warmth is seeping straight into my core, and I don’t want it to stop.
+  kira (pout): (from somewhere distant) No fair! I want some of that traveler warmth too!
+- Lean in and trade teasing remarks with Selene
+  selene (happy): A sharp mind to match a daring presence. I like that very much. Most travelers panic the moment they arrive here, yet you meet our eyes so steadily.
+  selene (ecchi): Perhaps you’d like to study my spellbooks under closer illumination? My robe might slip if you lean in any more~ The rift wind loves to play with loose fabric, and I’m starting to enjoy the game.
+  elara (sad_blush): Traveler… don’t forget about my core calibration. It feels lonely when you’re too far. The silence here makes every little touch echo like a promise.
+player: (Both of them are getting more flustered by the second. The way their outfits keep reacting to the air, the soft blushes, the charged glances… this place mixes beauty with something almost scary. Like the dimension itself is gently pushing us together, testing how close we’ll allow ourselves to become.)
+selene (neutral): The fabric of our universe is complex… but these moments of connection feel perfectly simple. And dangerously intimate. The Nexus seems to enjoy watching us grow closer, peeling away the distance one heartbeat at a time.
+elara (blush): Please… let’s not let the silence turn into something we can’t control. Though your eyes are making it very hard to focus on the rift.
+[background arg="res://bgs/rift.jpg" fade="1.4" transition="glitch"]
+elara: Ah—! The sanctum is destabilizing again! The wind is picking up… I can feel my vestments lifting!
+selene (surprised): Traveler, stay close! The rift is pulling us toward the next sanctum. This is only the beginning of the Nexus’s games with our hearts.
+leave elara [animation="Fade Out Down"]
+leave selene [animation="Slide To Right"]
+player: (My thoughts are spinning. These girls, this place, the way everything feels so charged and fragile at once… I have a feeling the Chrono Nexus isn’t going to let me stay distant for long. Every glance, every accidental closeness, is starting to feel like the real adventure.)
+[jump timeline="TL_003_Whispers_In_The_Grove"]

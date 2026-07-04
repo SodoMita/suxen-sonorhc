@@ -1,18 +1,40 @@
 {
-"@path": "res://addons/dialogic/Resources/character.gd",
-"@subpath": "res://addons/dialogic/Resources/character.gd",
-"color": Color(0.4, 0.4, 0.4, 1.0),
-"custom_info": {},
-"default_portrait": "shadow",
+"color": Color(0, 0, 0, 1),
+"custom_info": {
+"prefix": "",
+"sound_mood_default": "",
+"sound_moods": {},
+"style": "",
+"suffix": ""
+},
+"default_portrait": "default",
 "description": "An enigmatic foreign exchange student whose physical presence is a shifting shadow silhouette with soft glowing eyes.",
 "display_name": "Ren",
 "mirror": false,
-"nicknames": ["Stranger", "Shadow Boy"],
+"nicknames": ["Stranger", "Shadow Boy", "Player", "protagonist"],
 "offset": Vector2(0, 0),
 "portraits": {
+"default": {
+"export_overrides": {
+"image": ""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"neutral": {
+"export_overrides": {
+"image": ""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
 "shadow": {
 "export_overrides": {
-"image": "res://Sprites/player_shadow.png"
+"image": "\"res://Sprites/ren_shadow.webp\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
@@ -20,5 +42,8 @@
 "scene": ""
 }
 },
-"scale": 1.0
+"resource_local_to_scene": false,
+"resource_name": "",
+"scale": 1.0,
+"script": Resource("uid://don4ds5f38byo", "res://addons/dialogic/Resources/character.gd")
 }

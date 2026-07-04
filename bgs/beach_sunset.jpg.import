@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5xc6fwachph3"
-path="res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"
+uid="uid://dyokj47i0voog"
+path="res://.godot/imported/beach_sunset.jpg-ee6222b9891633135d269b52c2bcc4bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/aurora_serious_face.webp"
-dest_files=["res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"]
+source_file="res://bgs/beach_sunset.jpg"
+dest_files=["res://.godot/imported/beach_sunset.jpg-ee6222b9891633135d269b52c2bcc4bb.ctex"]
 
 [params]
 

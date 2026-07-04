@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5xc6fwachph3"
-path="res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"
+uid="uid://3q1nsjakfw0i"
+path="res://.godot/imported/festival_night.jpg-5f113a13a5091c6e138904950b43fd47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/aurora_serious_face.webp"
-dest_files=["res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"]
+source_file="res://bgs/festival_night.jpg"
+dest_files=["res://.godot/imported/festival_night.jpg-5f113a13a5091c6e138904950b43fd47.ctex"]
 
 [params]
 

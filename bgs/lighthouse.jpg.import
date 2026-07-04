@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5xc6fwachph3"
-path="res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"
+uid="uid://bg8n5mk51cgde"
+path="res://.godot/imported/lighthouse.jpg-0b46e118512bc154d2f47031bed651af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/aurora_serious_face.webp"
-dest_files=["res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"]
+source_file="res://bgs/lighthouse.jpg"
+dest_files=["res://.godot/imported/lighthouse.jpg-0b46e118512bc154d2f47031bed651af.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5xc6fwachph3"
-path="res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"
+uid="uid://q83j30h1bkiq"
+path="res://.godot/imported/lab_station.jpg-85ed49b9f290dd25fd1183dbf076b197.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/aurora_serious_face.webp"
-dest_files=["res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"]
+source_file="res://bgs/lab_station.jpg"
+dest_files=["res://.godot/imported/lab_station.jpg-85ed49b9f290dd25fd1183dbf076b197.ctex"]
 
 [params]
 

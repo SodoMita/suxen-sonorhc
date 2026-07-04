@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5xc6fwachph3"
-path="res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"
+uid="uid://cmyla2ad3x7r8"
+path="res://.godot/imported/sanctum.jpg-da8e0e40d74f64c8a7a1356920d96a11.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/aurora_serious_face.webp"
-dest_files=["res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"]
+source_file="res://bgs/sanctum.jpg"
+dest_files=["res://.godot/imported/sanctum.jpg-da8e0e40d74f64c8a7a1356920d96a11.ctex"]
 
 [params]
 

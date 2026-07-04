@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5xc6fwachph3"
-path="res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"
+uid="uid://c88ys72uu5he1"
+path="res://.godot/imported/cyberpunk_alley.jpg-2ca3d300676bce9278bc40065c466b6d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/aurora_serious_face.webp"
-dest_files=["res://.godot/imported/aurora_serious_face.webp-5b72c4fa208e7c42027ba6a0be1d2596.ctex"]
+source_file="res://bgs/cyberpunk_alley.jpg"
+dest_files=["res://.godot/imported/cyberpunk_alley.jpg-2ca3d300676bce9278bc40065c466b6d.ctex"]
 
 [params]
 

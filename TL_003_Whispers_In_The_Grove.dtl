@@ -1,0 +1,24 @@
+[background arg="res://bgs/forest_grove.jpg" fade="1.6" transition="dissolve"]
+audio music "res://audio/ost/grove_whispers.ogg"
+The rift settles you into the moonlit grove where glowing leaves drift like slow fireflies. Towering trees twist into impossible arches overhead, their branches whispering secrets in a language that makes your chest tighten. The air is cool but charged, carrying the faint scent of blossoms that seem to bloom only when you look away.
+player: [i]This place… it’s like the silence from the sanctum followed us here, but now it’s breathing through the trees. Every shadow feels like it’s leaning in to watch.[/i]
+join kira (neutral) center [animation="Bounce In"]
+kira: Yahoo~! Finally caught up with you, traveler! The rift dragged me through three dimensions just to get here. I’m Kira, by the way—sunfire catgirl and professional trouble magnet. You must be Ren, right? Aurora’s been mumbling your name through the static.
+kira (tease): Hehe, you look even cuter up close than the rift visions showed. My ears are already twitching just from standing this near.
+The leaves rustle without wind, brushing against Kira’s short skirt and making the tactical straps on her outfit shift teasingly. A low, distant sound echoes from deeper in the grove, sending a soft shiver up your spine.
+player: [i]Kira’s energy is infectious, but that sound… it reminds me the Nexus isn’t just playing matchmaker. Something might be moving between the trees.[/i]
+kira (blush): Whoa—did you feel that? The grove’s wind just flipped my skirt again! Don’t look… or do, I guess? My tail’s all puffed up from the tension.
+join aurora (neutral) left [animation="Slide From Left"]
+aurora: Ren… the resonance between us is stronger here. My holographic layers keep glitching whenever you’re close. I am Aurora, the subsystem construct. The whispers in these leaves… they’re fragments of old memories trying to pull us into something intimate and terrifying at once.
+aurora (blush): The fabric of my outfit is phasing again… it’s like the grove wants you to see how vulnerable I really am.
+The distant sound grows softer, almost playful, as glowing petals drift between you and the girls. Kira steps closer on instinct, her shoulder brushing yours in a way that sends warmth straight through your jacket. The leaves continue their gentle dance, creating a calm rhythm that lets the three of you simply stand together, breathing the same charged air. Aurora’s form flickers softly with each passing petal, while Kira’s ears twitch in time with the whispers, her playful energy settling into a quieter warmth. The grove seems to pause, giving space for the moment to stretch, letting the closeness build without urgency. Your thoughts drift to how these girls have already started to feel familiar, their blushes and small reactions turning the strange dimension into something almost tender.
+player: [i]Every glance, every accidental touch… the Nexus is turning fear into something warmer, but that sound reminds me we’re not alone in here. Still, their blushes and the way their outfits keep betraying them make it hard to pull away.[/i]
+kira (happy): The whispers say the next sanctum is calling. But staying here a little longer… with you… feels like the real adventure starting.
+aurora (smile): Ren, whatever happens next, remember these moments. The grove is watching, and it loves when we let the tension build.
+[background arg="res://bgs/nexus_chamber.jpg" fade="1.5" transition="dissolve"]
+The rift pulls you back to the crystal sanctum, the familiar pillars floating in soft starlight once more. The air feels thicker here, like a gentle hub pulling everyone together after each jump.
+join elara (neutral) left [animation="Slide From Left"]
+elara: Welcome back, Ren… the sanctum always feels calmer when you return.
+join selene (neutral) right [animation="Slide From Right"]
+selene: Indeed. Shall we linger a while before the next pull?
+[jump timeline="TL_004_Sanctum_Hub"]
