@@ -31,4 +31,4 @@ selene (surprised): Traveler, stay close! The rift is pulling us toward the next
 leave elara [animation="Fade Out Down"]
 leave selene [animation="Slide To Right"]
 player: (My thoughts are spinning. These girls, this place, the way everything feels so charged and fragile at once… I have a feeling the Chrono Nexus isn’t going to let me stay distant for long. Every glance, every accidental closeness, is starting to feel like the real adventure.)
-[jump timeline="TL_003_Whispers_In_The_Grove"]
+[jump timeline="res://timelines/TL_003_Whispers_In_The_Grove.dtl"]

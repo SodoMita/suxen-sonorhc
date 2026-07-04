@@ -21,4 +21,4 @@ elara (blush): Let's continue forward before the tide rises too high. The path a
 leave elara [animation="Fade Out Down"]
 leave selene [animation="Slide To Right"]
 [wait time="0.5"]
-[jump timeline="TL_005_Core_Resonance"]
+[jump timeline="res://timelines/TL_005_Core_Resonance.dtl"]

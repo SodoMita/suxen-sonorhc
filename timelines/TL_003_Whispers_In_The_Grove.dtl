@@ -16,4 +16,4 @@ player: [i]Every glance, every accidental touch… the Nexus is turning fear int
 kira (happy): The whispers say the next sanctum is calling. But staying here a little longer… with you… feels like the real adventure starting.
 aurora (smile): Ren, whatever happens next, remember these moments. The grove is watching, and it loves when we let the tension build.
 [wait time="1.0"]
-[jump timeline="TL_004_Sanctum_Hub"]
+[jump timeline="res://timelines/TL_004_Sanctum_Hub.dtl"]

@@ -14,4 +14,4 @@ aurora (gorgeous): Ren... as long as you are with us, the Nexus will never fract
 player: (The warmth of their presence, the soft blushes, the memories we've forged... the Chrono Nexus is no longer a prison. It is our sanctuary.)
 [background arg="res://bgs/festival_night.jpg" fade="2.5" transition="dissolve"]
 [wait time="1.5"]
-[jump timeline="TL_001_Opening_RiftSchool"]
+[jump timeline="res://timelines/TL_001_Opening_RiftSchool.dtl"]

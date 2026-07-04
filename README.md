@@ -21,11 +21,11 @@ An immersive, high-fidelity visual novel engine built entirely inside **Godot 4.
 ## 📂 Project Architecture
 
 *   `addons/dialogic/` — The complete Dialogic 2 plugin core files.
+*   `characters/` — Mapped `.dch` character files and resource configs.
+*   `timelines/` — Main story acts scripted in custom `.dtl` format.
 *   `Sprites/` — Character graphic assets and expression suites.
 *   `bgs/` — Environment and landscape backgrounds.
 *   `docs/` — Expanded design documents, lore, and directories.
     *   [`docs/characters.md`](docs/characters.md) — Comprehensive database of all configured characters.
     *   [`docs/world.md`](docs/world.md) — Documentation on dimensional rules, environments, and physics.
-*   `*.dch` — Configured character resources matching Dialogic 2.
-*   `*.dtl` — Linear campaign acts scripted in custom `.dtl` format.
 *   `main.tscn` & `main.gd` — Primary scene node and boot loader logic.

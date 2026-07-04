@@ -5,4 +5,4 @@ func _ready() -> void:
 	await get_tree().create_timer(0.2).timeout
 	
 	# Start the Chrono Nexus campaign from the official introduction
-	Dialogic.start("res://TL_001_Opening_RiftSchool.dtl")
+	Dialogic.start("res://timelines/TL_001_Opening_RiftSchool.dtl")
