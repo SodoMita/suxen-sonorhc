@@ -1,0 +1,60 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": "res://addons/dialogic/Resources/character.gd",
+"color": Color(0.68, 0.35, 0.9, 1.0),
+"custom_info": {},
+"default_portrait": "neutral",
+"description": "Twilight Sorceress with elegant poise and high-slit robes.",
+"display_name": "Selene",
+"mirror": false,
+"nicknames": [],
+"offset": Vector2(0, 0),
+"portraits": {
+"blush": {
+"export_overrides": {
+"image": "res://Sprites/selene_blush.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"happy": {
+"export_overrides": {
+"image": "res://Sprites/selene_happy.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"neutral": {
+"export_overrides": {
+"image": "res://Sprites/selene_neutral.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"sad": {
+"export_overrides": {
+"image": "res://Sprites/selene_sad.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"surprised": {
+"export_overrides": {
+"image": "res://Sprites/selene_surprised.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+}
+},
+"scale": 1.0
+}

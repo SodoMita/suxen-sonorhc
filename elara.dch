@@ -1,0 +1,60 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": "res://addons/dialogic/Resources/character.gd",
+"color": Color(0.2, 0.8, 0.4, 1.0),
+"custom_info": {},
+"default_portrait": "neutral",
+"description": "Moon Elf Healer wearing flowing, semi-sheer fabrics.",
+"display_name": "Elara",
+"mirror": false,
+"nicknames": [],
+"offset": Vector2(0, 0),
+"portraits": {
+"blush": {
+"export_overrides": {
+"image": "res://Sprites/elara_blush.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"happy": {
+"export_overrides": {
+"image": "res://Sprites/elara_happy.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"neutral": {
+"export_overrides": {
+"image": "res://Sprites/elara_neutral.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"sad": {
+"export_overrides": {
+"image": "res://Sprites/elara_sad.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"surprised": {
+"export_overrides": {
+"image": "res://Sprites/elara_surprised.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+}
+},
+"scale": 1.0
+}

@@ -1,0 +1,33 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": "res://addons/dialogic/Resources/character.gd",
+"color": Color(0.96, 0.45, 0.15, 1.0),
+"custom_info": {},
+"default_portrait": "neutral",
+"description": "Athletic Sunfire Catgirl with high energy and a playful attitude.",
+"display_name": "Kira",
+"mirror": false,
+"nicknames": ["Kitten"],
+"offset": Vector2(0, 0),
+"portraits": {
+"blush": {
+"export_overrides": {
+"image": "res://Sprites/kira_blush.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"neutral": {
+"export_overrides": {
+"image": "res://Sprites/kira_happy.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+}
+},
+"scale": 1.0
+}

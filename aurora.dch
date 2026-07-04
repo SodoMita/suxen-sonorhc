@@ -1,0 +1,69 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": "res://addons/dialogic/Resources/character.gd",
+"color": Color(0.18, 0.62, 0.92, 1.0),
+"custom_info": {},
+"default_portrait": "neutral",
+"description": "Holographic entity with system instability and high emotional vulnerability.",
+"display_name": "Aurora",
+"mirror": false,
+"nicknames": [],
+"offset": Vector2(0, 0),
+"portraits": {
+"blush": {
+"export_overrides": {
+"image": "res://Sprites/aurora_blush.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"gorgeous": {
+"export_overrides": {
+"image": "res://Sprites/aurora_gorgeous.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"happy": {
+"export_overrides": {
+"image": "res://Sprites/aurora_happy.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"neutral": {
+"export_overrides": {
+"image": "res://Sprites/aurora_serious.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"sad": {
+"export_overrides": {
+"image": "res://Sprites/aurora_sad.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"surprised": {
+"export_overrides": {
+"image": "res://Sprites/aurora_surprised.webp"
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+}
+},
+"scale": 1.0
+}
