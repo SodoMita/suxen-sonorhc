@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 
 class ChronoAgent:
@@ -7,11 +8,16 @@ class ChronoAgent:
 		self.public_profile = public_profile
 		self.private_secrets = private_secrets # Секретные знания, скрытые от других агентов
 		
+<<<<<<< HEAD
 		# Чтение системных переменных для защиты ключей
+=======
+		# Извлекаем ключи из переменных окружения
+>>>>>>> main
 		self.api_key = os.getenv("YANDEX_API_KEY", "PLACEHOLDER_KEY")
 		self.model_uri = os.getenv("YANDEX_MODEL_URI", "PLACEHOLDER_URI")
 		self.url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
 
+<<<<<<< HEAD
 	def generate_hidden_thought(self, public_history):
 		"""
 		ФАЗА 1: Генерация скрытой внутренней мысли (Chain of Thought).
@@ -19,6 +25,9 @@ class ChronoAgent:
 		Важно: Промпт четко регламентирует, что агент знает только о СЕБЕ и СВОИХ секретах,
 		и пишет мысли исключительно от первого лица.
 		"""
+=======
+	def generate_hidden_thought(self, public_history, location_context):
+>>>>>>> main
 		prompt = (
 			f"Ты — {self.character_name}. {self.public_profile}\n"
 			f"Твои глубокие скрытые секреты, о которых знаешь ТОЛЬКО ТЫ и никто другой: {self.private_secrets}\n"
@@ -28,11 +37,15 @@ class ChronoAgent:
 		)
 		return self._request_llm(prompt, public_history, temperature=0.6)
 
+<<<<<<< HEAD
 	def generate_public_dialogue(self, public_history, personal_thought):
 		"""
 		ФАЗА 2: Генерация реплики вслух на основе скрытой мысли.
 		Включает отображение собственных мыслей в формате [i](мысли)[/i], но полностью скрывает чужие секреты.
 		"""
+=======
+	def generate_public_dialogue(self, public_history, personal_thought, location_context):
+>>>>>>> main
 		prompt = (
 			f"Ты — {self.character_name}. {self.public_profile}\n"
 			f"Твоя текущая внутренняя мысль: {personal_thought}\n"
@@ -43,7 +56,11 @@ class ChronoAgent:
 
 	def _request_llm(self, system_text, user_text, temperature):
 		if self.api_key == "PLACEHOLDER_KEY" or self.model_uri == "PLACEHOLDER_URI":
+<<<<<<< HEAD
 			return "[Error: API key or Model URI not set]"
+=======
+			return "[Error: API keys not configured]"
+>>>>>>> main
 
 		headers = {
 			"Content-Type": "application/json",
