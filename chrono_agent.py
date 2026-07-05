@@ -9,7 +9,11 @@ class ChronoAgent:
 		self.private_secrets = private_secrets # Секретные знания, скрытые от других агентов
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		# Чтение системных переменных для защиты ключей
+=======
+		# Извлекаем ключи из переменных окружения
+>>>>>>> main
 =======
 		# Извлекаем ключи из переменных окружения
 >>>>>>> main
@@ -18,6 +22,7 @@ class ChronoAgent:
 		self.url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def generate_hidden_thought(self, public_history):
 		"""
 		ФАЗА 1: Генерация скрытой внутренней мысли (Chain of Thought).
@@ -25,6 +30,9 @@ class ChronoAgent:
 		Важно: Промпт четко регламентирует, что агент знает только о СЕБЕ и СВОИХ секретах,
 		и пишет мысли исключительно от первого лица.
 		"""
+=======
+	def generate_hidden_thought(self, public_history, location_context):
+>>>>>>> main
 =======
 	def generate_hidden_thought(self, public_history, location_context):
 >>>>>>> main
@@ -38,11 +46,15 @@ class ChronoAgent:
 		return self._request_llm(prompt, public_history, temperature=0.6)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def generate_public_dialogue(self, public_history, personal_thought):
 		"""
 		ФАЗА 2: Генерация реплики вслух на основе скрытой мысли.
 		Включает отображение собственных мыслей в формате [i](мысли)[/i], но полностью скрывает чужие секреты.
 		"""
+=======
+	def generate_public_dialogue(self, public_history, personal_thought, location_context):
+>>>>>>> main
 =======
 	def generate_public_dialogue(self, public_history, personal_thought, location_context):
 >>>>>>> main
@@ -60,7 +72,6 @@ class ChronoAgent:
 			return "[Error: API key or Model URI not set]"
 =======
 			return "[Error: API keys not configured]"
->>>>>>> main
 
 		headers = {
 			"Content-Type": "application/json",
