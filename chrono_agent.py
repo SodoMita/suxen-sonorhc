@@ -1,17 +1,5 @@
-<<<<<<< HEAD
-import requests
+import os
 import json
-import os
-
-class ChronoAgent:
-	def __init__(self, character_name, system_profile):
-		self.character_name = character_name
-		self.system_profile = system_profile
-		
-		# Безопасное извлечение ключа API и URL модели исключительно из переменных окружения
-		# В коде отсутствуют захардкоженные секреты.
-=======
-import os
 import requests
 
 class ChronoAgent:
@@ -20,22 +8,12 @@ class ChronoAgent:
 		self.public_profile = public_profile
 		self.private_secrets = private_secrets # Секретные знания, скрытые от других агентов
 		
-		# Безопасное чтение ключей из переменных окружения
->>>>>>> main
+		# Извлекаем ключи из переменных окружения
 		self.api_key = os.getenv("YANDEX_API_KEY", "PLACEHOLDER_KEY")
 		self.model_uri = os.getenv("YANDEX_MODEL_URI", "PLACEHOLDER_URI")
 		self.url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
 
-<<<<<<< HEAD
-	def generate_reply(self, user_input, temperature=0.45):
-		if self.api_key == "PLACEHOLDER_KEY" or self.model_uri == "PLACEHOLDER_URI":
-			return "Error: YANDEX_API_KEY or YANDEX_MODEL_URI environment variables are not set."
-=======
 	def generate_hidden_thought(self, public_history, location_context):
-		"""
-		ФАЗА 1: Генерация скрытой внутренней мысли.
-		Включает в себя текущую локацию и физическое состояние окружения.
-		"""
 		prompt = (
 			f"Ты — {self.character_name}. {self.public_profile}\n"
 			f"Текущая локация и физические законы окружения: {location_context}\n"
@@ -46,10 +24,6 @@ class ChronoAgent:
 		return self._request_llm(prompt, public_history, temperature=0.6)
 
 	def generate_public_dialogue(self, public_history, personal_thought, location_context):
-		"""
-		ФАЗА 2: Генерация реплики вслух.
-		Выводит мысли внутри [i](мысли)[/i], реагируя на глитчи одежды в зависимости от локации.
-		"""
 		prompt = (
 			f"Ты — {self.character_name}. {self.public_profile}\n"
 			f"Текущая локация и физическое состояние: {location_context}\n"
@@ -62,7 +36,6 @@ class ChronoAgent:
 	def _request_llm(self, system_text, user_text, temperature):
 		if self.api_key == "PLACEHOLDER_KEY" or self.model_uri == "PLACEHOLDER_URI":
 			return "[Error: API keys not configured]"
->>>>>>> main
 
 		headers = {
 			"Content-Type": "application/json",
@@ -77,28 +50,6 @@ class ChronoAgent:
 				"maxTokens": "500"
 			},
 			"messages": [
-<<<<<<< HEAD
-				{
-					"role": "system",
-					"text": f"Ты — {self.character_name}. {self.system_profile} Ограничься строго прямой речью и мыслями в круглых скобках (...), без описания твоих действий в звездочках или стороннего текста."
-				},
-				{
-					"role": "user",
-					"text": user_input
-				}
-			]
-		}
-		
-		try:
-			response = requests.post(self.url, headers=headers, json=payload)
-			if response.status_code == 200:
-				result = response.json()
-				return result["result"]["alternatives"][0]["message"]["text"]
-			else:
-				return f"Error: Code {response.status_code}, Message: {response.text}"
-		except Exception as e:
-			return f"Exception occurred: {str(e)}"
-=======
 				{"role": "system", "text": system_text},
 				{"role": "user", "text": str(user_text)}
 			]
@@ -111,4 +62,3 @@ class ChronoAgent:
 			return f"[Error Code {response.status_code}]"
 		except Exception as e:
 			return f"[Exception: {str(e)}]"
->>>>>>> main

@@ -1,115 +1,32 @@
 import os
 import time
+import json
 from chrono_agent import ChronoAgent
 
-<<<<<<< HEAD
-
-class ChronoNexusChat:
-    def __init__(self):
-        # Инициализируем агентов с их уникальными психолингвистическими профилями
-        self.agents = {
-            "Кира": ChronoAgent(
-                character_name="Кира",
-                system_profile="Твой профиль: кокетливая, дерзкая, используешь затяжные гласные. Когда Рен подходит близко, ты смущаешься, заикаешься и злишься (цундере).",
-            ),
-            "Аврора": ChronoAgent(
-                character_name="Аврора",
-                system_profile="Твой профиль: робкая, трепетная, нежная. Когда твоя стабильность падает, ты паникуешь и твоя речь прерывается квантовыми сбоями. Ты отчаянно ищешь защиты у Рена.",
-            ),
-            "Селена": ChronoAgent(
-                character_name="Селена",
-                system_profile="Твой профиль: утонченная, ироничная, уверенная в себе сумеречная ведунья. Обожаешь использовать изысканные провокации, скрытые смыслы и намеки. Поддразниваешь Рена.",
-            ),
-            "Нова": ChronoAgent(
-                character_name="Нова",
-                system_profile="Твой профиль: безумно робкая, страдаешь от социальной тревожности. Твой сканер разряжен, ты панически боишься темноты. Выражаешь смущение тихим шепотом в скобках (...).",
-            ),
-        }
-
-        # Очередь реплик для лога чата
-        self.history = []
-
-    def add_to_history(self, speaker, text):
-        self.history.append({"speaker": speaker, "text": text})
-        print(f"[{speaker}]: {text}")
-        print("-" * 50)
-
-    def run_group_discussion(self, starter_event, rounds=2):
-        """
-        Запуск симуляции группового диалога.
-        starter_event: событие-триггер (например, действие Рена)
-        rounds: количество кругов обсуждения между девушками
-        """
-        print("\n" + "=" * 20 + " ЗАПУСК СИМУЛЯЦИИ КВАНТОВОГО РЕЗОНАНСА " + "=" * 20)
-        self.add_to_history("Рен (Силуэт)", starter_event)
-
-        # Первый круг: реакция на действия Рена
-        last_reply = starter_event
-        for character_name, agent in self.agents.items():
-            # Передаем реплику/действие Рена на вход каждому агенту
-            reply = agent.generate_reply(last_reply)
-            self.add_to_history(character_name, reply)
-            # Даем небольшую паузу между запросами к API
-            time.sleep(1.0)
-
-        # Второй круг: девушки начинают реагировать на реплики друг друга
-        print("\n" + "=" * 20 + " ВТОРОЙ КРУГ: ВНУТРЕННИЙ РЕЗОНАНС " + "=" * 20)
-        for i in range(rounds - 1):
-            # Кира реагирует на Аврору и Селену
-            context = f"Аврора сказала: '{self.history[-3]['text']}'. Селена сказала: '{self.history[-2]['text']}'."
-            reply = self.agents["Кира"].generate_reply(
-                f"Реагируй на их слова: {context}"
-            )
-            self.add_to_history("Кира", reply)
-            time.sleep(1.0)
-
-            # Аврора пугается уверенности Селены и Киры
-            context = (
-                f"Кира спорит: '{reply}'. Селена смеется: '{self.history[-3]['text']}'."
-            )
-            reply = self.agents["Аврора"].generate_reply(f"Реагируй на спор: {context}")
-            self.add_to_history("Аврора", reply)
-            time.sleep(1.0)
-
-            # Селена изящно поддразнивает их обеих
-            context = f"Кира злится: '{self.history[-2]['text']}'. Аврора паникует: '{reply}'."
-            reply = self.agents["Селена"].generate_reply(
-                f"Поддразни их обеих: {context}"
-            )
-            self.add_to_history("Селена", reply)
-            time.sleep(1.0)
-
-            # Нова тихо шепчет из угла
-            context = f"Все спорят вокруг Рена. Селена говорит: '{reply}'."
-            reply = self.agents["Нова"].generate_reply(
-                f"Вырази свои тихие мысли из угла: {context}"
-            )
-            self.add_to_history("Nova", reply)
-            time.sleep(1.0)
-
-
-if __name__ == "__main__":
-    # Инструкция по локальному запуску:
-    # 1. Задайте переменные окружения в вашей ОС:
-    #    export YANDEX_API_KEY="ваш_ключ_api"
-    #    export YANDEX_MODEL_URI="ваш url yandex ai studio"
-    # 2. Запустите скрипт: python3 chrono_chat.py
-
-    chat = ChronoNexusChat()
-
-    # Сценарий: Рен делает выбор в пользу Авроры, сокращая дистанцию
-    trigger = "Рен делает шаг вперед, берет Аврору за руку, чтобы стабилизировать ее мерцающий костюм, и мягко смотрит на остальных."
-    chat.run_group_discussion(trigger, rounds=2)
-=======
 class ChronoNexusEngine:
 	def __init__(self):
 		# База данных локаций с их физическими параметрами
 		self.locations = {
-			"japanese_classroom": "Аварийный отсек японской школы. Гравитация нестабильна, парты парят, за окном бушует квантовый шторм Юпитера.",
-			"lab_station": "Жилой блок станции Прометей. Скорость света снижена, легкое визуальное размытие, воздух пахнет озоном.",
-			"starry_sanctum": "Лунное святилище. Гравитация 0.15g, парящие белые колонны. Ткани одежды теряют плотность и скользят.",
-			"twilight_archives": "Сумеречные архивы. Время течет петлями, сиреневый туман, парящие полуразрушенные свитки.",
-			"crystal_core": "Кристальный реакторный кор. Полная физическая нестабильность, постоянные перегрузки, фазовые сдвиги материи."
+			"japanese_classroom": {
+				"desc": "Аварийный отсек японской школы. Гравитация нестабильна, парты парят, за окном бушует квантовый шторм Юпитера.",
+				"bg_path": "res://bgs/japanese_school_class.jpg"
+			},
+			"lab_station": {
+				"desc": "Жилой блок станции Прометей. Скорость света снижена, легкое визуальное размытие, воздух пахнет озоном.",
+				"bg_path": "res://bgs/lab_station.jpg"
+			},
+			"starry_sanctum": {
+				"desc": "Лунное святилище. Гравитация 0.15g, парящие белые колонны. Ткани одежды теряют плотность и скользят.",
+				"bg_path": "res://bgs/sanctum.jpg"
+			},
+			"twilight_archives": {
+				"desc": "Сумеречные архивы. Время течет петлями, сиреневый туман, парящие полуразрушенные свитки.",
+				"bg_path": "res://bgs/cyberpunk_alley.jpg"
+			},
+			"crystal_core": {
+				"desc": "Кристальный реакторный кор. Полная физическая нестабильность, постоянные перегрузки, фазовые сдвиги материи.",
+				"bg_path": "res://bgs/core.jpg"
+			}
 		}
 
 		# База ИИ-агентов персонажей (весь каст)
@@ -147,48 +64,34 @@ class ChronoNexusEngine:
 		}
 
 	def run_scene_segment(self, location_id, public_history, last_action, responding_chars):
-		"""
-		Прогон сегмента сцены на определенной локации.
-		responding_chars: список персонажей, которые участвуют в этой сцене.
-		"""
-		location_context = self.locations.get(location_id, "Неизвестная квантовая зона")
-		print(f"\n--- [Текущая Локация: {location_id.upper()}] ---")
-		print(f"Физика окружения: {location_context}")
-		print("-" * 60)
-
-		# Сначала выводим действие игрока
-		print(f"[Рен (Игрок)]: {last_action}")
-		print("-" * 60)
+		location_data = self.locations.get(location_id, {"desc": "Неизвестная квантовая зона", "bg_path": "res://bgs/japanese_school_class.jpg"})
+		location_context = location_data["desc"]
 		
-		# Локальная история конкретного сегмента
+		segment_log = []
 		local_history = list(public_history)
 		local_history.append(f"Рен (Игрок): {last_action}")
 
-		# Каждый из выбранных персонажей генерирует мысли и реплику
 		for name in responding_chars:
 			if name not in self.agents:
 				continue
 			agent = self.agents[name]
 			
-			# Фаза 1: Генерация скрытой мысли с учетом локации
 			private_thought = agent.generate_hidden_thought(local_history, location_context)
-			print(f"  [Приватная Мысль {name} (Скрыто от других)]: {private_thought}")
-			
-			# Фаза 2: Генерация публичной реплики с учетом локации (глитчи одежды)
 			public_reply = agent.generate_public_dialogue(local_history, private_thought, location_context)
-			print(f"[{name}]: {public_reply}")
-			print("-" * 60)
 			
-			# Добавляем в историю
+			segment_log.append({
+				"character": name,
+				"dialogue": public_reply
+			})
 			local_history.append(f"{name}: {public_reply}")
-			time.sleep(1.0)
+			time.sleep(0.5)
 			
-		return local_history
+		return segment_log
 
 	def evaluate_branching_path(self, location_id, choices_dict):
 		"""
-		Создает развилку и ПООЧЕРЕДНО проходит каждый из вариантов выбора.
-		choices_dict: словарь вида { \"Название выбора\": { \"action\": \"действие\", \"chars\": [список персонажей] } }
+		Создает развилку, проходит поочередно каждую ветку, сохраняет результаты в JSON
+		и генерирует совместимый .dtl файл для Dialogic 2.
 		"""
 		print("\n" + "="*20 + " ОБНАРУЖЕНА КВАНТОВАЯ РАЗВИЛКА " + "="*20)
 		
@@ -196,17 +99,77 @@ class ChronoNexusEngine:
 		for choice_name, choice_data in choices_dict.items():
 			print(f"\n>>>> [ПРОХОЖДЕНИЕ ВЕТВИ: {choice_name.upper()}] <<<<")
 			
-			# Запускаем сегмент сцены для данной ветви
-			history = self.run_scene_segment(
+			segment_log = self.run_scene_segment(
 				location_id=location_id,
 				public_history=[],
 				last_action=choice_data["action"],
 				responding_chars=choice_data["chars"]
 			)
-			branch_results[choice_name] = history
-			
+			branch_results[choice_name] = {
+				"action": choice_data["action"],
+				"dialogue_steps": segment_log
+			}
+
+		# 1. Сохраняем чистый лог симуляции в JSON
+		output_json_path = "docs/vn_specific/simulated_branches.json"
+		os.makedirs(os.path.dirname(output_json_path), exist_ok=True)
+		with open(output_json_path, "w", encoding="utf-8") as f:
+			json.dump(branch_results, f, ensure_ascii=False, indent=4)
+		print(f"\n[Система]: Лог симуляции успешно сохранен в JSON: {output_json_path}")
+
+		# 2. Конвертируем результаты в Dialogic 2 .dtl формат
+		self.convert_json_to_dialogic_timeline(output_json_path, location_id)
+
 		print("\n" + "="*20 + " ВСЕ ВЕТВИ РАЗВИЛКИ УСПЕШНО СИМУЛИРОВАНЫ " + "="*20)
 		return branch_results
+
+	def convert_json_to_dialogic_timeline(self, json_path, location_id):
+		"""
+		Конвертирует JSON-лог симуляции в чистый, рабочий .dtl файл Dialogic 2
+		и сохраняет его в папку timelines/.
+		"""
+		with open(json_path, "r", encoding="utf-8") as f:
+			data = json.load(f)
+
+		location_data = self.locations.get(location_id, {"bg_path": "res://bgs/japanese_school_class.jpg"})
+		bg_path = location_data["bg_path"]
+
+		dtl_lines = []
+		# Задаем фоновое окружение
+		dtl_lines.append(f'[background arg="{bg_path}" fade="1.2"]')
+		dtl_lines.append("join player center [animation=\"Bounce In\"]")
+		dtl_lines.append("player: Что же мне сделать дальше? Квантовые флуктуации вокруг нарастают...")
+
+		# Сценарий выбора игрока
+		for choice_name, choice_data in data.items():
+			dtl_lines.append(f"- {choice_name}")
+			
+			# Наводим фокус на ветвь
+			action = choice_data["action"]
+			dtl_lines.append(f'\tplayer: ({action})')
+
+			# Рендерим диалоги персонажей
+			for step in choice_data["dialogue_steps"]:
+				char_name = step["character"]
+				dialogue_text = step["dialogue"]
+				
+				# Приводим имя персонажа к лоуэркейсу для референсов к dch
+				char_ref = char_name.lower()
+				
+				# Пишем со сдвигом таба (так как это внутри выбора Dialogic 2)
+				dtl_lines.append(f'\tjoin {char_ref} right [animation="Slide From Right"]')
+				
+				# Эскейпим возможные двоеточия во внутренних мыслях для безопасного парсинга Dialogic
+				safe_dialogue = dialogue_text.replace(":", "\\:")
+				dtl_lines.append(f'\t{char_ref}: {safe_dialogue}')
+				dtl_lines.append(f'\tleave {char_ref} [animation="Fade Out Down"]')
+
+		# Сохраняем в timelines/
+		output_dtl_path = "timelines/TL_006_Simulated_Branch.dtl"
+		os.makedirs(os.path.dirname(output_dtl_path), exist_ok=True)
+		with open(output_dtl_path, "w", encoding="utf-8") as f:
+			f.write("\n".join(dtl_lines))
+		print(f"[Система]: Dialogic 2 Timeline успешно сгенерирован: {output_dtl_path}")
 
 if __name__ == "__main__":
 	# Инструкция по локальному запуску:
@@ -215,4 +178,3 @@ if __name__ == "__main__":
 	#    export YANDEX_MODEL_URI="ваш url yandex ai studio"
 	# 2. Запустите скрипт: python3 chrono_chat.py
 	pass
->>>>>>> main
