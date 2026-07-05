@@ -19,6 +19,9 @@ This comprehensive master-reference document catalogs the complete spectrum of n
    * *1.10 The Direct Dialogue Confrontation (The Conversational Trap)*
    * *1.11 The Absurdist / Surreal Paradox (The Logical Break)*
    * *1.12 The Statistical / Demographic Profile (The Analytical Cold Start)*
+   * *1.13 The Cognitive Dissociation / Amok Start (The Hallucinatory Disorientation)*
+   * *1.14 The Direct Rhetorical Interrogation (The Prosecutor Hook)*
+   * *1.15 The Linguistic / Phonetic Play (The Verbal Texture Hook)*
 2. **Exhaustive Literary Analysis of Masterpiece Openings**
    * *2.1 Fate/stay night (The Sensory-Memory Hook)*
    * *2.2 Muv-Luv Alternative (The Contrast of the Fading Dream)*
@@ -47,7 +50,7 @@ This comprehensive master-reference document catalogs the complete spectrum of n
 
 ## 1. The Exhaustive Typology of Narrative Beginnings
 
-In visual novel and literary craftsmanship, the opening line is the single most critical sentence in the manuscript. It dictates the player's sensory focal point, outlines the boundary rules of the world, and instantly forces a psychological question—known as the **"Story-Worthy Hook"**. The following twelve archetypes cover the complete spectrum of narrative beginnings:
+In visual novel and literary craftsmanship, the opening line is the single most critical sentence in the manuscript. It dictates the player's sensory focal point, outlines the boundary rules of the world, and instantly forces a psychological question—known as the **"Story-Worthy Hook"**. The following fifteen archetypes cover the complete spectrum of narrative beginnings:
 
 ### 1.1 The In Medias Res (The Action/Panic Shock)
 *   **The Concept**: Thrusts the reader directly into a state of high physical or environmental panic without any prior explanation or backstory. The reader is forced to ask "Why?" and "How did we get here?" as they react to immediate stimuli.
@@ -108,6 +111,21 @@ In visual novel and literary craftsmanship, the opening line is the single most 
 *   **The Concept**: Begins with raw data, coordinate logs, geographical census indices, or anatomical statistics of the protagonist or surrounding space.
 *   **The Emotional Driver**: Cold detachment, clinical curiosity, and scientific framing.
 *   **Aesthetic Alignment**: Suited for deep investigation scenes or military-scientific visual novels.
+
+### 1.13 The Cognitive Dissociation / Amok Start (The Hallucinatory Disorientation)
+*   **The Concept**: Starts with overlapping, chaotic thought fragments, shattered sentence blocks, sensory hallucinations, or manic repetitions that reflect a mind fracturing under stress or high rift exposure.
+*   **The Emotional Driver**: Pure panic, psychological dissociation, and direct empathy with mental trauma.
+*   **Aesthetic Alignment**: Tailored for psychological collapse moments and peak rift turbulence.
+
+### 1.14 The Direct Rhetorical Interrogation (The Prosecutor Hook)
+*   **The Concept**: Begins by asking the reader/protagonist a highly personal, direct, and uncomfortable question, putting them immediately on the defensive.
+*   **The Emotional Driver**: High self-awareness, immediate intellectual engagement, and moral focus.
+*   **Aesthetic Alignment**: Highly effective for opening critical choice scenes.
+
+### 1.15 The Linguistic / Phonetic Play (The Verbal Texture Hook)
+*   **The Concept**: Focuses entirely on the literal, phonetic, and oral texture of words, syllables, or whispers, drawing the reader's attention to the sensory sound of language itself before any plot is established.
+*   **The Emotional Driver**: Intense aesthetic focus, sensory pleasure, and rhythmic immersion.
+*   **Aesthetic Alignment**: Essential for whispered proximity scenes and quiet, high-intimacy route openings.
 
 ---
 
@@ -188,11 +206,16 @@ In visual novel and literary craftsmanship, the opening line is the single most 
     > *"Mother died today. Or, maybe, yesterday; I can't be sure."*
 *   **Analysis**: An opening of profound emotional apathy and existential detachment. The narrator's complete lack of interest in the precise time of his mother's death immediately establishes his severe cognitive alienation from societal values.
 
+#### *Bleak House* (Charles Dickens, 1853)
+*   **Opening Line**: 
+    > *"London. Michaelmas term lately over, and the Lord Chancellor sitting in Lincoln's Inn Hall. Implacable November weather. As much mud in the streets as if the waters had but newly retired from the face of the earth..."*
+*   **Analysis**: A brilliant combination of the *Environmental Epiphany* and *Atmospheric Sensory Solitude*. Dickens uses the thick, unyielding London fog and the heavy mud as direct metaphors for the corrupt, sluggish, and blinding bureaucracy of the court of Chancery.
+
 ---
 
 ## 3. Designing Character-Specific Beginnings for the Complete Cast
 
-By leveraging these twelve beginning types, we can draft custom, highly immersive introductions for every character in the *Chrono Nexus* cast:
+By leveraging these fifteen beginning types, we can draft custom, highly immersive introductions for every character in the *Chrono Nexus* cast:
 
 ### 3.1 Aurora (The System Deflicker) — *The Metatheatrical Intrusive (1.4)*
 *   **The Hook**: Aurora's screen starts with a terminal dialogue box popping up, reading: `SYSTEM ERROR: UNKNOWN CORRELATION DETECTED`. She speaks directly to the user's cursor as it hovers over the start button, her holographic form flickering violently as her stabilizer attempts to register Ren's name.
@@ -319,4 +342,4 @@ nova: "Ren, your shadow-cloak's thermographic frequencies are highly anomalous. 
 
 ---
 
-*This master-reference document acts as the creative standard for the opening sequences of all routes and acts inside suxen-sonorhc. Writers must refer to these twelve categories to ensure that every campaign act starts with high emotional and literary impact.*
+*This master-reference document acts as the creative standard for the opening sequences of all routes and acts inside suxen-sonorhc. Writers must refer to these fifteen categories to ensure that every campaign act starts with high emotional and literary impact.*
