@@ -1,4 +1,4 @@
-[background arg="res://bgs/nexus_chamber.jpg" fade="1.8" transition="dissolve"]
+[background arg="res://bgs/nexus_chamber.jpg" fade="1.8" transition="Simple Fade"]
 audio music "res://audio/ost/sanctum_whispers.ogg"
 player: You blink hard as the rift spits you out, the classroom fading behind you like a half-remembered dream. Floating crystal pillars drift in soft starlight, and the air feels thick enough to touch. Your pulse hasn’t slowed since the pull began.
 player: (This silence… it’s beautiful, but it presses against my skin like it’s alive. Every breath feels like it’s being watched. And why does it feel like the walls are leaning in closer the longer I stand here?)
@@ -25,7 +25,7 @@ selene (ecchi): Careful, healer. If you keep blushing like that the traveler mig
 player: (Both of them are getting more flustered by the second. The way their outfits keep reacting to the air, the soft blushes, the charged glances… this place mixes beauty with something almost scary. Like the dimension itself is gently pushing us together, testing how close we’ll allow ourselves to become.)
 selene (neutral): The fabric of our universe is complex… but these moments of connection feel perfectly simple. And dangerously intimate. The Nexus seems to enjoy watching us grow closer, peeling away the distance one heartbeat at a time.
 elara (blush): Please… let’s not let the silence turn into something we can’t control. Though your eyes are making it very hard to focus on the rift.
-[background arg="res://bgs/rift.jpg" fade="1.4" transition="glitch"]
+[background arg="res://bgs/rift.jpg" fade="1.4" transition="Glitch"]
 elara: Ah—! The sanctum is destabilizing again! The wind is picking up… I can feel my vestments lifting!
 selene (surprised): Traveler, stay close! The rift is pulling us toward the next sanctum. This is only the beginning of the Nexus’s games with our hearts.
 leave elara [animation="Fade Out Down"]

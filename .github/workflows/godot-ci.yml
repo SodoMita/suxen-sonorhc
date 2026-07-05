@@ -1,0 +1,95 @@
+name: Godot CI
+
+# Verifies the Chrono Nexus Godot project on every push and pull
+# request. Runs the headless smoke test from tests/run_headless.sh,
+# which checks for script errors, parse failures, missing resources,
+# the 3D background, the glassmorphism theme, the GameState autoload,
+# and the pre-commit secrets guard.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  headless-test:
+    name: Headless smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Cache Godot 4.7 binary
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: /tmp/godot-bin/godot
+          key: ${{ runner.os }}-godot-4.7-stable
+
+      - name: Install Godot 4.7 (stable)
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -e
+          mkdir -p /tmp/godot-bin
+          cd /tmp/godot-bin
+          curl -L -o godot.zip \
+            "https://github.com/godotengine/godot-builds/releases/download/4.7-stable/Godot_v4.7-stable_linux.x86_64.zip"
+          unzip -o godot.zip
+          mv "Godot_v4.7-stable_linux.x86_64" godot
+          chmod +x godot
+          rm -f godot.zip
+          ./godot --version
+
+      - name: Restore Godot binary from cache
+        if: steps.cache-godot.outputs.cache-hit == 'true'
+        shell: bash
+        run: |
+          mkdir -p /tmp/godot-bin
+          chmod +x /tmp/godot-bin/godot
+
+      - name: Run headless smoke test
+        shell: bash
+        env:
+          GODOT_BIN: /tmp/godot-bin/godot
+        run: bash tests/run_headless.sh
+
+      - name: Verify pre-commit hook is executable
+        shell: bash
+        run: |
+          if [ -x .githooks/pre-commit ]; then
+            echo "OK: pre-commit hook is executable."
+          else
+            echo "ERROR: pre-commit hook is missing or not executable." >&2
+            exit 1
+          fi
+
+      - name: Smoke-test the pre-commit hook
+        # The fake token is generated at runtime (not stored in this
+        # file) so the repo's own pre-commit hook doesn't reject the
+        # commit of this workflow file.
+        shell: bash
+        run: |
+          set -e
+          TMPF=$(mktemp)
+          # Build a fake token by concatenation; never write the full
+          # literal into this repo.
+          PREFIX="ghp_"
+          SUFFIX="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+          printf '%s%s\n' "$PREFIX" "$SUFFIX" > "$TMPF"
+          # The hook scans staged files, so stage the temp file.
+          git add "$TMPF"
+          set +e
+          ./.githooks/pre-commit
+          rc=$?
+          set -e
+          git reset HEAD "$TMPF" >/dev/null
+          rm -f "$TMPF"
+          if [ "$rc" -eq 0 ]; then
+            echo "ERROR: pre-commit hook did not detect the fake PAT." >&2
+            exit 1
+          fi
+          echo "OK: pre-commit hook correctly rejected the fake PAT."

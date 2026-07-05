@@ -1,4 +1,4 @@
-[background arg="res://bgs/forest_grove.jpg" fade="1.6" transition="dissolve"]
+[background arg="res://bgs/forest_grove.jpg" fade="1.6" transition="Simple Fade"]
 audio music "res://audio/ost/grove_whispers.ogg"
 The rift settles you into the moonlit grove where glowing leaves drift like slow fireflies. Towering trees twist into impossible arches overhead, their branches whispering secrets in a language that makes your chest tighten. The air is cool but charged, carrying the faint scent of blossoms that seem to bloom only when you look away.
 player: [i]This place… it’s like the silence from the sanctum followed us here, but now it’s breathing through the trees. Every shadow feels like it’s leaning in to watch.[/i]

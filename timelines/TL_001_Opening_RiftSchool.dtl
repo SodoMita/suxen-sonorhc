@@ -1,11 +1,11 @@
-[background arg="res://bgs/japanese_school_class.jpg" fade="1.2" transition="dissolve"]
+[background arg="res://bgs/japanese_school_class.jpg" fade="1.2" transition="Simple Fade"]
 join player (shadow) center [animation="Bounce In"]
 player: (The humming of the fluorescent lights... the quiet scratching of chalk... and the rain beating against the classroom windows.)
 player: (As a foreign exchange student, I've spent weeks in Tokyo trying to blend into the shadows. Literally and figuratively.)
 player: (But today, the silence in the old school building feels heavy. The air is vibrating...)
-[background arg="res://bgs/japanese_school_class.jpg" fade="0.5" transition="glitch"]
+[background arg="res://bgs/japanese_school_class.jpg" fade="0.5" transition="Simple Fade"]
 player: (Wait. The desks... they're flickering? The chalkboard is folding in on itself!)
-[background arg="res://bgs/nexus_chamber.jpg" fade="1.5" transition="glitch"]
+[background arg="res://bgs/nexus_chamber.jpg" fade="1.5" transition="Glitch"]
 player: (The school is gone. I am floating in a magnificent, terrifying fracture of reality—crystals floating in starlight...)
 update player left [move_time="1.0"]
 join aurora (neutral) right [animation="Slide From Right" length="1.5"]
@@ -29,7 +29,7 @@ kira: Whoa—! The floor just tilted!
   kira (ecchi): Eek—! My skirt just flipped from the rift wind! Don’t look, don't look!
   aurora (sad_blush): Traveler… please don’t ignore my calibration… It feels lonely when you’re far…
 
-[background arg="res://bgs/rift.jpg" fade="1.8" transition="glitch"]
+[background arg="res://bgs/rift.jpg" fade="1.8" transition="Glitch"]
 aurora: L-Look out! The rift is pulling us again!
 leave kira [animation="Slide To Left"]
 leave aurora [animation="Fade Out Down"]

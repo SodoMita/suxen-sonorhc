@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import requests
-import json
-import os
-
-class ChronoAgent:
-	def __init__(self, character_name, system_profile):
-		self.character_name = character_name
-		self.system_profile = system_profile
-		
-		# Безопасное извлечение ключа API и URL модели исключительно из переменных окружения
-		# В коде отсутствуют захардкоженные секреты.
-=======
 import os
 import requests
 
@@ -20,49 +7,43 @@ class ChronoAgent:
 		self.public_profile = public_profile
 		self.private_secrets = private_secrets # Секретные знания, скрытые от других агентов
 		
-		# Безопасное чтение ключей из переменных окружения
->>>>>>> main
+		# Чтение системных переменных для защиты ключей
 		self.api_key = os.getenv("YANDEX_API_KEY", "PLACEHOLDER_KEY")
 		self.model_uri = os.getenv("YANDEX_MODEL_URI", "PLACEHOLDER_URI")
 		self.url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
 
-<<<<<<< HEAD
-	def generate_reply(self, user_input, temperature=0.45):
-		if self.api_key == "PLACEHOLDER_KEY" or self.model_uri == "PLACEHOLDER_URI":
-			return "Error: YANDEX_API_KEY or YANDEX_MODEL_URI environment variables are not set."
-=======
-	def generate_hidden_thought(self, public_history, location_context):
+	def generate_hidden_thought(self, public_history):
 		"""
-		ФАЗА 1: Генерация скрытой внутренней мысли.
-		Включает в себя текущую локацию и физическое состояние окружения.
+		ФАЗА 1: Генерация скрытой внутренней мысли (Chain of Thought).
+		Этот результат записывается ТОЛЬКО в приватный лог в оперативной памяти игры.
+		Важно: Промпт четко регламентирует, что агент знает только о СЕБЕ и СВОИХ секретах,
+		и пишет мысли исключительно от первого лица.
 		"""
 		prompt = (
 			f"Ты — {self.character_name}. {self.public_profile}\n"
-			f"Текущая локация и физические законы окружения: {location_context}\n"
-			f"Твои глубокие скрытые секреты, о которых знаешь ТОЛЬКО ТЫ: {self.private_secrets}\n"
-			f"Ты не знаешь чужих секретов. Напиши свои текущие внутренние мысли от первого лица "
-			f"в ответ на последнюю ситуацию. Ограничься мыслями без прямой речи."
+			f"Твои глубокие скрытые секреты, о которых знаешь ТОЛЬКО ТЫ и никто другой: {self.private_secrets}\n"
+			f"Ты не знаешь чужих секретов. Ты реагируешь исключительно от своего лица.\n"
+			f"Напиши свои текущие внутренние мысли от первого лица, выражая то, что ты чувствуешь "
+			f"в ответ на последнюю ситуацию. Ограничься строго мыслями без прямой речи и мета-текста."
 		)
 		return self._request_llm(prompt, public_history, temperature=0.6)
 
-	def generate_public_dialogue(self, public_history, personal_thought, location_context):
+	def generate_public_dialogue(self, public_history, personal_thought):
 		"""
-		ФАЗА 2: Генерация реплики вслух.
-		Выводит мысли внутри [i](мысли)[/i], реагируя на глитчи одежды в зависимости от локации.
+		ФАЗА 2: Генерация реплики вслух на основе скрытой мысли.
+		Включает отображение собственных мыслей в формате [i](мысли)[/i], но полностью скрывает чужие секреты.
 		"""
 		prompt = (
 			f"Ты — {self.character_name}. {self.public_profile}\n"
-			f"Текущая локация и физическое состояние: {location_context}\n"
-			f"Твоя внутренняя мысль: {personal_thought}\n"
-			f"Сформулируй реплику для визуальной новеллы. Сначала напиши мысли строго внутри тегов [i](мысли)[/i], "
-			f"а затем напиши фразу, которую ты произносишь вслух. Учти физические глитчи одежды в зависимости от локации."
+			f"Твоя текущая внутренняя мысль: {personal_thought}\n"
+			f"Сформулируй реплику для визуальной новеллы. Сначала напиши свои мысли строго внутри тегов [i](мысли)[/i], "
+			f"а затем напиши фразу, которую ты произносишь вслух. Ограничься строго этим текстом, без мета-описаний."
 		)
 		return self._request_llm(prompt, public_history, temperature=0.4)
 
 	def _request_llm(self, system_text, user_text, temperature):
 		if self.api_key == "PLACEHOLDER_KEY" or self.model_uri == "PLACEHOLDER_URI":
-			return "[Error: API keys not configured]"
->>>>>>> main
+			return "[Error: API key or Model URI not set]"
 
 		headers = {
 			"Content-Type": "application/json",
@@ -77,28 +58,6 @@ class ChronoAgent:
 				"maxTokens": "500"
 			},
 			"messages": [
-<<<<<<< HEAD
-				{
-					"role": "system",
-					"text": f"Ты — {self.character_name}. {self.system_profile} Ограничься строго прямой речью и мыслями в круглых скобках (...), без описания твоих действий в звездочках или стороннего текста."
-				},
-				{
-					"role": "user",
-					"text": user_input
-				}
-			]
-		}
-		
-		try:
-			response = requests.post(self.url, headers=headers, json=payload)
-			if response.status_code == 200:
-				result = response.json()
-				return result["result"]["alternatives"][0]["message"]["text"]
-			else:
-				return f"Error: Code {response.status_code}, Message: {response.text}"
-		except Exception as e:
-			return f"Exception occurred: {str(e)}"
-=======
 				{"role": "system", "text": system_text},
 				{"role": "user", "text": str(user_text)}
 			]
@@ -111,4 +70,3 @@ class ChronoAgent:
 			return f"[Error Code {response.status_code}]"
 		except Exception as e:
 			return f"[Exception: {str(e)}]"
->>>>>>> main

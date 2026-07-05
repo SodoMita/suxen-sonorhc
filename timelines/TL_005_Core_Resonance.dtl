@@ -1,4 +1,4 @@
-[background arg="res://bgs/core.jpg" fade="1.8" transition="dissolve"]
+[background arg="res://bgs/core.jpg" fade="1.8" transition="Simple Fade"]
 audio music "res://audio/ost/nexus_heartbeat.ogg"
 player: The core of the Chrono Nexus. A massive sphere of rotating crystal, humming with the raw power of space and time.
 join aurora (gorgeous) center [animation="Bounce In"]
@@ -12,6 +12,6 @@ join selene (neutral) right [animation="Slide From Right"]
 selene (tease): And look at us... gathered at the heart of existence itself. Quite a romantic view for a shadowy foreign exchange student, don't you think?
 aurora (gorgeous): Ren... as long as you are with us, the Nexus will never fracture again. Our souls are woven together, across every horizon, across every lifetime.
 player: (The warmth of their presence, the soft blushes, the memories we've forged... the Chrono Nexus is no longer a prison. It is our sanctuary.)
-[background arg="res://bgs/festival_night.jpg" fade="2.5" transition="dissolve"]
+[background arg="res://bgs/festival_night.jpg" fade="2.5" transition="Simple Fade"]
 [wait time="1.5"]
 [jump timeline="res://timelines/TL_001_Opening_RiftSchool.dtl"]

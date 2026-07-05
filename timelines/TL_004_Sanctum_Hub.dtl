@@ -1,4 +1,4 @@
-[background arg="res://bgs/beach_sunset.jpg" fade="1.5" transition="dissolve"]
+[background arg="res://bgs/beach_sunset.jpg" fade="1.5" transition="Simple Fade"]
 audio music "res://audio/ost/sanctum_whispers.ogg"
 player: The rift currents release us with a gentle, warm breath of air. The cold starlight of the sanctuary is replaced by a vast, glowing sunset over an endless, surreal sea.
 join elara (neutral) left [animation="Slide From Left"]
@@ -17,7 +17,7 @@ selene (tease): Oh, my dear healer. If the traveler didn't want to look, they wo
   elara (blush): S-Selene! You're letting the wind pull your shoulder straps down on purpose!
 selene (neutral): Closeness in the Nexus is never accidental. The dimensions shape themselves around what our souls desire most.
 elara (blush): Let's continue forward before the tide rises too high. The path ahead is leading into the core of the Nexus itself.
-[background arg="res://bgs/core.jpg" fade="2.0" transition="dissolve"]
+[background arg="res://bgs/core.jpg" fade="2.0" transition="Simple Fade"]
 leave elara [animation="Fade Out Down"]
 leave selene [animation="Slide To Right"]
 [wait time="0.5"]

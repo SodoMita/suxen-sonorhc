@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+# Pre-commit hook: refuse to commit any file that looks like it contains
+# a credential. Better to force the author to look at a false positive
+# than to leak a token.
+#
+# Implementation notes:
+#   * We can't use `git diff -G<pattern> --pickaxe-regex` because Git
+#     doesn't allow `--pickaxe-regex` with `-G` (the two flags are
+#     mutually exclusive). For regex search we use `-S<pattern>
+#     --pickaxe-regex` instead, which uses a regex pickaxe.
+#   * For each staged file, we read its full contents and grep the
+#     pattern directly. This catches brand-new files that aren't in
+#     the previous commit (where `git diff` would be empty).
+set -e
+
+# Patterns matched as case-sensitive substrings (or regexes) in any
+# staged file's contents.
+PATTERNS=(
+  'ghp_[A-Za-z0-9]{30,}'
+  'gho_[A-Za-z0-9]{30,}'
+  'ghu_[A-Za-z0-9]{30,}'
+  'ghs_[A-Za-z0-9]{30,}'
+  'ghr_[A-Za-z0-9]{30,}'
+  'github_pat_[A-Za-z0-9_]{40,}'
+  'xox[bpars]-[A-Za-z0-9-]{10,}'
+  'sk-[A-Za-z0-9]{20,}'
+  'sk_live_[A-Za-z0-9]{20,}'
+  'sk_test_[A-Za-z0-9]{20,}'
+  'AKIA[0-9A-Z]{16}'
+  'AIza[0-9A-Za-z_-]{35}'
+  'ya29\.[0-9A-Za-z_-]{30,}'
+  'glpat-[A-Za-z0-9_-]{20,}'
+  'glptt-[A-Za-z0-9_-]{20,}'
+)
+
+found=0
+
+# Build a list of staged files (Added, Copied, Modified).
+mapfile -t staged_files < <(git diff --cached --name-only --diff-filter=ACMR)
+if [ "${#staged_files[@]}" -eq 0 ]; then
+  exit 0
+fi
+
+# Concatenate staged file contents into a single buffer to grep once.
+# We also include the diff against HEAD so that re-staging a partial
+# change (e.g. un-staging a key) doesn't bypass the check.
+scan_buffer="$(mktemp)"
+trap 'rm -f "$scan_buffer"' EXIT
+
+for f in "${staged_files[@]}"; do
+  # `git show :path` gives the staged (index) version of a file.
+  if git show ":${f}" >/dev/null 2>&1; then
+    git show ":${f}" >>"$scan_buffer"
+    printf '\n---END-OF-FILE-%s---\n' "$f" >>"$scan_buffer"
+  fi
+done
+
+# Also include the textual diff so line additions/changes are visible
+# even if the file as a whole is unchanged.
+git diff --cached -U0 >>"$scan_buffer" 2>/dev/null || true
+
+for pat in "${PATTERNS[@]}"; do
+  # `-S` is regex-anchored to the diff, so we also scan the raw file
+  # contents with grep -E. Skip the file-content grep for binary files
+  # by relying on `grep -I`.
+  if grep -IqE "${pat}" "$scan_buffer" 2>/dev/null; then
+    matches="$(grep -nE "${pat}" "$scan_buffer" | head -5 || true)"
+    if [ -n "$matches" ]; then
+      echo "ERROR: credential pattern '${pat}' detected in staged changes."
+      echo "First matches:"
+      echo "$matches"
+      echo "Refusing to commit. Please scrub the credential and try again."
+      found=1
+    fi
+  fi
+done
+
+# Also scan for Yandex-style credentials with non-placeholder values.
+if grep -qE 'YANDEX_API_KEY[[:space:]]*=[[:space:]]*"[A-Za-z0-9]{8,}"' "$scan_buffer"; then
+  if ! grep -qE 'YANDEX_API_KEY[[:space:]]*=[[:space:]]*"(PLACEHOLDER|your_|xxx)' "$scan_buffer"; then
+    echo "ERROR: YANDEX_API_KEY has a non-placeholder value."
+    found=1
+  fi
+fi
+
+# Also scan for Yandex model URI with real folder IDs (a 20+ char
+# lowercase alnum folder ID is the giveaway).
+if grep -qE 'YANDEX_MODEL_URI[[:space:]]*=[[:space:]]*gpt://[a-z0-9]{20,}/' "$scan_buffer"; then
+  echo "ERROR: YANDEX_MODEL_URI has a real folder ID."
+  found=1
+fi
+
+if [ "$found" -ne 0 ]; then
+  exit 1
+fi

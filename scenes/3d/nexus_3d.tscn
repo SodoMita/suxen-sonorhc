@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3dnexus001"]
+
+[ext_resource type="Shader" uid="uid://csny1wiijjlis" path="res://scenes/3d/nexus_sky.gdshader" id="1_sky"]
+[ext_resource type="Script" uid="uid://n2aafgalopjv" path="res://scenes/3d/nexus_3d.gd" id="2_root_script"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
+shader = ExtResource("1_sky")
+
+[sub_resource type="SphereMesh" id="SphereMesh_sky"]
+radius = 80.0
+height = 160.0
+radial_segments = 64
+rings = 32
+
+[sub_resource type="Environment" id="Environment_3d"]
+background_mode = 1
+background_color = Color(0.02, 0.02, 0.05, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.3, 0.5, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.6
+glow_bloom = 0.3
+fog_enabled = true
+fog_light_color = Color(0.05, 0.02, 0.15, 1)
+fog_density = 0.012
+
+[sub_resource type="StandardMaterial3D" id="Mat_crystal"]
+albedo_color = Color(0.6, 0.8, 1.0, 1)
+emission_enabled = true
+emission = Color(0.3, 0.5, 1.0, 1)
+emission_energy_multiplier = 0.5
+roughness = 0.2
+metallic = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_crystal"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="Nexus3D" type="Node3D"]
+script = ExtResource("2_root_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3d")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5)
+
+[node name="Sky" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_sky")
+material_override = SubResource("ShaderMaterial_sky")
+flip_faces = true
+
+[node name="Crystals" type="Node3D" parent="."]
+
+[node name="C0" type="MeshInstance3D" parent="Crystals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, -1)
+mesh = SubResource("BoxMesh_crystal")
+material_override = SubResource("Mat_crystal")
+
+[node name="C1" type="MeshInstance3D" parent="Crystals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.2, -1.5)
+mesh = SubResource("BoxMesh_crystal")
+material_override = SubResource("Mat_crystal")
+
+[node name="C2" type="MeshInstance3D" parent="Crystals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.3, -2.5)
+mesh = SubResource("BoxMesh_crystal")
+material_override = SubResource("Mat_crystal")
+
+[node name="C3" type="MeshInstance3D" parent="Crystals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 1.0, -3)
+mesh = SubResource("BoxMesh_crystal")
+material_override = SubResource("Mat_crystal")
+
+[node name="C4" type="MeshInstance3D" parent="Crystals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.8, -1.8)
+mesh = SubResource("BoxMesh_crystal")
+material_override = SubResource("Mat_crystal")
+
+[node name="C5" type="MeshInstance3D" parent="Crystals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.5, -1.2)
+mesh = SubResource("BoxMesh_crystal")
+material_override = SubResource("Mat_crystal")
+
+[node name="C6" type="MeshInstance3D" parent="Crystals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, -2.0)
+mesh = SubResource("BoxMesh_crystal")
+material_override = SubResource("Mat_crystal")
+
+[node name="C7" type="MeshInstance3D" parent="Crystals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.0, -1.0)
+mesh = SubResource("BoxMesh_crystal")
+material_override = SubResource("Mat_crystal")
