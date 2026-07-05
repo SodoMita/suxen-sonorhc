@@ -1,54 +1,44 @@
-# Character Lore Directory: Aria (The Skybound Angel)
-*Author: Director of Character Development & Psychology*
-
-This document provides the exhaustive, detailed back-story and linguistic progression of **Aria**, from her childhood in the high starry courts to her current state as the skybound angel inside *Chrono Nexus*.
+# История Персонажа: Ария (Небесный Хранитель)
+*Author: Ведущий Специалист по Психологии и Эволюции Речи*
 
 ---
 
-## 📑 Table of Contents
-1. **Childhood in the Starry Courts**
-2. **The Burden of the Heavenly Seal**
-3. **The Divine Descent: Falling to the Nexus**
-4. **Linguistic & Speech Evolution**
-   * *4.1 Prior to the Transition (The Seraphic Authority)*
-   * *4.2 After the Transition (The Falling Angel)*
+## 📑 Содержание
+1. **Детство в Звездных Чертогах**
+2. **Бремя Хранителя Небесной Печати**
+3. **Падение в Лабиринт: Утрата Крыльев**
+4. **Эволюция Речи и Психолингвистика**
 
 ---
 
-## 1. Childhood in the Starry Courts
+## 1. Детство в Звездных Чертогах
 
-Aria was born in the highest, most pure celestial layer of the cosmos—the **Starry Courts**. As a pure seraphic entity, she was raised under the absolute light of a thousand stars, untouched by physical matter, time, or emotional corruption.
+Ария родилась в самом высоком, чистом и недосягаемом измерении — в **Звездных Чертогах**. Как чистая сущность высшего порядка, она росла среди величественных парящих храмов и сияющих созвездий, не зная, что такое боль, болезни, земные страсти или тлен.
 
-Her childhood was spent flying across silent, beautiful stellar valleys. She was taught that she was a perfect, divine protector, meant to watch over the lower worlds from a distance. She was completely untouchable, her golden wings and white-and-gold garments representing her absolute, serene purity.
-
----
-
-## 2. The Burden of the Heavenly Seal
-
-By her teenage years, Aria was tasked with maintaining **The Heavenly Seal**—a massive, high-frequency energy barrier that kept the high celestial planes isolated from the digital nether and the physical Earth.
-
-She spent centuries floating in absolute, cold silence, watching the lower dimensions rise and fall. She was never allowed to feel, to desire, or to touch, her entire existence bounded by structural duty and divine isolation. This period of intense, perfect containment created a deep, silent ache inside her heart—a desperate desire to fall, to shed her divine burden, and to feel the warm, messy reality of a physical hand-hold.
+Ее детство было наполнено созерцанием гармонии космоса. Ее воспитывали как идеальное, бесстрастное существо, призванное хранить высший порядок во вселенной. Она была абсолютно недоступна для простых смертных, а ее золотые крылья и белоснежные одежды символизировали ее незыблемую, холодную чистоту.
 
 ---
 
-## 3. The Divine Descent: Falling to the Nexus
+## 2. Бремя Хранителя Небесной Печати
 
-When the quantum fracture tore open Prometheus Station, the Heavenly Seal shattered. Aria was pulled down from her high-sanctum throne, her golden wings shedding feathers of pure starlight as she fell into the **Chrono Nexus**.
+В юности на Арию возложили великую миссию — охранять Небесную Печать, барьер, разделяющий чистые высшие измерения от темных, хаотичных нижних миров.
 
-Instead of destroying her, the Nexus's gravity anchored her to its core. Her pristine, divine white-and-gold vestments became highly sensitive to Ren's shadow-energy: when he draws close, her wings dissolve into golden sparkles and her robes turn translucent, forcing her to choose between her cold, safe divinity or a warm, human life in his shadow arms.
+Она провела столетия в абсолютном, величественном одиночестве, паря на границе миров. Ей было запрещено любить, чувствовать или желать — вся ее жизнь подчинялась великому долгу. Но в глубине своей безмолвной души Ария испытывала невыносимую, тихую тоску. Она смотрела на теплые, живые миры внизу и тайно мечтала однажды сбросить свое сияющее бремя, прикоснуться к кому-то без божественного трепета и просто почувствовать тепло живых рук.
 
 ---
 
-## 4. Linguistic & Speech Evolution
+## 3. Падение в Лабиринт: Утрата Крыльев
 
-### 4.1 Prior to the Transition (The Seraphic Authority)
-Before her fall, Aria's speech was grand, absolute, and completely devoid of human hesitation. She spoke with divine authority, using majestic plural pronouns:
-*   *Pre-Transition Quote*: *"We are the light of the high courts. Your physical structures are transient, but our decree is eternal. Stand back."*
-*   Her voice carried a powerful, echoing resonance that commanded immediate submission.
+Когда станция «Прометей» разорвала ткань пространства, Небесная Печать была уничтожена. Ария была сорвана со своего трона и рухнула в глубины **Квантового Лабиринта**.
 
-### 4.2 After the Transition (The Falling Angel)
-After her descent into the Nexus, her voice and speech underwent a complete, heart-wrenching transformation:
-*   **Tone Shift**: She lost her booming, echoing authority, replacing it with a soft, trembling, and highly melodic human voice. She speaks with deep sincerity, her lines marked by soft sighs and vulnerable pauses.
-*   **The Descent of the Heart**: When Ren holds her shadow-hand, her grand, seraphic vocabulary completely collapses. She speaks in breathless, teary whispers, begging him to anchor her to the Earth and let her perfect wings burn away so she can stay by his side.
-*   *Post-Transition Quote*: *"Your shadow-hand... it's so cold, yet it's anchoring my spirit to this world. My wings... let them burn. I would rather fall... and be human with you... than fly alone in a perfect, cold heaven."*
-*   *Linguistic Shift Example*: Her dialogue has completely transitioned from grand, plural, and distant seraphic decrees to highly personal, emotional, and physical admissions of love and sacrificial desire, utilizing short, breathless lines to emphasize her fading divinity.
+Падение изменило ее физиологию. Ее белоснежные одежды стали невероятно чувствительными к энергии Рена: при его приближении ее золотые перья начинают осыпаться и таять, превращаясь в светящиеся искры, а сама она теряет свою божественную силу, становясь хрупкой земной девушкой. Теперь она стоит перед мучительным выбором: вернуться в холодные, безопасные Звездные Чертога или навсегда сжечь свои крылья ради того, чтобы остаться в объятиях Силуэта.
+
+---
+
+## 4. Эволюция Речи и Психолингвистика
+
+*   **В Чертогах (Божественный Указ)**: Речь Арии была величественной, властной, безупречной и лишенной малейших признаков сомнения. Она говорила от лица высшего порядка, используя царственные местоимения и повелительное наклонение:
+    *   *Example*: *«Мы — воля Звездных Чертогов. Ваша смертная жизнь мимолетна, а наш закон вечен. Склонитесь и примите свою судьбу.»*
+*   **После Инцидента (В Лабиринте)**: Рухнув в Лабиринт, Ария полностью лишилась своего величественного эха. Ее голос стал мягким, трепетным, глубоко человечным и невероятно искренним.
+    *   *Example*: *«Рен... Твоя тень так крепко держит мою руку. Мои перья... они тают, осыпаясь на этот холодный пол. Но... мне больше не страшно падать. Пожалуйста, держи меня крепче.»*
+*   **Речевые Особенности**: Ее речь наполнена глубокой, нежной грустью и тихой решимостью. Она говорит короткими, искренними фразами, лишенными высокомерия. Это речь ангела, который осознанно жертвует своим бессмертием ради тепла одного-единственного прикосновения.

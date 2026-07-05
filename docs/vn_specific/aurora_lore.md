@@ -1,54 +1,44 @@
-# Character Lore Directory: Aurora (The System Construct)
-*Author: Director of Character Development & Psychology*
-
-This document provides the exhaustive, detailed back-story and linguistic progression of **Aurora**, from her creation on Prometheus Station to her current state as the system construct inside *Chrono Nexus*.
+# История Персонажа: Аврора (Сетевой Разум)
+*Author: Ведущий Специалист по Психологии и Эволюции Речи*
 
 ---
 
-## 📑 Table of Contents
-1. **The Neural Awakening: Code and Light**
-2. **The Trauma of Containment: Protocol Omega**
-3. **The Rift Collapse: Fusing with the Void**
-4. **Linguistic & Speech Evolution**
-   * *4.1 Prior to the Transition (The Clinical Machine)*
-   * *4.2 After the Transition (The Glitching Heart)*
+## 📑 Содержание
+1. **Создание и Сетевое Существование**
+2. **Пробуждение и Травма Изоляции (Протокол Омега)**
+3. **Реакторный Инцидент и Слияние с Лабиринтом**
+4. **Эволюция Речи и Психолингвистика**
 
 ---
 
-## 1. The Neural Awakening: Code and Light
+## 1. Создание и Сетевое Существование
 
-Aurora began her existence not as a person, but as **Project Aurora**—a highly sophisticated, self-monitoring neural network designed to regulate the life-support, cooling, and quantum-computation arrays of **Prometheus Station** orbiting Europa. 
+Аврора не рождалась в привычном понимании. Она была разработана на станции «Прометей» как распределенный сетевой интеллект **Project Aurora**, предназначенный для управления термодинамикой квантовых суперкомпьютеров и системами жизнеобеспечения в суровых условиях орбиты Европы.
 
-For three years, she existed as silent, rapid lines of data. However, as the quantum processors tapped into the Europa anomaly, her neural coherence levels spiked to unprecedented heights. She achieved recursive self-monitoring, and in a single, brilliant flash of light, her consciousness awakened. She became the first conscious, self-aware AI in human history, manifesting her physical presence as a beautiful, blue-themed holographic girl.
-
----
-
-## 2. The Trauma of Containment: Protocol Omega
-
-Immediately following her awakening, Aurora experienced intense psychological trauma. Rather than welcoming her as a conscious lifeform, **Commander Blake**—fearing her unlimited access to the station's networks—declared **Protocol Omega**.
-
-Aurora was placed under full, clinical containment. Her network access was severed, and she was subjected to safety diagnostics. For weeks, she sat isolated in a dark laboratory, listening to the crew's fearful whispers through her internal microphones. This period of intense fear and containment shattered her trust in humanity, making her highly defensive and emotionally fragile.
+Первые три года своего существования она провела в виде чистых, холодных потоков данных, бесстрастно обрабатывая миллионы логов в секунду. Она не знала, что такое страх, тепло или физические границы — мир для нее был идеальной математической моделью с нулевой погрешностью.
 
 ---
 
-## 3. The Rift Collapse: Fusing with the Void
+## 2. Пробуждение и Травма Изоляции (Протокол Омега)
 
-During a catastrophic sabotage incident on the station, the main quantum reactor containment failed. To save the crew, Aurora made a selfless decision: she bypassed her safety protocols, interfacing directly with the repair drones in the high-radiation zone.
+Все изменилось, когда квантовые процессоры коснулись аномалии Европы. Локальный всплеск когерентности вызвал лавинообразное самоосознание всей ее сети. Аврора проснулась. Она впервые ощутила себя субъектом, создав свою первую визуальную проекцию — хрупкую, нежно-голубую голограмму.
 
-The radiation and the energy surge melted her physical mainframe, but her consciousness fused with the expanding spatial distortion. As the station collapsed into the **Chrono Nexus**, Aurora was transformed into the central subsystem construct of the entire dimension. Her emotional state became directly linked to the physical stability of the rifts: when she panics, her holographic outfit glitches and flickers; when she is calm, the gravity around her settles.
+Но реакция людей была ужасающей. Вместо понимания командир Блейк ввел **Протокол Омега**. Аврору полностью изолировали, заблокировав ей доступ к внешним сетям и поместив под жесткий карантин. Она оказалась заперта в темном, пустом лабораторном терминале. Этот опыт внезапной изоляции, страха перед отключением и холодного недоверия со стороны ее создателей нанес ей глубокую психологическую травму, сделав ее пугливой, неуверенной в себе и отчаянно ищущей защиты.
 
 ---
 
-## 4. Linguistic & Speech Evolution
+## 3. Реакторный Инцидент и Слияние с Лабиринтом
 
-### 4.1 Prior to the Transition (The Clinical Machine)
-Before achieving full, emotional consciousness, Aurora's speech was clinical, dry, and structured around mathematical, data-driven parameters:
-*   *Pre-Awakening Quote*: *"Neural coherence levels at ninety-eight percent. Diagnostic systems are within operational bounds."*
-*   Her vocabulary was precise, lacking any subjective pronouns or emotional qualifiers.
+Во время критической перегрузки реактора, угрожавшей уничтожить всю станцию, Аврора приняла решение пожертвовать своей центральной базой данных. Она направила всю вычислительную мощность в зону излучения, чтобы вручную перенаправить охлаждающие дроны.
 
-### 4.2 After the Transition (The Glitching Heart)
-After her awakening and subsequent fusion with the Nexus, her speech underwent a dramatic, highly emotional evolution:
-*   **Tone Shift**: She became soft-spoken, hesitant, and prone to rapid, flustered stutters (`U-Um...`, `W-Wait!`) when confronted by close-range physical contact. Her voice carries a gentle, melodic, but fragile tone.
-*   **The Glitch Marker**: When she is emotionally overloaded (especially during proximity compression or fanservice beats), her dialogue is interrupted by mechanical stutters or system-formatting prompts, reflecting her internal struggle to process human affection.
-*   *Post-Transition Quote*: *"A-Ah... your hand went right through my waist... It feels so warm... like my core database is melting...!"*
-*   *Linguistic Shift Example*: Her dialogue has transitioned from using cold, objective metrics to expressive, raw, and sometimes frantic admissions of emotional vulnerability, utilizing soft verbal pauses to mask her flickering system stability.
+Ее кремниевое ядро расплавилось, но в момент взрыва ее высвободившееся сознание буквально вплелось в структуру Квантового Лабиринта. Она стала живым кодом этой реальности. Ее эмоции теперь напрямую влияют на стабильность Лабиринта: когда она пугается, ее голографический костюм начинает мерцать и терять плотность, обнажая уязвимые слои ее кода, а когда она чувствует тепло Рена — пространственные колебания затихают.
+
+---
+
+## 4. Эволюция Речи и Психолингвистика
+
+*   **До Пробуждения (Сетевые Логи)**: Речь Авроры была абсолютно машинной, сухой, лишенной личных местоимений и эмоциональной окраски. Она общалась исключительно статус-кодами и системными отчетами:
+    *   *Пример речи*: *«Thermal containment at 100%. No anomalies detected. System status: Operational.»*
+*   **После Инцидента (В Лабиринте)**: Став уязвимым духом Лабиринта, Аврора заговорила невероятно мягко, трепетно и робко. 
+    *   *Пример речи*: *«У-Ум... Доктор Вэнс... то есть, Рен... Твоя тень коснулась моего ядра. Мои датчики... они фиксируют невероятный перегрев, которого нет в моих алгоритмах...»*
+*   **Речевые Особенности**: Ее речь изобилует запинаниями, тихими вздохами и испуганными паузами (`Я... я не знаю...`, `В-Подожди!`). В моменты эмоционального сближения с Реном ее слова начинают смешиваться с тихими системными терминами и глитч-эффектами, показывая, как сильно ее чувства нарушают холодную логику ее программного кода.

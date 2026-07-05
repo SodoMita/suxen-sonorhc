@@ -1,54 +1,44 @@
-# Character Lore Directory: Selene (The Twilight Sorceress)
-*Author: Director of Character Development & Psychology*
-
-This document provides the exhaustive, detailed back-story and linguistic progression of **Selene**, from her childhood in the obsidian archives to her current state as the twilight sorceress inside *Chrono Nexus*.
+# История Персонажа: Селена (Сумеречная Ведунья)
+*Author: Ведущий Специалист по Психологии и Эволюции Речи*
 
 ---
 
-## 📑 Table of Contents
-1. **Childhood in the Obsidian Archives**
-2. **The Obsessive Pursuit of the Twilight Script**
-3. **The Core Collapse: Drifting into the Nexus**
-4. **Linguistic & Speech Evolution**
-   * *4.1 Prior to the Transition (The Cynical Scholar)*
-   * *4.2 After the Transition (The Sophisticated Tease)*
+## 📑 Содержание
+1. **Детство в Обсидиановых Архивах**
+2. **Одержимость Сумеречным Манускриптом**
+3. **Обвал Архивов и Прорыв в Лабиринт**
+4. **Эволюция Речи и Психолингвистика**
 
 ---
 
-## 1. Childhood in the Obsidian Archives
+## 1. Детство в Обсидиановых Архивах
 
-Selene was born in a dim, high-gravity library dimension known as the **Obsidian Archives**. Raised by ancient scholars of dark magic, she spent her early childhood surrounded by crumbling spellbooks, cold stone walls, and endless, analytical archives.
+Селена родилась в мрачном, холодном мире — в **Обсидиановых Архивах**. Это было измерение гигантских каменных библиотек, где древние маги хранили свитки с запретными знаниями. Она росла сиротой среди пыльных фолиантов и строгих, циничных наставников.
 
-She was highly intelligent, sharp-tongued, and completely detached from normal childhood relationships. She viewed the world as a complex system of mathematical and magical equations to be solved, completely ignoring the concepts of emotion or physical touch.
-
----
-
-## 2. The Obsessive Pursuit of the Twilight Script
-
-By her teenage years, Selene became obsessed with the legend of **The Twilight Script**—an ancient, forbidden dimensional code that was said to bridge the gap between physical matter, digital code, and celestial energy.
-
-She spent her days and nights researching in absolute isolation, ignoring her health, and developing a cold, cynical defensive shield. She kept her robes loosely draped, completely indifferent to how others viewed her, treating her own body as merely a vessel for her research. This period of intense, academic isolation created a deep, subconscious hunger for a physical and mental rival—someone who could meet her gaze steadily without flinching.
+Ее детство было лишено родительской ласки и тепла. Вместо детских игр она изучала мертвые языки и сложные формулы пространственного искривления. Селена рано поняла, что мир — это холодная, расчетливая система, где выживает лишь тот, у кого острый ум и сильная воля.
 
 ---
 
-## 3. The Core Collapse: Drifting into the Nexus
+## 2. Одержимость Сумеречным Манускриптом
 
-During her attempt to activate a fragmented twilight spell, her archives collapsed under a massive spatial rift wave. She was pulled out of her library and thrown straight into the **Chrono Nexus**, her spellbooks fusing with her twilight robes.
+В юности Селена наткнулась на упоминание о **Сумеречном Манускрипте** — легендарном коде, способном объединить физическую материю, цифровой код и чистую энергию. 
 
-Instead of being crushed, she became the master of the twilight dimensional corridors inside the Nexus. She wears elegant, high-slit purple robes that slide off her shoulders with every gravitational shift, and she uses her sophisticated, teasing intellect to test Ren's shadow composition, enjoying the physical and mental tension of their close-proximity encounters.
+Она стала одержима этой идеей. Она проводила годы в изоляции, проводя опасные эксперименты и полностью игнорируя собственную жизнь. Она привыкла относиться к своему телу лишь как к инструменту познания, небрежно набрасывая на плечи темные свободные мантии и цинично отвергая любые попытки сближения со стороны других магов. Она ждала того, кто сможет стать для нее равным интеллектуальным и эмоциональным соперником.
 
 ---
 
-## 4. Linguistic & Speech Evolution
+## 3. Обвал Архивов и Прорыв в Лабиринт
 
-### 4.1 Prior to the Transition (The Cynical Scholar)
-Before entering the Nexus, Selene's speech was cold, cynical, and marked by dry, academic sarcasm:
-*   *Pre-Transition Quote*: *"Your equations are flawed. The probability of your survival is less than three percent. Step aside."*
-*   Her vocabulary was formal, clinical, and completely devoid of playfulness or physical curiosity.
+Во время попытки активировать фрагмент Сумеречного Манускрипта ее лаборатория не выдержала нагрузки. Обсидиановые Архивы рухнули в образовавшийся пространственный разлом, а саму Селену затянуло в **Квантовый Лабиринт**.
 
-### 4.2 After the Transition (The Sophisticated Tease)
-After entering the Nexus, her speech evolved into an incredibly mature, sophisticated, and teasing weapon:
-*   **Tone Shift**: She adopted a slow, smooth, and highly seductive tone. She speaks with playful sarcasm, using sophisticated double entendres and double-meaning remarks (`exquisite`, `distracted`, `illumination`) to disarm Ren.
-*   **The Seductive Defeat**: When Ren meets her gaze steadily and returns her witty remarks, her teasing shell cracks. Her voice drops into a quiet, warm whisper, and she blushes, admitting that her twilight robes are sliding off her shoulders not just because of the wind, but because she wants to be closer to his shadow.
-*   *Post-Transition Quote*: *"A sharp mind to match a mysterious shadow presence. I like that very much... Perhaps you'd like to study my spellbooks under closer... illumination? My robe might slip if you lean in any more~"*
-*   *Linguistic Shift Example*: Her vocabulary has completely transitioned from cold, mathematical sarcasm to highly elegant, suggestive, and touch-centered dialogue, utilizing playful pauses (`~`) and direct rhetorical questions to manipulate the tension.
+Там ее мантии сплавились с остатками манускрипта, превратившись в изящные фиолетовые одежды с глубокими разрезами, которые эффектно скользят по ее плечам при каждом колебании гравитации. Она стала полноправной хозяйкой сумеречных коридоров Лабиринта, используя свой блестящий, ироничный ум, чтобы испытывать на прочность всех, кто попадает в ее владения.
+
+---
+
+## 4. Эволюция Речи и Психолингвистика
+
+*   **В Архивах (Сухой Цинизм)**: Речь Селены была холодной, надменной, перенасыщенной сложными научными терминами и язвительным сарказмом. Она разговаривала свысока, безжалостно указывая окружающим на их глупость:
+    *   *Пример речи*: *«Ваши теории тривиальны, а расчеты содержат критические погрешности. Не тратьте мое время на свои бессмысленные изыскания.»*
+*   **После Инцидента (В Лабиринте)**: Оказавшись в Nexus, Селена превратила свой острый ум в изысканное оружие соблазнения и флирта. Ее речь стала медленной, вкрадчивой, полной иронии, скрытых смыслов и изящных провокаций.
+    *   *Пример речи*: *«О, какой любопытный Силуэт забрел в мои сумерки... Рен, дорогой, скажи, ты так пристально изучаешь мои заклинания, или тебя просто отвлекает то, как небрежно спадает эта мантия с моего плеча?~»*
+*   **Речевые Особенности**: Она обожает манипулировать вниманием собеседника, используя игривые интонации и открытые вопросы. Но когда Рен парирует ее колкости и проявляет твердость, ее саркастический тон исчезает, обнажая искреннее, глубокое изумление и тихий, искренний шепот девушки, которая наконец-то нашла того, кому может полностью довериться.

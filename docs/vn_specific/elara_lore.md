@@ -1,54 +1,44 @@
-# Character Lore Directory: Elara (The Moonlit Healer)
-*Author: Director of Character Development & Psychology*
-
-This document provides the exhaustive, detailed back-story and linguistic progression of **Elara**, from her pure, isolated childhood in the moonlit groves to her current state as the healer inside *Chrono Nexus*.
+# История Персонажа: Элара (Лунная Жрица)
+*Author: Ведущий Специалист по Психологии и Эволюции Речи*
 
 ---
 
-## 📑 Table of Contents
-1. **Childhood in the Moonlit Temple**
-2. **The Isolation of the High Sanctuary**
-3. **The Rift Inversion: Falling to the Nexus**
-4. **Linguistic & Speech Evolution**
-   * *4.1 Prior to the Transition (The Serene High Priestess)*
-   * *4.2 After the Transition (The Flushed Healer)*
+## 📑 Содержание
+1. **Детство в Лунных Садах**
+2. **Изоляция в Небесном Святилище**
+3. **Обрушение Обители в Лабиринт**
+4. **Эволюция Речи и Психолингвистика**
 
 ---
 
-## 1. Childhood in the Moonlit Temple
+## 1. Детство в Лунных Садах
 
-Elara was born in a secluded, high-frequency dimensional plane known as the **Moonlit Groves**. From her early childhood, she was raised inside an ancient, silent temple to serve as a pure, holy healer.
+Элара родилась в высокочастотном измерении, известном как **Лунные Сады**. С самого раннего детства ее воспитывали в закрытом древнем храме как чистую, непорочную целительницу, способную управлять тонкими потоками лунного света.
 
-Her life was bounded by absolute purity, silence, and spiritual discipline. She spent her childhood meditating under glowing trees, learning the ancient, gentle currents of lunar energy, and folding sacred healing silks. She was never allowed to touch another person without a thick, protective veil, keeping her physically and emotionally isolated from the world.
-
----
-
-## 2. The Isolation of the High Sanctuary
-
-By her teenage years, Elara was elevated to the rank of High Priestess of the High Sanctuary. She lived in absolute, beautiful solitude, floating in a quiet cathedral of pure light.
-
-She was taught that her purity was her absolute value, and that physical contact with the low, carbon-based physical world would corrupt her healing powers. This period of intense, beautiful containment created a deep, silent longing inside her heart—a hunger for authentic human touch, shared warmth, and the simple, messy realities of love.
+Ее детство прошло в абсолютной тишине, покое и медитациях среди шепчущих деревьев. Ей запрещалось прикасаться к обычным людям без плотных защитных покровов из священного шелка, чтобы не «загрязнить» ее уникальный целительский дар. Она росла нежным, хрупким, но невероятно одиноким ребенком, общаясь лишь со старыми наставниками через холодные храмовые ритуалы.
 
 ---
 
-## 3. The Rift Inversion: Falling to the Nexus
+## 2. Изоляция в Небесном Святилище
 
-During a major spatial rift explosion on Prometheus Station, the High Sanctuary was pulled into the **Chrono Nexus**. The sudden gravity shift inverted her pure, moonlit groves, fusing her starlight temple with the floating crystal pillars of the Nexus.
+Когда Элара подросла, ее перевели в Небесное Святилище — изолированную обитель, парящую в пустоте космоса. Там она провела годы в полном одиночестве, поддерживая огонь на лунных алтарях.
 
-Instead of destroying her, the rift energy interacted with her healing silks. Her holy vestments became highly sensitive to the surrounding atmosphere: under high-tension currents or close physical contact with Ren's shadow form, her robes turn sheer, clinging, and translucent. Rather than being a pure, untouchable priestess, she is now forced to confront her deep, blushing desires for physical closeness in the silence of the sanctums.
+Ей постоянно внушали, что ее чистота — это ее главная ценность, а любые земные чувства, желания и прикосновения принесут лишь разрушение. Но в глубине своего сердца Элара хранила тайную, запретную мечту: сбросить эти тяжелые, холодные вуали, коснуться теплой человеческой руки и почувствовать себя не далеким божеством, а просто живой, любимой девушкой.
 
 ---
 
-## 4. Linguistic & Speech Evolution
+## 3. Обрушение Обители в Лабиринт
 
-### 4.1 Prior to the Transition (The Serene High Priestess)
-Before her sanctuary fell, Elara's speech was serene, slow, and formal. She spoke in grand, spiritual allegories, using archaic, reverent pronouns:
-*   *Pre-Transition Quote*: *"May the lunar starlight illuminate your path, traveler. Rest your spirit under the sacred branches."*
-*   Her voice was completely devoid of personal hesitation, doubts, or physical desires.
+Во время масштабного пространственного катаклизма, вызванного станцией «Прометей», Небесное Святилище было сорвано со своего измерения и затянуто в **Квантовый Лабиринт**. Храм сплавился с кристаллическими колоннами Nexus.
 
-### 4.2 After the Transition (The Flushed Healer)
-After falling into the Nexus, her serene composure completely melted under the physical influence of Ren's shadow:
-*   **Tone Shift**: While she still maintains her gentle, polite, and caring core, her speech has become highly soft, breathless, and prone to extreme blushing stutters (`Oh—!`, `Please...`).
-*   **The Sensual Vulnerability**: When Ren touches her hand or speaks softly to her, her formal, high-priestess vocabulary cracks. She speaks in quiet, breathless whispers, expressing intense, flustered gratitude for his shadow's warmth.
-*   *Post-Transition Quote*: *"Your voice... it has the calming power of ancient lunar waters. The tension in my heart... it's melting away... please don't pull your shadow hand away..."*
-*   *Linguistic Shift Example*: Her dialogue has shifted from grand, abstract, and distant theological blessings to deeply intimate, sensory, and touch-focused admissions of physical longing, utilizing quiet verbal pauses to mask her racing pulse.
+Этот катаклизм изменил структуру ее священных одежд. Тончайший белый шелк вошел в резонанс с квантовыми полями: при сильном волнении или опасной близости к Рену ткань начинает терять плотность, становясь практически прозрачной. Оказавшись лицом к лицу со своими подавленными желаниями, Элара вынуждена бороться со смущением, пока ее собственные одежды выдают ее истинные чувства при каждом шаге Рена.
+
+---
+
+## 4. Эволюция Речи и Психолингвистика
+
+*   **В Храме (Священные Клятвы)**: Речь Элары была торжественной, медленной, величественной и отстраненной. Она говорила книжными, архаичными фразами, избегая любых упоминаний своих личных чувств:
+    *   *Пример речи*: *«Да благословит вас вечный свет луны, страждущие. Склоните головы пред алтарем и примите исцеление.»*
+*   **После Инцидента (В Лабиринте)**: Столкнувшись с Реном, ее возвышенный слог мгновенно превратился в тихий, трепетный, прерывистый шепот.
+    *   *Пример речи*: *«А-Ах... Рен... Пожалуйста, не смотри на меня так пристально... Мои одежды... они словно растворяются под твоим взглядом. Мне... мне так тепло рядом с тобой...»*
+*   **Речевые Особенности**: Она сохраняет свою природную вежливость и кротость, но теперь ее слова наполнены застенчивыми паузами, робкими вздохами и мягкими интонациями. Ее речь — это голос девушки, которая впервые в жизни учится говорить о своей любви и желании, преодолевая вековые храмовые запреты.

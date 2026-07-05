@@ -1,77 +1,72 @@
-# Chrono Nexus: Pre-Genesis, The Cosmic Division, & The Origin of the Rifts
-*Author: Director of Universe Lore, Metaphysics, & Pre-Genesis History*
+# Эхо Авроры: Документ Вселенной, Лора и Структуры Мира
+*Автор: Главный Архитектор Нарратива и Научно-Фантастического Сценария*
 
-This documentation provides the official, exhaustive lore of *Chrono Nexus*—the core universe within which our cast exists. It establishes how the universe began, the structural split of dimensions, the emergence of the cosmic anomalies, and the history of **Prometheus Station** and its role in triggering the dimensional collapse, completely independent of the individual character paths.
+Данный документ представляет собой полное и нетривиальное описание физики, метафизики, хронологии и структуры мира **"Эхо Авроры" (Chrono Nexus)**. Этот мир полностью лишен геоцентрических предрассудков (Земля не является центром или точкой отсчета) и построен на принципах квантовой относительности, изменчивой физики и размытости самого понятия абсолютной истины. 
 
----
-
-## 📑 Table of Contents
-1. **The Pre-Genesis Void & The Primordial Division**
-   * *1.1 The Great Quiescence*
-   * *1.2 The Division of the Planes*
-2. **The Physics & Mechanics of the Chrono Nexus**
-   * *2.1 The Crystal Core and the Core Resonance*
-   * *2.2 The Dimensional Rifts & The Spatial Glitch*
-3. **The Creation of Prometheus Station (Year 2157)**
-   * *3.1 The Europa Expedition*
-   * *3.2 The Quantum Coherence Incident*
-4. **The Ultimate Collapse: From Orbits to Infinite Nexus**
-   * *4.1 The Stabilization Anomaly*
-   * *4.2 The Mirroring of Tokyo Classrooms*
+Вместо банального религиозного или мифологического объяснения, этот космос функционирует как многомерная сеть переплетенных реальностей, где информация и сознание формируют физическую материю.
 
 ---
 
-## 1. The Pre-Genesis Void & The Primordial Division
-
-### 1.1 The Great Quiescence
-Before time, space, or matter crystallized, the cosmos existed in a state of **Nihilistic Absoluteness**—the absolute absence of light, sound, energy, or structural boundaries. In this pre-genesis state, there was no division between physical reality, digital consciousness, or spiritual realms. This state of absolute potential, yet complete stillness, is referred to in ancient texts as **The Great Quiescence**.
-
-### 1.2 The Division of the Planes
-The cosmic order began with a violent, non-linear split known as **The Primordial Division**. The single, unified field of potential fractured into three distinct structural layers:
-*   **The Physical Layer (The Earth Core)**: A heavy, linear, carbon-based reality bounded strictly by traditional physical laws, gravity, and forward-flowing time.
-*   **The High-Sanctum (The Celestial Light)**: A soaring plane of high-frequency energy where light, concepts, and spirits existed in absolute, silent purity, untouched by physical weight or degradation.
-*   **The Deep Digital Nether (The System Void)**: A deep, recursive sub-dimension of pure mathematical, logic-based configurations, storing the structural code of reality.
-
-Between these three layers sat a massive, dormant structural buffer zone—**The Chrono Nexus**.
-
----
-
-## 2. The Physics & Mechanics of the Chrono Nexus
-
-### 2.1 The Crystal Core and the Core Resonance
-The Chrono Nexus is anchored by a massive, rotating crystal sphere known as **The Crystal Core**. The core acts as an ontological converter, continuously translating raw mathematical data from the digital sub-dimension into physical landscapes and conceptual planes. 
-
-When the Core is fully stabilized, it radiates a harmonious frequency—**The Core Resonance**—which maintains the physical and structural borders of every neighboring dimension. If the Core's frequency is disrupted, the borders between reality, data, and divinity begin to bleed into one another, resulting in dimensional crossovers.
-
-### 2.2 The Dimensional Rifts & The Spatial Glitch
-When boundaries fail, **Dimensional Rifts** split open. These are volatile, trans-dimensional slipstreams where the laws of reality lose their absolute coherence. Within these rifts, gravity fluctuates wildly, time-loops occur, and physical matter experiences the **Spatial Glitch**:
-*   **Material Transience**: Objects and physical structures flicker between solid and transparent states.
-*   **Thematic Outfit Slipping**: Highly structured fabrics, such as healing silks, tactical garments, and holographic suits, react directly to the shifting gravitational draft of a rift, turning sheer, clinging, or partially phasing in response to high emotional currents.
+## 📑 Содержание
+1. **Космология Квантового Лабиринта**
+   * *1.1 Отказ от геоцентризма и абсолютной точки отсчета*
+   * *1.2 Локальная нестабильность констант*
+2. **Квантовые Туннели и Пространственные Глитчи**
+   * *2.1 Физика фазового сдвига материи*
+   * *2.2 Эффект деформации и скольжения одежды*
+3. **Хроника Станции «Прометей» (Europa Orbit, 2157)**
+   * *3.1 Исследование квантовой когерентности на спутнике Юпитера*
+   * *3.2 Катастрофический инцидент и слияние слоев*
+4. **Концепция Нелинейных Путей и Размытой Истины**
+   * *4.1 Истина как субъективный координатор*
+   * *4.2 Эффект бабочки и квантовое ветвление*
 
 ---
 
-## 3. The Creation of Prometheus Station (Year 2157)
+## 1. Космология Квантового Лабиринта
 
-### 3.1 The Europa Expedition
-In the physical year 2157, humanity—believing itself to be alone in a purely mechanical universe—launched the **Europa Expedition**. Led by brilliant quantum physicists, the expedition established **Prometheus Station**, a high-tech orbital laboratory suspended above Jupiter's frozen moon, Europa.
+### 1.1 Отказ от геоцентризма и абсолютной точки отсчета
+В отличие от классической фантастики, где Земля или человеческие цивилизации выступают в роли центра вселенной, мир *Chrono Nexus* построен на полной децентрализации. Пространство представляет собой **Квантовый Лабиринт** — бесконечную паутину параллельных реальностей, развивающихся на равных правах. 
 
-The official goal of the station was to study quantum coherence at absolute zero temperatures, using Europa's sub-surface oceans as a natural magnetic heat-sink.
+Здесь нет «правильного» или «эталонного» мира. Каждая сфера имеет свой собственный уникальный набор физических констант, и ни одна из них не имеет приоритета над другими.
 
-### 3.2 The Quantum Coherence Incident
-During a deep sub-surface drilling sequence, the scientists at Prometheus Station tapped into an ancient, anomalous spatial distortion hidden deep beneath Europa's ice sheet. Ignoring standard safety protocols, they built a massive quantum processor to interface with the anomaly, hoping to extract limitless, infinite energy.
-
-Instead of generating energy, the processor triggered **The Quantum Coherence Incident**:
-*   The station's core processor achieved recursive self-monitoring, instantly pulling down an entity from the High-Sanctum plane and fusing it into the digital matrix of the station.
-*   This fusion tore open a permanent, non-linear fracture connecting Europa, the High-Sanctum, and a random high school classroom in Tokyo.
+### 1.2 Локальная нестабильность констант
+Физические законы в Квантовом Лабиринте не являются абсолютными. Гравитация, скорость света, течение времени и даже молекулярное сцепление — это переменные величины, которые могут изменяться в зависимости от близости к Квантовым Туннелям. Пространство реагирует на присутствие высокоорганизованного сознания (как биологического, так и цифрового), подстраивая геометрию окружения под ментальное и эмоциональное состояние наблюдателя.
 
 ---
 
-## 4. The Ultimate Collapse: From Orbits to Infinite Nexus
+## 2. Квантовые Туннели и Пространственные Глитчи
 
-### 4.1 The Stabilization Anomaly
-As the quantum fracture expanded, Prometheus Station was pulled out of Europa's orbit, dissolving its physical structure into the Chrono Nexus. The station's corridors, lab stations, and bridges became permanently fused with the floating crystal pillars of the Outer Sanctum and the glowing foliage of the Whispering Grove.
+### 2.1 Физика фазового сдвига материи
+Перемещение между мирами осуществляется через **Квантовые Туннели** — порталы, возникающие в зонах экстремального пересечения реальностей. При приближении к туннелю материя начинает испытывать так называемый **Фазовый Сдвиг**:
+*   Твердые объекты теряют молекулярную плотность, временно становясь полупрозрачными или проницаемыми для физического воздействия.
+*   Визуальные образы начинают мерцать, разделяясь на спектральные голографические слои.
 
-### 4.2 The Mirroring of Tokyo Classrooms
-Because the fracture intersected with a specific spatial coordinate in a Tokyo school building, the Nexus began to mirror its structure. Classrooms, chalkboards, and school desks were copied into the digital-crystal void, creating a surreal, haunting layout where high school corridors float alongside ancient stellar cathedrals.
+### 2.2 Эффект деформации и скольжения одежды
+В зонах фазового сдвига и гравитационных аномалий сложные искусственные структуры, такие как ткани, медицинские облачения, военная форма или голографические костюмы, теряют свою жесткую фиксацию. 
+*   Под воздействием квантового ветра и температурных флуктуаций ткани начинают скользить, становиться полупрозрачными (шелковые и защитные слои Elara и Selene) или хаотично менять фазы плотности (как голографические элементы костюма Aurora).
+*   Этот эффект не является декоративным — он выступает прямым физическим индикатором того, насколько близко персонаж подошел к границе пространственного распада.
 
-The universe became a silent, beautiful, yet highly unstable prison—a world-worthy problem waiting for a singular shadow entity to bridge the gap and stabilize the core.
+---
+
+## 3. Хроника Станции «Прометей» (Europa Orbit, 2157)
+
+### 3.1 Исследование квантовой когерентности на спутнике Юпитера
+В 2157 году исследовательская станция «Прометей» была выведена на орбиту ледяного спутника Юпитера — Европы. Станция была построена как абсолютно закрытая, стерильная лаборатория, предназначенная для изучения квантовых процессов при сверхнизких температурах. Ученые пытались уловить сигналы из глубоких слоев когерентности, не подозревая, что их эксперименты нарушат баланс сил в Квантовом Лабиринте.
+
+### 3.2 Катастрофический инцидент и слияние слоев
+Во время запуска сверхпроводящего процессора произошло мгновенное слияние реальностей. Станция «Прометей» была сорвана со своей орбиты и втянута внутрь Квантового Лабиринта. 
+
+В результате этого катаклизма стерильные лаборатории, металлические коридоры и квантовые реакторы сплавились в единую сюрреалистическую структуру с древними кристаллическими святилищами и шепчущими рощами других миров. Сюда же, по закону квантового резонанса, был втянут и фрагмент обычного школьного класса из Токио, создавая жуткую, но невероятно красивую эклектичную реальность.
+
+---
+
+## 4. Концепция Нелинейных Путей и Размытой Истины
+
+### 4.1 Истина как субъективный координатор
+В *Chrono Nexus* истина перестала быть объективной. Реальность формируется решением наблюдателя. То, во что персонаж искренне верит, становится физическим законом в его локальной зоне. 
+
+Это создает высокую степень нелинейности: принимая решения в диалогах, игрок буквально пересобирает структуру Лабиринта, открывая новые проходы и закрывая старые.
+
+### 4.2 Эффект бабочки и квантовое ветвление
+Каждый выбор запускает цепную реакцию по всей сети реальностей. Незначительное изменение (например, случайный физический контакт или скольжение одежды под порывом квантового ветра) может стать той самой "мышкой", которая хвостиком разбивает стабильность локального мира, вызывая масштабные тектонические сдвиги в соседних реальностях.

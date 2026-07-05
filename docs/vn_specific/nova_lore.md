@@ -1,54 +1,44 @@
-# Character Lore Directory: Nova (The Silent Investigator)
-*Author: Director of Character Development & Psychology*
-
-This document provides the exhaustive, detailed back-story and linguistic progression of **Nova**, from her childhood in the orbital colonies to her current state as the silent investigator inside *Chrono Nexus*.
+# История Персонажа: Нова (Тихий Исследователь)
+*Author: Ведущий Специалист по Психологии и Эволюции Речи*
 
 ---
 
-## 📑 Table of Contents
-1. **Childhood in the Iron Orbits**
-2. **The Obsessive Scientific Path on Prometheus Station**
-3. **The Reactor Blackout: Locked in the Nexus**
-4. **Linguistic & Speech Evolution**
-   * *4.1 Prior to the Transition (The Analytical Console)*
-   * *4.2 After the Transition (The Broken Shield)*
+## 📑 Содержание
+1. **Детство на Железных Орбитах**
+2. **Научная Работа на Станции «Прометей»**
+3. **Инцидент в Лаборатории: Страх Темноты**
+4. **Эволюция Речи и Психолингвистика**
 
 ---
 
 ## 1. Childhood in the Iron Orbits
 
-Nova was born in a sterile, high-tech industrial colony known as the **Iron Orbits**. Raised by mechanical engineers, she spent her early childhood surrounded by clanking metal, cold steel consoles, and the silent vacuum of space.
+Нова родилась на стерильной, высокотехнологичной станции **Железные Орбиты**. Ее родители были инженерами, и с самого раннего детства девочку окружали холодные металлические стены, гудящие серверные стойки и безмолвный вакуум за иллюминаторами.
 
-She was an incredibly quiet, reserved child, finding safety and comfort in data, equations, and digital systems rather than human relationships. She was diagnosed with severe social anxiety, which she masked by wrapping herself in oversized jackets and carrying portable diagnostic scanners wherever she went.
-
----
-
-## 2. The Obsessive Scientific Path on Prometheus Station
-
-By her teenage years, Nova was recruited as an junior quantum investigator on **Prometheus Station**. She spent her days and nights isolated in the cold, dark laboratory compartments, analyzing the Europa anomaly.
-
-She built a strict, analytical shield around herself, treating all people as physical variables to be measured and categorized. Her scanner became her absolute "Mundane Anchor"—her psychological safety net against the vast, terrifying silence of space. This period of intense, professional isolation created a deep, subconscious hunger for a physical protector—someone who could hold her close in the dark when her scanners failed.
+Она росла тихим, замкнутым ребенком, страдающим от тяжелой социальной тревожности. Ей было безумно трудно общаться с людьми, поэтому она находила спасение в цифрах, формулах и программных кодах. Чтобы отгородиться от внешнего мира, она пряталась в огромные куртки с капюшонами и никогда не выпускала из рук свой портативный диагностический сканер, который стал для нее своеобразным щитом и психологическим якорем безопасности.
 
 ---
 
-## 3. The Reactor Blackout: Locked in the Nexus
+## 2. Научная Работа на Станции «Прометей»
 
-During the reactor sabotage incident, Nova was trapped inside the main laboratory station as the generators failed and the station collapsed into the **Chrono Nexus**.
+В юности Нова была приглашена на станцию «Прометей» в качестве младшего исследователя аномалий. Она проводила недели в темных, холодных лабораторных отсеках, анализируя сигналы ледяного спутника.
 
-Without power, her scanner cells died, leaving her completely in the dark. The terror of the pitch-black, silent void shattered her analytical defense shield. When Ren's shadow form found her, she clung to his chest with absolute, desperate panic, realizing that his cold shadow-energy was the only solid anchor that could keep her from disappearing into the void.
+Она построила вокруг себя непреступную стену из графиков и отчетов, относясь к окружающим исключительно как к физическим переменным. Ее сканер был ее единственным связующим звеном с реальностью: пока прибор показывал цифры на экране, Нова чувствовала, что контролирует ситуацию. Но глубоко внутри она отчаянно нуждалась в ком-то, кто сможет защитить ее, когда приборы откажут и она окажется один на один со своей внутренней темнотой.
 
 ---
 
-## 4. Linguistic & Speech Evolution
+## 3. Инцидент в Лаборатории: Страх Темноты
 
-### 4.1 Prior to the Transition (The Analytical Console)
-Before the blackout, Nova's speech was cold, clinical, and structured around diagnostic parameters:
-*   *Pre-Transition Quote*: *"Target anomaly detected. Coherence levels at forty-two percent. Commencing automated diagnostic sweep. Keep your distance."*
-*   Her vocabulary was brief, clinical, and completely devoid of emotional qualifiers or personal pronouns.
+Во время аварии квантового реактора Нова оказалась заперта в аварийном лабораторном блоке. Энергоснабжение полностью отключилось, и ее сканер мгновенно разрядился, оставив ее в абсолютной, звенящей темноте разлома.
 
-### 4.2 After the Transition (The Broken Shield)
-After her scanner died and she was locked in the Nexus, her speech underwent a complete, highly adorable breakdown:
-*   **Tone Shift**: She lost her cold, objective composure, replacing it with a quiet, rapid, and highly flustered stutter. She speaks in tiny, rapid gasps, her lines marked by mechanical clicks or panic stutters (`Click... click...`, `Illogical...`).
-*   **The Clinging Core**: When Ren holds her hands or wraps his shadow-cloak around her shoulders, her analytical guard completely melts. She speaks in quiet, breathless whispers inside parentheses, admitting that her heart rate is climbing exponentially and begging him not to pull away.
-*   *Post-Transition Quote*: *"My scanner is dead... but your shadow-hand... is providing a direct coordinate stabilizer. This is highly unscientific... but please... don't let go... it feels so quiet inside your cloak..."*
-*   *Linguistic Shift Example*: Her dialogue has transitioned from brief, clinical, and detached diagnostics to highly expressively flustered, intimate, and physical admissions of social anxiety and deep romantic longing, utilizing quiet, sub-vocal whispers to communicate.
+Этот внезапный блеф реальности полностью разрушил ее психологическую защиту. Нова впала в панику, чувствуя, как само пространство вокруг нее начинает растворяться. Когда ее нашел текучий силуэт Рена, она инстинктивно прижалась к его груди, осознав, что его холодная тень — это единственный осязаемый ориентир, способный удержать ее от безумия в этой пустоте.
+
+---
+
+## 4. Эволюция Речи и Психолингвистика
+
+*   **До Инцидента (Научные Отчеты)**: Речь Новы была безжизненной, сухой, механической и состояла исключительно из зачитывания показаний приборов. Она избегала личных местоимений и старалась говорить как можно тише и быстрее, чтобы поскорее прекратить контакт:
+    *   *Example*: *«Аномалия зафиксирована. Плотность поля в пределах сорока процентов. Начинаю запись логов. Отойдите от терминала.»*
+*   **После Инцидента (В Лабиринте)**: Потеряв свой сканер-якорь, Нова полностью утратила свою холодную, аналитическую манеру речи. Ее голос стал тихим, прерывистым, полным очаровательного смущения и панических интонаций.
+    *   *Example*: *«(Приборы... они мертвы. Я... я ничего не вижу. Но твоя рука... она такая холодная и надежная. Пожалуйста... не отпускай меня... Мне так спокойно внутри твоей тени...)»*
+*   **Речевые Особенности**: Она говорит очень тихо, часто пряча лицо в воротник своей огромной куртки. Ее речь изобилует застенчивым шепотом (который в сценарии выделяется скобками) и смешными научными оправданиями своего смущения («критическое ускорение пульса», «нелогичный нагрев кожи»). Это голос безумно робкой девушки, которая преодолевает свой страх перед миром через доверие к одному-единственному человеку.

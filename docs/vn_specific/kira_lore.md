@@ -1,54 +1,44 @@
-# Character Lore Directory: Kira (The Sunfire Catgirl)
-*Author: Director of Character Development & Psychology*
-
-This document provides the exhaustive, detailed back-story and linguistic progression of **Kira**, from her athletic childhood to her current state as the sunfire catgirl inside *Chrono Nexus*.
+# История Персонажа: Кира (Солнечная Вспышка)
+*Author: Ведущий Специалист по Психологии и Эволюции Речи*
 
 ---
 
-## 📑 Table of Contents
-1. **Childhood in the Sunfire Badlands**
-2. **The Military Academy Phase: Absolute Discipline**
-3. **The Rift Accident: Crossing the Red Line**
-4. **Linguistic & Speech Evolution**
-   * *4.1 Prior to the Transition (The Cocky Cadet)*
-   * *4.2 After the Transition (The Playful Shield)*
+## 📑 Содержание
+1. **Детство на Солнечных Пустошах**
+2. **Академия и Школа Разведки: Железные Рамки**
+3. **Авария и Прыжок в Лабиринт**
+4. **Эволюция Речи и Психолингвистика**
 
 ---
 
-## 1. Childhood in the Sunfire Badlands
+## 1. Детство на Солнечных Пустошах
 
-Kira was born in a harsh, high-gravity solar colony known as the **Sunfire Badlands**. From her childhood, she was marked by her physical, athletic prowess, feline ears and tail, and an incredibly high body temperature.
+Кира родилась в экстремальном секторе — на **Солнечных Пустошах**, планетарной колонии с невероятно сильной гравитацией и постоянной солнечной радиацией. С самого детства ее физиология адаптировалась к выживанию: ее тело вырабатывало колоссальное количество тепла, а кошачьи уши и хвост помогали улавливать малейшие электромагнитные колебания в атмосфере.
 
-Raised in a culture that valued survival, speed, and physical strength above all else, Kira spent her early years training, running across sun-baked dunes, and developing her natural reflex systems. She was high-energy, cocky, and completely unafraid of danger, earning her a reputation as an unstoppable troublemaker.
-
----
-
-## 2. The Military Academy Phase: Absolute Discipline
-
-By her teenage years, Kira was drafted into a high-status tactical academy to serve as a rift-reconnaissance scout. Here, she was subjected to strict, military discipline, tight containment suits, and relentless tactical drills.
-
-For years, she was forced to suppress her playful, high-energy instincts, wrapping her tail tightly under heavy combat armor and keeping her distance from others. This period of intense physical containment created a deep, subconscious hunger for freedom, physical closeness, and authentic emotional expression.
+Она росла в атмосфере дикой свободы, бегая по раскаленным пескам и прыгая по скалам. Она была дерзкой, упрямой и гиперактивной девчонкой, не признающей авторитетов и обожающей испытывать мир на прочность.
 
 ---
 
-## 3. The Rift Accident: Crossing the Red Line
+## 2. Академия и Школа Разведки: Железные Рамки
 
-During her first active orbital mission, Kira's reconnaissance vessel caught a massive solar flare directly inside a spatial rift corridor. The shielding collapsed, and her tactical gear fused with her nervous system as she was pulled out of her cockpit and thrown into the **Chrono Nexus**.
+В подростковом возрасте выдающиеся физические показатели Киры привлекли внимание военных. Ее принудительно зачислили в элитную Школу Разведки Квантовых Разломов.
 
-Instead of being crushed, Kira's high-gravity constitution allowed her to survive the dimensional shift. She became a free-roaming traveler within the Nexus, her natural sunfire energy now acting as a mobile radar system. She is completely free of her military constraints, wearing short skirts, tactical straps, and playing with her cat-ears with absolute, uninhibited joy.
+Там ее свободолюбивую натуру заковали в жесткие рамки воинской дисциплины. Ее заставили носить тяжелые, герметичные тактические костюмы, подавляющие ее естественный жар, и плотно прижимать хвост к телу. Года тренировок под присмотром суровых инструкторов развили в ней глубокий внутренний протест и дикое, почти болезненное желание сбросить эти оковы, коснуться кого-то без защитной брони и выплеснуть всю свою нерастраченную нежность.
 
 ---
 
-## 4. Linguistic & Speech Evolution
+## 3. Авария и Прыжок в Лабиринт
 
-### 4.1 Prior to the Transition (The Cocky Cadet)
-Before her accident, Kira's speech was sharp, formal, and structured around tactical military codes:
-*   *Pre-Transition Quote*: *"Cadet Kira reporting. Target acquired at zero-two-zero. Initiating containment sweep."*
-*   Her vocabulary was aggressive, brief, and completely devoid of playfulness or personal pronouns.
+Во время первого боевого вылета ее разведывательный истребитель попал под удар аномальной солнечной вспышки прямо внутри разлома. Системы жизнеобеспечения отказали, броня начала плавиться, и Киру выбросило в открытый Квантовый Лабиринт.
 
-### 4.2 After the Transition (The Playful Shield)
-After her transition into the free space of the Nexus, her speech underwent a complete, dramatic transformation:
-*   **Tone Shift**: She adopted an incredibly high-energy, bubbly, and teasing tone. She speaks with rapid, playful cadences, frequently using elongated vowels (`Yahoo~!`, `Aww~`, `tasty~`) and colloquial pronouns.
-*   **The Tsundere Shift**: When Ren steps into her personal boundary zone, her playful confidence immediately cracks. She stutters, her face turning crimson (`blush`), and she shifts into a defensive, adorable tsundere posture, hiding her twitching ears behind rapid, playful threats.
-*   *Post-Transition Quote*: *"H-Hey! Those glowing eyes of yours are way too intense from this close! Don't look at my skirt... stupid shadow!"*
-*   *Linguistic Shift Example*: Her vocabulary has completely shed all military codes, replacing them with highly expressive, sensory, and playful slang, utilizing loud comedic outbursts to cover up her sudden, intense physical fluster.
+Благодаря своей невероятной физической стойкости она не просто выжила — ее жар вошел в идеальный резонанс с местными полями. Она обрела абсолютную свободу от военных уставов. Теперь она перемещается по секторам как вольный ветер, нося легкую, открытую одежду с тактическими ремешками, и обожает поддразнивать окружающих, компенсируя годы вынужденной казарменной изоляции.
+
+---
+
+## 4. Эволюция Речи и Психолингвистика
+
+*   **В Академии (Военный Устав)**: Речь Киры была сухой, резкой, отрывистой и подчинялась исключительно армейскому регламенту. Она использовала только официальные термины и рапорты:
+    *   *Пример речи*: *«Курсант Кира. Сектор чист. Цель идентифицирована. Жду дальнейших указаний.»*
+*   **После Инцидента (В Лабиринте)**: Освободившись, Кира заговорила в невероятно живой, дерзкой, игривой и дразнящей манере. Она обожает использовать затяжные гласные, кокетливые словечки (`Яху~!`, `Хей~`, `глупышка~`) и смелые намеки.
+    *   *Пример речи*: *«Йоу, Ренчик! Что это у нас тут за угрюмый силуэт прячется в тени? Ну-ка, иди сюда, дай я тебя обниму, а то от твоей темноты у меня даже ушки замерзли~»*
+*   **Речевые Особенности**: Когда Рен делает ответный шаг и сокращает дистанцию, ее напускная игривость мгновенно рушится. Она начинает заикаться, путаться в словах и переходить на классический оборонительный тон («цундере»), пытаясь скрыть дикое смущение и то, как отчаянно ее тело жаждет его холодного, успокаивающего прикосновения.
