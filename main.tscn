@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://df6g3f7ks8sju"]
+[gd_scene format=3 uid="uid://df6g3f7ks8sju"]
 
 [ext_resource type="Script" uid="uid://qyg0bakcoedf" path="res://main.gd" id="1_main_script"]
 [ext_resource type="PackedScene" uid="uid://b3dnexus001" path="res://scenes/3d/nexus_3d.tscn" id="2_nexus_3d"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=182449774]
 script = ExtResource("1_main_script")
 
-[node name="Background3D" parent="." instance=ExtResource("2_nexus_3d")]
+[node name="Background3D" parent="." unique_id=1762775049 instance=ExtResource("2_nexus_3d")]

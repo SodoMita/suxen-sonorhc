@@ -11,7 +11,7 @@
 "description": "Holographic entity with system instability and high emotional vulnerability.",
 "display_name": "Aurora",
 "mirror": false,
-"nicknames": [""],
+"nicknames": ["аврора"],
 "offset": Vector2(0, 0),
 "portraits": {
 "blush": {

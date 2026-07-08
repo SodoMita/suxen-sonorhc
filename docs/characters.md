@@ -33,7 +33,7 @@ This document catalogs the complete cast of characters configured in the *Chrono
 ### 5. Selene (Twilight Sorceress)
 *   **ID/Resource**: `selene.dch`
 *   **Visual Mappings**: `selene_neutral.webp`, `selene_happy.webp`, `selene_sad.webp`, `selene_surprised.webp`, `selene_blush.webp`.
-*   **Aesthetic Profile**: High-slit dark indigo robes, elegant composure, and playful expressions.
+*   **Aesthetic Profile**: High-slit dark indigo robes, elegant composure, and dark expressions.
 *   **Description**: Keeper of twilight dimensional scripts.
 
 ### 6. Aria (Skybound Angel)

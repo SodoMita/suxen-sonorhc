@@ -33,11 +33,13 @@ directories/dch_directory={
 "sora": "res://characters/sora.dch"
 }
 directories/dtl_directory={
+"TL_000_The_Beginning": "res://timelines/TL_000_The_Beginning.dtl",
 "TL_001_Opening_RiftSchool": "res://timelines/TL_001_Opening_RiftSchool.dtl",
 "TL_002_Sanctum_Arrival": "res://timelines/TL_002_Sanctum_Arrival.dtl",
 "TL_003_Whispers_In_The_Grove": "res://timelines/TL_003_Whispers_In_The_Grove.dtl",
 "TL_004_Sanctum_Hub": "res://timelines/TL_004_Sanctum_Hub.dtl",
-"TL_005_Core_Resonance": "res://timelines/TL_005_Core_Resonance.dtl"
+"TL_005_Core_Resonance": "res://timelines/TL_005_Core_Resonance.dtl",
+"TL_006_Simulated_Branch": "res://timelines/TL_006_Simulated_Branch.dtl"
 }
 layout/style_directory={
 "Chrono Nexus (Glassmorphism)": "res://themes/glassmorphism/chrono_nexus_style.tres",
