@@ -8,6 +8,10 @@ extends Node2D
 const NEXUS_3D_PATH := "res://scenes/3d/nexus_3d.tscn"
 const STYLE_NAME := "Chrono Nexus (Glassmorphism)"
 
+var _menu_overlay: Control = null
+var _mind_label: Label = null
+
+
 func _ready() -> void:
 	# Small delay to ensure everything (3D scene, autoloads, etc.)
 	# has finished initializing.
@@ -22,8 +26,57 @@ func _ready() -> void:
 	Dialogic.timeline_ended.connect(_on_timeline_ended)
 	Dialogic.signal_event.connect(_on_signal_event)
 
+	# Hook the custom dialog toolbar's Menu button once the layout is built.
+	_connect_custom_toolbar()
+
 	# Start the campaign.
 	Dialogic.start("res://timelines/TL_001_Opening_RiftSchool.dtl")
+
+
+# The custom toolbar layer is instantiated by Dialogic after the style loads,
+# so we poll briefly for it and then wire the menu_requested signal.
+func _connect_custom_toolbar() -> void:
+	for _i in range(30):
+		var layout = (
+			Dialogic.Styles.get_layout_node() if Dialogic.Styles.has_active_layout_node() else null
+		)
+		if layout and layout.has_node("CustomDialogControls"):
+			var toolbar = layout.get_node("CustomDialogControls")
+			if toolbar.has_signal(&"menu_requested"):
+				toolbar.menu_requested.connect(_on_custom_menu)
+			return
+		await get_tree().process_frame
+
+
+# Placeholder menu overlay — extend this with your actual pause menu.
+func _on_custom_menu() -> void:
+	if _menu_overlay and is_instance_valid(_menu_overlay):
+		_menu_overlay.queue_free()
+		_menu_overlay = null
+		return
+	_menu_overlay = Control.new()
+	_menu_overlay.name = "CustomMenuOverlay"
+	_menu_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_menu_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	var dim := ColorRect.new()
+	dim.color = Color(0, 0, 0, 0.55)
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_menu_overlay.add_child(dim)
+	var label := Label.new()
+	label.text = "⏸  Menu\n(click to close — hook _on_custom_menu() to open your real menu)"
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_color_override("font_color", Color.WHITE)
+	label.add_theme_font_size_override("font_size", 20)
+	label.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_menu_overlay.add_child(label)
+	_menu_overlay.gui_input.connect(
+		func(ev):
+			if ev is InputEventMouseButton and ev.pressed:
+				_menu_overlay.queue_free()
+				_menu_overlay = null
+	)
+	get_tree().root.add_child(_menu_overlay)
 
 
 func _on_timeline_ended(_timeline: Resource) -> void:
@@ -55,7 +108,6 @@ func _on_signal_event(argument: String) -> void:
 
 
 # Thought-bubble overlay for [mind:] events.
-var _mind_label: Label = null
 func _show_mind_read(character_id: String) -> void:
 	if _mind_label == null:
 		_mind_label = Label.new()

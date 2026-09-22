@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://lx24i8fl6uo" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_History/history_layer.tscn" id="10_8v8jj"]
 [ext_resource type="StyleBox" path="res://themes/glassmorphism/textbox_panel.tres" id="11_textbox_panel"]
 [ext_resource type="StyleBox" path="res://themes/glassmorphism/name_label_panel.tres" id="12_namelabel_panel"]
+[ext_resource type="PackedScene" path="res://ui/dialog/custom_dialog_controls.tscn" id="13_custom_controls"]
 
 [sub_resource type="Resource" id="Resource_3dixn"]
 script = ExtResource("2_3b8ue")
@@ -51,10 +52,14 @@ scene = ExtResource("9_tufw5")
 script = ExtResource("2_3b8ue")
 scene = ExtResource("10_8v8jj")
 
+[sub_resource type="Resource" id="Resource_customcontrols"]
+script = ExtResource("2_3b8ue")
+scene = ExtResource("13_custom_controls")
+
 [resource]
 script = ExtResource("1_mvpc0")
 name = "Chrono Nexus (Glassmorphism)"
-layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16", "17"])
+layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16", "17", "18"])
 layer_info = {
 "": SubResource("Resource_3dixn"),
 "10": SubResource("Resource_gen8e"),
@@ -64,6 +69,7 @@ layer_info = {
 "14": SubResource("Resource_pvwog"),
 "15": SubResource("Resource_spe5r"),
 "16": SubResource("Resource_jf1ol"),
-"17": SubResource("Resource_gs5pl")
+"17": SubResource("Resource_gs5pl"),
+"18": SubResource("Resource_customcontrols")
 }
-metadata/_latest_layer = "17"
+metadata/_latest_layer = "18"
