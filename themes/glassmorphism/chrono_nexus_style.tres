@@ -4,13 +4,12 @@
 [ext_resource type="Script" uid="uid://bwg6yncmh2cml" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_3b8ue"]
 [ext_resource type="PackedScene" uid="uid://c1k5m0w3r40xf" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_FullBackground/full_background_layer.tscn" id="2_dtgi6"]
 [ext_resource type="PackedScene" uid="uid://cy1y14inwkplb" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Portraits/vn_portrait_layer.tscn" id="4_q1t5h"]
-[ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.tscn" id="5_o6sv8"]
+[ext_resource type="PackedScene" path="res://ui/dialog/glassmorphism_textbox_layer.tscn" id="5_textbox"]
 [ext_resource type="PackedScene" uid="uid://cn674foxwedqu" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Input/full_advance_input_layer.tscn" id="6_j6olx"]
 [ext_resource type="PackedScene" uid="uid://dhk6j6eb6e3q" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Choices/vn_choice_layer.tscn" id="7_vw5f4"]
 [ext_resource type="PackedScene" uid="uid://cvgf4c6gg0tsy" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_TextInput/text_input_layer.tscn" id="9_tufw5"]
 [ext_resource type="PackedScene" uid="uid://lx24i8fl6uo" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_History/history_layer.tscn" id="10_8v8jj"]
-[ext_resource type="StyleBox" path="res://themes/glassmorphism/textbox_panel.tres" id="11_textbox_panel"]
-[ext_resource type="StyleBox" path="res://themes/glassmorphism/name_label_panel.tres" id="12_namelabel_panel"]
+[ext_resource type="PackedScene" path="res://ui/dialog/custom_dialog_controls.tscn" id="13_custom_controls"]
 
 [sub_resource type="Resource" id="Resource_3dixn"]
 script = ExtResource("2_3b8ue")
@@ -29,11 +28,7 @@ scene = ExtResource("6_j6olx")
 
 [sub_resource type="Resource" id="Resource_05bhv"]
 script = ExtResource("2_3b8ue")
-scene = ExtResource("5_o6sv8")
-overrides = {
-"name_label/panel": ExtResource("12_namelabel_panel"),
-"textbox/panel": ExtResource("11_textbox_panel")
-}
+scene = ExtResource("5_textbox")
 
 [sub_resource type="Resource" id="Resource_pvwog"]
 script = ExtResource("2_3b8ue")
@@ -51,10 +46,14 @@ scene = ExtResource("9_tufw5")
 script = ExtResource("2_3b8ue")
 scene = ExtResource("10_8v8jj")
 
+[sub_resource type="Resource" id="Resource_customcontrols"]
+script = ExtResource("2_3b8ue")
+scene = ExtResource("13_custom_controls")
+
 [resource]
 script = ExtResource("1_mvpc0")
 name = "Chrono Nexus (Glassmorphism)"
-layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16", "17"])
+layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16", "17", "18"])
 layer_info = {
 "": SubResource("Resource_3dixn"),
 "10": SubResource("Resource_gen8e"),
@@ -64,6 +63,7 @@ layer_info = {
 "14": SubResource("Resource_pvwog"),
 "15": SubResource("Resource_spe5r"),
 "16": SubResource("Resource_jf1ol"),
-"17": SubResource("Resource_gs5pl")
+"17": SubResource("Resource_gs5pl"),
+"18": SubResource("Resource_customcontrols")
 }
-metadata/_latest_layer = "17"
+metadata/_latest_layer = "18"

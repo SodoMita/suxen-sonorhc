@@ -1,0 +1,164 @@
+[gd_scene load_steps=3 format=3 uid="uid://custom_dialog_controls_001"]
+
+[ext_resource type="Script" path="res://ui/dialog/custom_dialog_controls.gd" id="1_script"]
+[ext_resource type="StyleBoxFlat" path="res://ui/dialog/toolbar_button_style.tres" id="2_btn_style"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toast"]
+bg_color = Color(0.04, 0.04, 0.10, 0.78)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.47, 0.51, 0.86, 0.45)
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+shadow_color = Color(0.4, 0.5, 0.9, 0.25)
+shadow_size = 8
+
+[node name="CustomDialogControls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Toolbar" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -320.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 50.0
+mouse_filter = 2
+alignment = 2
+theme_override_constants/separation = 4
+
+[node name="BtnHistory" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_btn_style")
+theme_override_styles/hover = ExtResource("2_btn_style")
+theme_override_styles/pressed = ExtResource("2_btn_style")
+theme_override_styles/focus = ExtResource("2_btn_style")
+theme_override_colors/font_color = Color(0.92, 0.94, 1.0, 0.95)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "H"
+tooltip_text = "Dialog History"
+
+[node name="BtnAuto" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_btn_style")
+theme_override_styles/hover = ExtResource("2_btn_style")
+theme_override_styles/pressed = ExtResource("2_btn_style")
+theme_override_styles/focus = ExtResource("2_btn_style")
+theme_override_colors/font_color = Color(0.92, 0.94, 1.0, 0.95)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "A"
+tooltip_text = "Toggle Auto-Advance"
+
+[node name="BtnSkip" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_btn_style")
+theme_override_styles/hover = ExtResource("2_btn_style")
+theme_override_styles/pressed = ExtResource("2_btn_style")
+theme_override_styles/focus = ExtResource("2_btn_style")
+theme_override_colors/font_color = Color(0.92, 0.94, 1.0, 0.95)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "»"
+tooltip_text = "Toggle Skip (fast-forward)"
+
+[node name="BtnSave" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_btn_style")
+theme_override_styles/hover = ExtResource("2_btn_style")
+theme_override_styles/pressed = ExtResource("2_btn_style")
+theme_override_styles/focus = ExtResource("2_btn_style")
+theme_override_colors/font_color = Color(0.92, 0.94, 1.0, 0.95)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "S"
+tooltip_text = "Quick Save"
+
+[node name="BtnLoad" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_btn_style")
+theme_override_styles/hover = ExtResource("2_btn_style")
+theme_override_styles/pressed = ExtResource("2_btn_style")
+theme_override_styles/focus = ExtResource("2_btn_style")
+theme_override_colors/font_color = Color(0.92, 0.94, 1.0, 0.95)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "L"
+tooltip_text = "Quick Load"
+
+[node name="BtnPause" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_btn_style")
+theme_override_styles/hover = ExtResource("2_btn_style")
+theme_override_styles/pressed = ExtResource("2_btn_style")
+theme_override_styles/focus = ExtResource("2_btn_style")
+theme_override_colors/font_color = Color(0.92, 0.94, 1.0, 0.95)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "❚❚"
+tooltip_text = "Pause / Resume"
+
+[node name="BtnMenu" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_btn_style")
+theme_override_styles/hover = ExtResource("2_btn_style")
+theme_override_styles/pressed = ExtResource("2_btn_style")
+theme_override_styles/focus = ExtResource("2_btn_style")
+theme_override_colors/font_color = Color(0.92, 0.94, 1.0, 0.95)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "≡"
+tooltip_text = "Menu"
+
+[node name="Toast" type="Label" parent="."]
+unique_name_in_owner = true
+visible = true
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -200.0
+offset_top = 58.0
+offset_right = -12.0
+offset_bottom = 82.0
+mouse_filter = 2
+horizontal_alignment = 2
+theme_override_colors/font_color = Color(0.92, 0.94, 1.0, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_toast")
+text = ""
