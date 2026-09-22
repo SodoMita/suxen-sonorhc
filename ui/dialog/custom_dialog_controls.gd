@@ -70,9 +70,10 @@ func _ready() -> void:
 		Dialogic.dialogic_resumed.connect(_refresh_pause_button)
 
 	# Track auto-advance / auto-skip state changes (so buttons stay in sync
-	# even if something else toggles them).
-	Dialogic.Inputs.auto_advance.toggled.connect(func(_en): _refresh_auto_button())
-	Dialogic.Inputs.auto_skip.toggled.connect(_refresh_skip_button)
+	# even if something else toggles them). Both `toggled` signals pass a
+	# bool, so the connected callables must accept one argument.
+	Dialogic.Inputs.auto_advance.toggled.connect(func(_en = false): _refresh_auto_button())
+	Dialogic.Inputs.auto_skip.toggled.connect(func(_en = false): _refresh_skip_button())
 
 	_refresh_auto_button()
 	_refresh_skip_button()
