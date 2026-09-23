@@ -50,22 +50,14 @@ if [ -n "$ERRORS" ]; then
 	exit 1
 fi
 
-# Step 4: Verify the 3D background actually loaded.
-# (Look for either the sky shader or a crystal mesh in the log.)
+# Step 4: The 3D nexus backdrop was removed. Dialogue uses the 2D backgrounds.
 echo ""
-echo "=== Step 4: Verifying 3D background loaded ==="
-if grep -qE "ShaderMaterial|BoxMesh|MeshInstance3D" "$RUN_LOG"; then
-	echo "OK: 3D background is referenced."
-else
-	# The 3D scene might not log explicitly. Try a stronger check by
-	# reading the scene file directly.
-	if [ -f scenes/3d/nexus_3d.tscn ]; then
-		echo "OK: scenes/3d/nexus_3d.tscn exists."
-	else
-		echo "ERROR: 3D background not loaded and scene file is missing."
-		exit 1
-	fi
+echo "=== Step 4: Verifying the 3D backdrop is gone ==="
+if [ -f scenes/3d/nexus_3d.tscn ] || grep -q "nexus_3d.tscn" main.tscn; then
+	echo "ERROR: the 3D background scene is still in the game."
+	exit 1
 fi
+echo "OK: no 3D background scene."
 
 # Step 5: Verify the Dialogue Manager balloon replaced Dialogic.
 echo ""

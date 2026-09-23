@@ -1,7 +1,7 @@
 extends Node
-## Runtime audio: procedural music, tiny OGG loops and SFX. play_theme()
-## renders a runtime score; play_music_loop() crossfades to a loop; "Generated
-## music" off swaps themes for loops. play_sfx() plays OGG or synthesizes.
+## Runtime audio: procedural music, tiny OGG loops and SFX. play_scene()
+## renders a score for the background that just came up. play_theme() is the
+## demo's mood entry. play_music_loop() is only the "Generated music" off path.
 
 
 const SAMPLE_RATE: int = 22050        ## stream rate
@@ -44,6 +44,76 @@ const THEMES: Dictionary = {
 	},
 }
 
+## One generated score per background. Mood tags tint this; they do not replace it.
+const SCENE_THEMES: Dictionary = {
+	"classroom": {
+		"bpm": 68.0, "root": 60, "scale": [0, 2, 4, 7, 9], "shape": 0.0,
+		"prog": [[0, 2, 4], [3, 0, 2], [4, 1, 3], [0, 2, 4]],
+		"pad": 0.46, "pluck": 0.18, "bass": 0.26, "plucks": 2, "bass_hits": 1,
+		"pluck_shift": 12, "bass_shift": -12,
+	},
+	"nexus": {
+		"bpm": 96.0, "root": 74, "scale": [0, 2, 4, 6, 7, 9, 11], "shape": 0.0,
+		"prog": [[0, 2, 4], [4, 6, 1], [5, 0, 2], [2, 4, 6]],
+		"pad": 0.22, "pluck": 0.46, "bass": 0.16, "plucks": 8, "bass_hits": 1,
+		"pluck_shift": 24, "bass_shift": -24,
+	},
+	"rift": {
+		"bpm": 128.0, "root": 61, "scale": [0, 3, 6, 9], "shape": 2.0,
+		"prog": [[0, 1, 2], [2, 0, 3], [1, 2, 0], [3, 1, 2]],
+		"pad": 0.16, "pluck": 0.34, "bass": 0.58, "plucks": 8, "bass_hits": 2,
+		"pluck_shift": 12, "bass_shift": -24,
+	},
+	"grove": {
+		"bpm": 62.0, "root": 64, "scale": [0, 3, 5, 7, 10], "shape": 1.0,
+		"prog": [[0, 2, 4], [3, 0, 2], [4, 1, 3], [0, 2, 4]],
+		"pad": 0.52, "pluck": 0.16, "bass": 0.2, "plucks": 3, "bass_hits": 1,
+		"pluck_shift": 12, "bass_shift": -12,
+	},
+	"shore": {
+		"bpm": 56.0, "root": 67, "scale": [0, 2, 4, 5, 7, 9, 11], "shape": 0.0,
+		"prog": [[0, 2, 4], [3, 5, 0], [4, 6, 1], [0, 2, 4]],
+		"pad": 0.58, "pluck": 0.12, "bass": 0.28, "plucks": 2, "bass_hits": 1,
+		"pluck_shift": 0, "bass_shift": -12,
+	},
+	"core": {
+		"bpm": 72.0, "root": 36, "scale": [0, 3, 7], "shape": 2.0,
+		"prog": [[0, 1, 2], [0, 2, 1], [0, 1, 2], [2, 0, 1]],
+		"pad": 0.3, "pluck": 0.08, "bass": 0.66, "plucks": 1, "bass_hits": 2,
+		"pluck_shift": 12, "bass_shift": -12,
+	},
+	"festival": {
+		"bpm": 114.0, "root": 65, "scale": [0, 2, 4, 5, 7, 9, 11], "shape": 1.0,
+		"prog": [[0, 2, 4], [4, 6, 1], [3, 5, 0], [5, 0, 2]],
+		"pad": 0.26, "pluck": 0.42, "bass": 0.34, "plucks": 6, "bass_hits": 2,
+		"pluck_shift": 12, "bass_shift": -12,
+	},
+	"lab": {
+		"bpm": 108.0, "root": 69, "scale": [0, 2, 3, 5, 7, 8, 11], "shape": 2.0,
+		"prog": [[0, 2, 4], [5, 0, 2], [3, 5, 1], [6, 1, 3]],
+		"pad": 0.14, "pluck": 0.36, "bass": 0.44, "plucks": 8, "bass_hits": 2,
+		"pluck_shift": 12, "bass_shift": -12,
+	},
+	"sanctum": {
+		"bpm": 48.0, "root": 72, "scale": [0, 4, 7, 11], "shape": 0.0,
+		"prog": [[0, 1, 2], [2, 0, 1], [1, 2, 3], [0, 1, 2]],
+		"pad": 0.6, "pluck": 0.1, "bass": 0.1, "plucks": 1, "bass_hits": 1,
+		"pluck_shift": 24, "bass_shift": -24,
+	},
+	"alley": {
+		"bpm": 86.0, "root": 46, "scale": [0, 3, 5, 7, 10], "shape": 2.0,
+		"prog": [[0, 2, 4], [3, 0, 2], [4, 1, 3], [2, 4, 0]],
+		"pad": 0.28, "pluck": 0.16, "bass": 0.52, "plucks": 3, "bass_hits": 2,
+		"pluck_shift": 0, "bass_shift": -12,
+	},
+	"lighthouse": {
+		"bpm": 46.0, "root": 53, "scale": [0, 7], "shape": 1.0,
+		"prog": [[0, 1], [0, 1], [1, 0], [0, 1]],
+		"pad": 0.62, "pluck": 0.08, "bass": 0.36, "plucks": 1, "bass_hits": 1,
+		"pluck_shift": 12, "bass_shift": -12,
+	},
+}
+
 
 # Introspection for tests/tools.
 var music_source: String = ""          ## "", "procedural" or "loop"
@@ -56,6 +126,8 @@ var last_sfx: String = ""              ## key of the most recent SFX
 var last_sfx_source: String = ""       ## "ogg" or "synth"
 var last_sfx_pitch: float = 1.0        ## pitch of the most recent SFX
 var music_seed: int = 20260921         ## arpeggio RNG seed
+var _scene_key: String = ""
+var _scene_mood: String = ""
 
 var _gen: AudioStreamGenerator
 var _gen_player: AudioStreamPlayer
@@ -162,26 +234,71 @@ func _ramp_gain(delta: float) -> void:
 
 
 
-## Start/switch a theme; "stop"/unknown stop it; off -> mood-matched loop.
+## Start/switch a mood theme; "stop"/unknown stop it; off -> mood-matched loop.
 func play_theme(theme: StringName) -> void:
 	if theme == &"stop" or not THEMES.has(theme):
 		stop_music()
 		return
+	_scene_key = ""
+	_scene_mood = ""
 	_last_theme = theme
 	if not procedural_enabled:
 		play_music_loop(String(THEME_LOOPS.get(theme, "res://assets/music/day.ogg")), true)
 		return
 	if music_source == "procedural" and current_theme == theme:
 		return
+	_begin_score(theme, THEMES[theme])
+
+
+## Generated score for a background. A mood tints that score; it does not swap in a shared loop.
+func play_scene(scene_key: String, mood: String = "") -> void:
+	if not SCENE_THEMES.has(scene_key):
+		return
+	if procedural_enabled and _scene_key == scene_key and _scene_mood == mood and music_source == "procedural" and current_theme == StringName(scene_key):
+		return
+	_scene_key = scene_key
+	_scene_mood = mood
+	var score: Dictionary = (SCENE_THEMES[scene_key] as Dictionary).duplicate(true)
+	_color_mood(score, mood)
+	_last_theme = StringName(scene_key)
+	if not procedural_enabled:
+		play_music_loop(String(THEME_LOOPS.get(StringName(scene_key), "res://assets/music/night.ogg")), true)
+		return
+	_begin_score(StringName(scene_key), score)
+
+
+func _color_mood(score: Dictionary, mood: String) -> void:
+	if mood == "calm":
+		score["plucks"] = maxi(1, int(score["plucks"]) - 1)
+		score["bass"] = float(score["bass"]) * 0.8
+	elif mood == "warm":
+		score["bpm"] = float(score["bpm"]) * 0.92
+		score["pad"] = minf(0.72, float(score["pad"]) * 1.18)
+		score["pluck"] = float(score["pluck"]) * 0.8
+	elif mood == "tense":
+		score["bpm"] = float(score["bpm"]) * 1.16
+		score["plucks"] = mini(12, int(score["plucks"]) + 3)
+		score["bass"] = minf(0.72, float(score["bass"]) * 1.3)
+		score["pad"] = float(score["pad"]) * 0.82
+	elif mood == "night":
+		score["bpm"] = float(score["bpm"]) * 0.8
+		score["plucks"] = maxi(1, int(score["plucks"]) - 1)
+		score["bass"] = float(score["bass"]) * 0.7
+		score["pluck_shift"] = int(score.get("pluck_shift", 12)) - 12
+
+
+func _begin_score(theme_name: StringName, score: Dictionary) -> void:
 	_fade_out_loops()
-	_theme = THEMES[theme]
-	current_theme = theme
+	_theme = score
+	current_theme = theme_name
 	music_source = "procedural"
 	_auto_loop = false
-	_rng.seed = hash(String(theme)) ^ music_seed
+	_rng.seed = hash(String(theme_name) + _scene_mood) ^ music_seed
 	_bar_index = 0
 	_queue.clear()
-	_next_bar = _playhead + 0.05
+	_voice_count = 0
+	_trim_voices()
+	_next_bar = _playhead + 0.02
 	_gain_target = MUSIC_GAIN
 	if not _gen_player.playing:
 		_gen_player.play()
@@ -223,9 +340,14 @@ func stop_music(fade: float = 0.8) -> void:
 	_gain_target = 0.0
 	current_theme = &""
 	_last_theme = &""
+	_scene_key = ""
+	_scene_mood = ""
 	_auto_loop = false
 	_loop_path = ""
 	music_source = ""
+	_queue.clear()
+	_voice_count = 0
+	_trim_voices()
 	for p: AudioStreamPlayer in [_loop_a, _loop_b]:
 		if p.playing:
 			var tw := create_tween()
@@ -247,13 +369,20 @@ func _fade_out_loops() -> void:
 func set_procedural_enabled(on: bool) -> void:
 	procedural_enabled = on
 	if on:
-		if music_source == "loop" and _auto_loop and _last_theme != &"":
-			play_theme(_last_theme)
-	else:
-		if music_source == "procedural":
-			var theme: StringName = current_theme if current_theme != &"" else _last_theme
-			_last_theme = theme
-			play_music_loop(String(THEME_LOOPS.get(theme, "res://assets/music/day.ogg")), true)
+		if _scene_key != "":
+			var key := _scene_key
+			var mood := _scene_mood
+			_scene_key = ""
+			_scene_mood = ""
+			play_scene(key, mood)
+		elif _last_theme != &"":
+			var theme := _last_theme
+			_last_theme = &""
+			play_theme(theme)
+	elif music_source == "procedural":
+		var theme: StringName = current_theme if current_theme != &"" else _last_theme
+		_last_theme = theme
+		play_music_loop(String(THEME_LOOPS.get(theme, "res://assets/music/night.ogg")), true)
 
 
 ## Tag helper: #music=stop | loop:<file> | <theme>.
@@ -264,6 +393,10 @@ func request_music(spec: String) -> void:
 		var key: String = spec.substr(5)
 		var path: String = key if key.begins_with("res://") else "res://assets/music/%s.ogg" % key
 		play_music_loop(path)
+	elif SCENE_THEMES.has(spec):
+		play_scene(spec)
+	elif spec in ["calm", "warm", "tense", "night"] and _scene_key != "":
+		play_scene(_scene_key, spec)
 	else:
 		play_theme(StringName(spec))
 
@@ -378,7 +511,13 @@ func _render_frames(n: int) -> PackedVector2Array:
 					_copy_voice(vi, _voice_count)
 					_trim_voices()
 					continue
-				var s: float = _v_py[vi] * env * _v_peak[vi]
+				var raw: float = _v_py[vi]
+				var shape: float = float(_theme.get("shape", 0.0)) if not _theme.is_empty() else 0.0
+				if shape >= 2.0:
+					raw = signf(raw) * 0.72 + raw * 0.28
+				elif shape >= 1.0:
+					raw = asin(clampf(raw, -1.0, 1.0)) * 0.63662
+				var s: float = raw * env * _v_peak[vi]
 				l += s * _v_gl[vi]
 				r += s * _v_gr[vi]
 				# Rotate.
@@ -434,19 +573,21 @@ func _schedule_bar(bar: int, bt: float) -> void:
 			"kind": 0, "dur": bar_len * 1.15, "peak": float(_theme["pad"]) / chord.size(),
 			"pan": 0.22 if i % 2 == 1 else -0.22})
 		notes_scheduled += 1
-	# Bass on the root.
+	# Bass on the root. Scene scores may sit an octave lower than the demo moods.
+	var bass_shift: int = int(_theme.get("bass_shift", -12))
 	var hits: int = int(_theme["bass_hits"])
 	for h: int in hits:
 		var t: float = bt + bar_len * 0.5 * h
-		_queue.append({"t": t, "midi": _degree_midi(int(chord[0]), root, scale) - 12,
+		_queue.append({"t": t, "midi": _degree_midi(int(chord[0]), root, scale) + bass_shift,
 			"kind": 2, "dur": bar_len * 0.45, "peak": float(_theme["bass"]), "pan": 0.0})
 		notes_scheduled += 1
 	# Arpeggio: one pluck per plucks-th of the bar.
+	var pluck_shift: int = int(_theme.get("pluck_shift", 12))
 	var plucks: int = int(_theme["plucks"])
 	for k in plucks:
 		var t: float = bt + bar_len * (float(k) / plucks)
 		var deg: int = int(chord[(k + bar) % chord.size()])
-		var midi: int = _degree_midi(deg, root, scale) + 12
+		var midi: int = _degree_midi(deg, root, scale) + pluck_shift
 		if plucks >= 8 and k % 3 == 2:
 			midi += 12
 		_queue.append({"t": t, "midi": midi, "kind": 1, "dur": bar_len * 0.6,

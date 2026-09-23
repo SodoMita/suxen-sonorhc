@@ -4,6 +4,8 @@ A Godot **4.7** visual novel. The dialogue UI is the classical balloon from [vn_
 
 Typewriter **sounds** are removed. Lines still reveal character by character; they do not tick.
 
+Music is generated at runtime, one score per background. A classroom, the rift, the grove, and the lab do not share a track. A `#music=` mood tints the current scene; it does not replace it.
+
 ## Getting started
 
 1. Open this folder in **Godot 4.7**.

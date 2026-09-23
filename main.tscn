@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://df6g3f7ks8sju"]
 
 [ext_resource type="Script" uid="uid://qyg0bakcoedf" path="res://main.gd" id="1_main"]
-[ext_resource type="PackedScene" uid="uid://b3dnexus001" path="res://scenes/3d/nexus_3d.tscn" id="2_nexus"]
+[ext_resource type="Texture2D" uid="uid://cao4hs88e08tp" path="res://bgs/nexus_chamber.jpg" id="2_nexus"]
 [ext_resource type="FontFile" uid="uid://ctxcxi25fm0pu" path="res://assets/fonts/DejaVuSerif.ttf" id="3_serif"]
 [ext_resource type="FontFile" uid="uid://ex3s7gibjgfb" path="res://assets/fonts/DejaVuSerif-Bold.ttf" id="4_bold"]
 
@@ -88,10 +88,19 @@ Button/styles/pressed = SubResource("StyleBoxFlat_hot")
 [node name="Main" type="Node" unique_id=182449774]
 script = ExtResource("1_main")
 
-[node name="Background3D" parent="." unique_id=1762775049 instance=ExtResource("2_nexus")]
-
 [node name="TitleLayer" type="CanvasLayer" parent="."]
 layer = 20
+
+[node name="TitleArt" type="TextureRect" parent="TitleLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_nexus")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Scrim" type="ColorRect" parent="TitleLayer"]
 anchors_preset = 15

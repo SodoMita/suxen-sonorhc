@@ -485,9 +485,8 @@ func start(with_dialogue_resource: DialogueResource = null, cue: String = "", ex
 	if not cue.is_empty():
 		start_from_cue = cue
 	show()
-	# Ambient music under the conversation; tagged #music= lines override this.
-	if audio != null and audio.music_source == "":
-		audio.play_theme(&"calm")
+	# The first #bg= tag starts that scene's generated score. Do not play a
+	# shared mood first or every opening sounds the same.
 	dialogue_line = await dialogue_resource.get_next_dialogue_line(start_from_cue, temporary_game_states)
 
 
@@ -778,7 +777,10 @@ func _refresh_stats() -> void:
 
 
 func _set_background(key: String) -> void:
+	var changed := key != _current_bg
 	_current_bg = key
+	if changed and key != "" and key != "none" and audio != null and audio.has_method("play_scene"):
+		audio.play_scene(key)
 	var next_tex: Texture2D = null
 	if key != "none" and backgrounds.has(key):
 		next_tex = backgrounds[key]

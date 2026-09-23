@@ -1,5 +1,5 @@
 extends Node
-## Chrono Nexus entry. The 3D nexus sits behind a glass title card.
+## Chrono Nexus entry. A still of the nexus sits behind a glass title card.
 ## Starting a route hides the card and opens the Dialogue Manager balloon.
 
 const STORY: DialogueResource = preload("res://dialogue/chrono_nexus.dialogue")
@@ -47,5 +47,5 @@ func _on_dialogue_ended(_resource: Resource) -> void:
 
 func _play_title_theme() -> void:
 	var audio := get_node_or_null("/root/AudioDirector")
-	if audio != null and audio.has_method("play_theme"):
-		audio.play_theme(&"night")
+	if audio != null and audio.has_method("play_scene"):
+		audio.play_scene("nexus")
