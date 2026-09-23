@@ -23,3 +23,5 @@ credentials/
 
 # Ignore backups created by chrono-nexus unpack --into-existing
 /.chrono-nexus-incoming-backup-*/
+
+*__pycache__
