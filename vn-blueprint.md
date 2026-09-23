@@ -1,3 +1,5 @@
+**Engine note:** the playable UI is the [vn_dialogue_demo](https://github.com/SodoMita/vn_dialogue_demo) balloon (Nathan Hoad Dialogue Manager), restyled as Chrono Nexus glass. Dialogic is not used. Typewriter tick sounds are removed; text still reveals.
+
 **CHRONO NEXUS: ULTIMATE PRODUCTION MASTER BLUEPRINT**
 *(Kira’s Midnight Run — No brakes, just the good kind of tension)*
 

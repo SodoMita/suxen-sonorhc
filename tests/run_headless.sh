@@ -67,15 +67,30 @@ else
 	fi
 fi
 
-# Step 5: Verify the glassmorphism theme loaded.
+# Step 5: Verify the Dialogue Manager balloon replaced Dialogic.
 echo ""
-echo "=== Step 5: Verifying glassmorphism theme ==="
-if [ -f themes/glassmorphism/chrono_nexus_style.tres ]; then
-	echo "OK: chrono_nexus_style.tres exists."
-else
-	echo "ERROR: Glassmorphism theme not found."
+echo "=== Step 5: Verifying vn_dialogue_demo balloon ==="
+if [ ! -f scenes/vn_balloon.tscn ] || [ ! -f addons/dialogue_manager/plugin.cfg ]; then
+	echo "ERROR: Dialogue Manager balloon is missing."
 	exit 1
 fi
+if [ -d addons/dialogic ]; then
+	echo "ERROR: Dialogic addon is still present."
+	exit 1
+fi
+if grep -q "Typewriter sound" scenes/vn_balloon.tscn || grep -q "typing_tick" scenes/vn_balloon.gd autoloads/audio_director.gd; then
+	echo "ERROR: typewriter sound is still wired up."
+	exit 1
+fi
+if ! grep -q "CHRONO NEXUS" scenes/vn_balloon.tscn; then
+	echo "ERROR: Chrono Nexus UI mark is missing from the balloon."
+	exit 1
+fi
+if [ ! -f dialogue/chrono_nexus.dialogue ]; then
+	echo "ERROR: story dialogue is missing."
+	exit 1
+fi
+echo "OK: balloon, story, and no typewriter ticks."
 
 # Step 6: Verify the GameState autoload is registered.
 echo ""

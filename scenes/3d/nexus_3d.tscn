@@ -45,6 +45,7 @@ environment = SubResource("Environment_3d")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5)
+current = true
 
 [node name="Sky" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_sky")
