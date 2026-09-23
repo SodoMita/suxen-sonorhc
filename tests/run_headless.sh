@@ -8,6 +8,30 @@
 #        GODOT_BIN=/path/to/godot tests/run_headless.sh
 set -e
 
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+# The live mixer has to be present even when Godot itself is not.
+echo "=== SceneScore extension ==="
+if [ ! -f "$ROOT/addons/scene_score/scene_score.gdextension" ]; then
+	echo "ERROR: SceneScore GDExtension is missing."
+	exit 1
+fi
+for arch in x86_64 arm64 arm32; do
+	if [ ! -f "$ROOT/addons/scene_score/bin/libscene_score.linux.${arch}.so" ]; then
+		echo "ERROR: missing SceneScore linux ${arch} library."
+		exit 1
+	fi
+done
+if ! nm -D "$ROOT/addons/scene_score/bin/libscene_score.linux.x86_64.so" | grep -q ' scene_score_library_init$'; then
+	echo "ERROR: SceneScore entry symbol is not exported."
+	exit 1
+fi
+if grep -q 'BAKE_BARS\|_bake_chunk' "$ROOT/autoloads/audio_director.gd"; then
+	echo "ERROR: procedural music is baked instead of generated live."
+	exit 1
+fi
+echo "OK: live SceneScore libraries are present."
+
 # Locate the Godot binary.
 GODOT_BIN="${GODOT_BIN:-/home/user/.local/bin/godot}"
 if [ ! -x "$GODOT_BIN" ]; then

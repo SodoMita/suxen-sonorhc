@@ -1,7 +1,11 @@
 extends Node
 ## Runtime audio: procedural music, tiny OGG loops and SFX. play_scene()
-## renders a score for the background that just came up. play_theme() is the
-## demo's mood entry. play_music_loop() is only the "Generated music" off path.
+## starts a live score for the background that just came up. The mix runs in
+## the SceneScore C extension: each frame is generated, a scene change
+## crossfades, a mood adjusts the score that is already playing, and reroll()
+## reseeds plucks that have not been scheduled yet. Nothing is baked to a loop
+## or a WAV. The GDScript mixer below is only the fallback if that library is
+## missing. play_music_loop() is the "Generated music" off path.
 
 
 const SAMPLE_RATE: int = 22050        ## stream rate
@@ -172,6 +176,8 @@ var _sfx_pool: Array[AudioStreamPlayer] = []
 var _hold_player: AudioStreamPlayer
 var hold_pitch: float = 1.4            ## hold tone pitch (falls as it fills)
 var _synth_cache: Dictionary = {}   ## synth blips, on first use
+var _engine: Object = null          ## SceneScore, when the extension loaded
+var _push := PackedVector2Array()  ## reused generator buffer
 
 
 func _ready() -> void:
@@ -197,6 +203,7 @@ func _ready() -> void:
 	_hold_player.bus = &"SFX"
 	add_child(_hold_player)
 	_rng.seed = music_seed
+	_attach_engine()
 
 
 func _make_music_player(node_name: String) -> AudioStreamPlayer:
@@ -209,6 +216,10 @@ func _make_music_player(node_name: String) -> AudioStreamPlayer:
 
 
 func _process(delta: float) -> void:
+	if _engine != null:
+		if bool(_engine.call("active")):
+			_pump_engine()
+		return
 	if music_source != "procedural" and _gain <= 0.0005 and _gain_target <= 0.0005:
 		return
 	_ramp_gain(delta)
@@ -256,6 +267,7 @@ func play_scene(scene_key: String, mood: String = "") -> void:
 		return
 	if procedural_enabled and _scene_key == scene_key and _scene_mood == mood and music_source == "procedural" and current_theme == StringName(scene_key):
 		return
+	var same_scene := procedural_enabled and music_source == "procedural" and _scene_key == scene_key and current_theme == StringName(scene_key)
 	_scene_key = scene_key
 	_scene_mood = mood
 	var score: Dictionary = (SCENE_THEMES[scene_key] as Dictionary).duplicate(true)
@@ -263,6 +275,11 @@ func play_scene(scene_key: String, mood: String = "") -> void:
 	_last_theme = StringName(scene_key)
 	if not procedural_enabled:
 		play_music_loop(String(THEME_LOOPS.get(StringName(scene_key), "res://assets/music/night.ogg")), true)
+		return
+	# A mood tint changes the score that is already playing. It does not restart it.
+	if same_scene and _engine != null:
+		_theme = score
+		_engine.call("adjust", _pack_score(score))
 		return
 	_begin_score(StringName(scene_key), score)
 
@@ -293,17 +310,20 @@ func _begin_score(theme_name: StringName, score: Dictionary) -> void:
 	current_theme = theme_name
 	music_source = "procedural"
 	_auto_loop = false
-	_rng.seed = hash(String(theme_name) + _scene_mood) ^ music_seed
+	var seed := hash(String(theme_name) + _scene_mood) ^ music_seed
+	_rng.seed = seed
+	if _engine != null:
+		var first := not bool(_engine.call("active"))
+		_engine.call("transition", _pack_score(score), 0.35 if first else 0.8, hash(String(theme_name)), seed)
+		_ensure_playback()
+		return
 	_bar_index = 0
 	_queue.clear()
 	_voice_count = 0
 	_trim_voices()
 	_next_bar = _playhead + 0.02
 	_gain_target = MUSIC_GAIN
-	if not _gen_player.playing:
-		_gen_player.play()
-	if _playback == null:
-		_playback = _gen_player.get_stream_playback() as AudioStreamGeneratorPlayback
+	_ensure_playback()
 
 
 ## Crossfade to an OGG loop; as_fallback marks a stand-in for the engine.
@@ -311,6 +331,8 @@ func play_music_loop(path: String, as_fallback: bool = false) -> void:
 	if music_source == "loop" and _loop_path == path:
 		return
 	_gain_target = 0.0  # fade the procedural engine out under the loop
+	if _engine != null:
+		_engine.call("release")
 	current_theme = &""
 	music_source = "loop"
 	_loop_path = path
@@ -338,6 +360,8 @@ func play_music_loop(path: String, as_fallback: bool = false) -> void:
 ## Fade everything out.
 func stop_music(fade: float = 0.8) -> void:
 	_gain_target = 0.0
+	if _engine != null:
+		_engine.call("release")
 	current_theme = &""
 	_last_theme = &""
 	_scene_key = ""
@@ -455,6 +479,81 @@ func _play_stream(stream: AudioStream, pitch: float = 1.0) -> void:
 	_sfx_pool[0].pitch_scale = pitch
 	_sfx_pool[0].play()
 
+
+
+## Re-roll plucks that have not been scheduled yet. Sounding notes stay put.
+func reroll(seed: int = 0) -> void:
+	if seed == 0:
+		seed = music_seed ^ int(Time.get_ticks_usec() & 0x7fffffff)
+		if seed == 0:
+			seed = 1
+	music_seed = seed
+	_rng.seed = seed
+	if _engine != null:
+		_engine.call("reseed", seed)
+
+
+func _attach_engine() -> void:
+	if not ClassDB.class_exists("SceneScore"):
+		push_warning("AudioDirector: SceneScore extension is not loaded; using the GDScript mixer.")
+		return
+	_engine = ClassDB.instantiate("SceneScore")
+	if _engine == null:
+		push_warning("AudioDirector: SceneScore failed to construct; using the GDScript mixer.")
+
+
+## Flat score blob. Layout matches native/scene_score/mix.h.
+func _pack_score(score: Dictionary) -> PackedFloat64Array:
+	var out := PackedFloat64Array()
+	out.resize(60)
+	out[0] = float(score.get("bpm", 72.0))
+	out[1] = float(score.get("root", 60))
+	out[2] = float(score.get("shape", 0.0))
+	out[3] = float(score.get("pad", 0.4))
+	out[4] = float(score.get("pluck", 0.2))
+	out[5] = float(score.get("bass", 0.3))
+	out[6] = float(score.get("plucks", 4))
+	out[7] = float(score.get("bass_hits", 1))
+	out[8] = float(score.get("pluck_shift", 12))
+	out[9] = float(score.get("bass_shift", -12))
+	var scale: Array = score.get("scale", [0, 2, 4, 7, 9])
+	var scale_n: int = mini(8, scale.size())
+	out[10] = scale_n
+	for i in scale_n:
+		out[11 + i] = float(scale[i])
+	var prog: Array = score.get("prog", [[0, 2, 4]])
+	var chord_n: int = mini(8, prog.size())
+	out[19] = chord_n
+	for c in chord_n:
+		var chord: Array = prog[c]
+		var tones: int = mini(4, chord.size())
+		var base: int = 20 + c * 5
+		out[base] = tones
+		for k in tones:
+			out[base + 1 + k] = float(chord[k])
+	return out
+
+
+func _ensure_playback() -> void:
+	if not _gen_player.playing:
+		_gen_player.play()
+	if _playback == null:
+		_playback = _gen_player.get_stream_playback() as AudioStreamGeneratorPlayback
+
+
+func _pump_engine() -> void:
+	_ensure_playback()
+	if _playback == null:
+		return
+	var frames: int = mini(_playback.get_frames_available(), MAX_PUSH_PER_FRAME)
+	if frames <= 0:
+		return
+	if _push.size() != frames:
+		_push.resize(frames)
+	_engine.call("render_into", _push)
+	_playback.push_buffer(_push)
+	frames_pushed += frames
+	notes_scheduled = int(_engine.call("notes_scheduled"))
 
 
 func _pump() -> void:

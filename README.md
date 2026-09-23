@@ -1,17 +1,17 @@
 # Chrono Nexus (suxen-sonorhc)
 
-A Godot **4.7** visual novel. The dialogue UI is the classical balloon from [vn_dialogue_demo](https://github.com/SodoMita/vn_dialogue_demo) (Nathan Hoad's Dialogue Manager), restyled for Chrono Nexus: translucent glass panels, cyan edges, per-speaker name colors, a stat strip, and a title card over the 3D nexus. Dialogic is not used.
+A Godot **4.7** visual novel. The dialogue UI is the classical balloon from [vn_dialogue_demo](https://github.com/SodoMita/vn_dialogue_demo) (Nathan Hoad's Dialogue Manager), restyled for Chrono Nexus: translucent glass panels, cyan edges, per-speaker name colors, a stat strip, and a title card over the nexus still. Dialogic is not used.
 
 Typewriter **sounds** are removed. Lines still reveal character by character; they do not tick.
 
-Music is generated at runtime, one score per background. A classroom, the rift, the grove, and the lab do not share a track. A `#music=` mood tints the current scene; it does not replace it.
+Music is generated live, one score per background, by the SceneScore C extension. It is not a WAV and not a baked loop: a scene change crossfades two live scores, a `#music=` mood adjusts the score that is already playing, and `AudioDirector.reroll()` reseeds plucks that have not been scheduled yet. A classroom, the rift, the grove, and the lab do not share a track. If the library for this machine is missing, the GDScript mixer is the fallback.
 
 ## Getting started
 
 1. Open this folder in **Godot 4.7**.
 2. Press **F5**.
 
-The title card sits on the 3D nexus. **Step through the rift** starts the short opening. **The long night** is the longer classroom prologue. **A flicker in the lab** is the Russian lab branch.
+The title card sits on the nexus still. **Step through the rift** starts the short opening. **The long night** is the longer classroom prologue. **A flicker in the lab** is the Russian lab branch.
 
 ### Controls
 
@@ -31,7 +31,8 @@ Save, load, settings, auto, and the story map live on the bottom system row.
 - `dialogue/chrono_nexus.dialogue` — the story. Stage tags: `#bg=`, `#sprite=key:left|right`, `#focus=`, `#music=`, `#sfx=`.
 - `autoloads/game_state.gd` — trust, insight, power, bonds. Choices mutate these; rollback restores them.
 - `Sprites/` — original portraits. `assets/characters/` — the same art, trimmed so it fits the left/right slots.
-- `bgs/` — backgrounds. `scenes/3d/` — the nexus behind the title card.
+- `bgs/` — backgrounds, including the nexus still behind the title card.
+- `addons/scene_score/` — live SceneScore mixer (C GDExtension). Source is in `native/scene_score/`.
 - `addons/dialogue_manager/` — Dialogue Manager 4.1.0.
 
 ## Palette
