@@ -1,3 +1,13 @@
+# Fixed copy of .github/workflows/godot-ci.yml — move this file to
+# .github/workflows/godot-ci.yml to replace the broken workflow.
+#
+# Why this copy exists outside .github/workflows/: the Arena GitHub App
+# lacks the 'workflows' permission and cannot push workflow files.
+#
+# The fix: the pre-commit smoke test creates its fake token with mktemp
+# in /tmp, but git refuses to stage paths outside the work tree, and
+# 'set -e' turned that into a failed build before the hook ever ran.
+# Create the file inside the repository instead.
 name: Godot CI
 
 # Verifies the Chrono Nexus Godot project on every push and pull
@@ -70,11 +80,14 @@ jobs:
       - name: Smoke-test the pre-commit hook
         # The fake token is generated at runtime (not stored in this
         # file) so the repo's own pre-commit hook doesn't reject the
-        # commit of this workflow file.
+        # commit of this workflow file. mktemp must create the file
+        # INSIDE the repository: git refuses to stage paths outside
+        # the work tree, and `set -e` turns that refusal into a red
+        # build before the hook ever runs.
         shell: bash
         run: |
           set -e
-          TMPF=$(mktemp)
+          TMPF=$(mktemp "${PWD}/.fake-pat-XXXXXX")
           # Build a fake token by concatenation; never write the full
           # literal into this repo.
           PREFIX="ghp_"

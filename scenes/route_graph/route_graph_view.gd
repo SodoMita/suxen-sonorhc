@@ -55,7 +55,7 @@ func open_resource(resource = null, player: Dictionary = {}) -> void:
 	if resource != null:
 		dialogue_resource = resource
 	elif dialogue_resource == null:
-		var loaded = load("res://dialogue/intro.dialogue")
+		var loaded = load("res://dialogue/chrono_nexus.dialogue")
 		if loaded != null:
 			dialogue_resource = loaded
 	player_state = player

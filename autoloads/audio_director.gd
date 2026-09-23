@@ -24,6 +24,23 @@ const THEME_LOOPS: Dictionary = {
 	&"night": "res://assets/music/night.ogg",
 }
 
+## Scene -> mood for the non-procedural fallback (Settings "Generated music"
+## off). Scene keys are not mood keys, so looking them up in THEME_LOOPS
+## alone always fell through to night.ogg for every background.
+const SCENE_LOOPS: Dictionary = {
+	"classroom": &"calm",
+	"grove": &"night",
+	"shore": &"warm",
+	"sanctum": &"calm",
+	"nexus": &"tense",
+	"rift": &"tense",
+	"core": &"tense",
+	"lab": &"tense",
+	"alley": &"tense",
+	"festival": &"warm",
+	"lighthouse": &"calm",
+}
+
 ## Procedural score: chords as scale degrees; plucks/bass_hits per bar.
 const THEMES: Dictionary = {
 	&"calm": {
@@ -274,7 +291,7 @@ func play_scene(scene_key: String, mood: String = "") -> void:
 	_color_mood(score, mood)
 	_last_theme = StringName(scene_key)
 	if not procedural_enabled:
-		play_music_loop(String(THEME_LOOPS.get(StringName(scene_key), "res://assets/music/night.ogg")), true)
+		play_music_loop(_scene_loop_path(scene_key, mood), true)
 		return
 	# A mood tint changes the score that is already playing. It does not restart it.
 	if same_scene and _engine != null:
@@ -282,6 +299,19 @@ func play_scene(scene_key: String, mood: String = "") -> void:
 		_engine.call("adjust", _pack_score(score))
 		return
 	_begin_score(StringName(scene_key), score)
+
+
+## Resolve the OGG stand-in when generated music is off. A live mood tag wins;
+## otherwise a plain mood key (from play_theme) maps itself, and a scene key
+## falls back to its own day/night entry in SCENE_LOOPS.
+func _scene_loop_path(scene_or_mood: String, mood: String = "") -> String:
+	var mood_key := StringName(mood)
+	if not THEME_LOOPS.has(mood_key):
+		if THEME_LOOPS.has(StringName(scene_or_mood)):
+			mood_key = StringName(scene_or_mood)
+		else:
+			mood_key = SCENE_LOOPS.get(scene_or_mood, &"night")
+	return String(THEME_LOOPS.get(mood_key, "res://assets/music/night.ogg"))
 
 
 func _color_mood(score: Dictionary, mood: String) -> void:
@@ -406,7 +436,7 @@ func set_procedural_enabled(on: bool) -> void:
 	elif music_source == "procedural":
 		var theme: StringName = current_theme if current_theme != &"" else _last_theme
 		_last_theme = theme
-		play_music_loop(String(THEME_LOOPS.get(theme, "res://assets/music/night.ogg")), true)
+		play_music_loop(_scene_loop_path(String(theme), _scene_mood), true)
 
 
 ## Tag helper: #music=stop | loop:<file> | <theme>.
