@@ -1,0 +1,57 @@
+[configuration]
+
+entry_symbol = "scene_score_library_init"
+compatibility_minimum = "4.7"
+reloadable = false
+
+[libraries]
+
+linux.debug.x86_64.single = "res://addons/scene_score/bin/libscene_score.linux.x86_64.so"
+linux.release.x86_64.single = "res://addons/scene_score/bin/libscene_score.linux.x86_64.so"
+linux.editor.x86_64.single = "res://addons/scene_score/bin/libscene_score.linux.x86_64.so"
+linux.debug.x86_32.single = "res://addons/scene_score/bin/libscene_score.linux.x86_32.so"
+linux.release.x86_32.single = "res://addons/scene_score/bin/libscene_score.linux.x86_32.so"
+linux.editor.x86_32.single = "res://addons/scene_score/bin/libscene_score.linux.x86_32.so"
+linux.debug.arm64.single = "res://addons/scene_score/bin/libscene_score.linux.arm64.so"
+linux.release.arm64.single = "res://addons/scene_score/bin/libscene_score.linux.arm64.so"
+linux.editor.arm64.single = "res://addons/scene_score/bin/libscene_score.linux.arm64.so"
+linux.debug.arm32.single = "res://addons/scene_score/bin/libscene_score.linux.arm32.so"
+linux.release.arm32.single = "res://addons/scene_score/bin/libscene_score.linux.arm32.so"
+linux.editor.arm32.single = "res://addons/scene_score/bin/libscene_score.linux.arm32.so"
+linux.debug.rv64.single = "res://addons/scene_score/bin/libscene_score.linux.rv64.so"
+linux.release.rv64.single = "res://addons/scene_score/bin/libscene_score.linux.rv64.so"
+linux.editor.rv64.single = "res://addons/scene_score/bin/libscene_score.linux.rv64.so"
+
+windows.debug.x86_64.single = "res://addons/scene_score/bin/scene_score.windows.x86_64.dll"
+windows.release.x86_64.single = "res://addons/scene_score/bin/scene_score.windows.x86_64.dll"
+windows.editor.x86_64.single = "res://addons/scene_score/bin/scene_score.windows.x86_64.dll"
+windows.debug.x86_32.single = "res://addons/scene_score/bin/scene_score.windows.x86_32.dll"
+windows.release.x86_32.single = "res://addons/scene_score/bin/scene_score.windows.x86_32.dll"
+windows.editor.x86_32.single = "res://addons/scene_score/bin/scene_score.windows.x86_32.dll"
+windows.debug.arm64.single = "res://addons/scene_score/bin/scene_score.windows.arm64.dll"
+windows.release.arm64.single = "res://addons/scene_score/bin/scene_score.windows.arm64.dll"
+windows.editor.arm64.single = "res://addons/scene_score/bin/scene_score.windows.arm64.dll"
+
+macos.debug.x86_64.single = "res://addons/scene_score/bin/libscene_score.macos.x86_64.dylib"
+macos.release.x86_64.single = "res://addons/scene_score/bin/libscene_score.macos.x86_64.dylib"
+macos.editor.x86_64.single = "res://addons/scene_score/bin/libscene_score.macos.x86_64.dylib"
+macos.debug.arm64.single = "res://addons/scene_score/bin/libscene_score.macos.arm64.dylib"
+macos.release.arm64.single = "res://addons/scene_score/bin/libscene_score.macos.arm64.dylib"
+macos.editor.arm64.single = "res://addons/scene_score/bin/libscene_score.macos.arm64.dylib"
+
+android.debug.x86_64.single = "res://addons/scene_score/bin/libscene_score.android.x86_64.so"
+android.release.x86_64.single = "res://addons/scene_score/bin/libscene_score.android.x86_64.so"
+android.editor.x86_64.single = "res://addons/scene_score/bin/libscene_score.android.x86_64.so"
+android.debug.x86_32.single = "res://addons/scene_score/bin/libscene_score.android.x86_32.so"
+android.release.x86_32.single = "res://addons/scene_score/bin/libscene_score.android.x86_32.so"
+android.editor.x86_32.single = "res://addons/scene_score/bin/libscene_score.android.x86_32.so"
+android.debug.arm64.single = "res://addons/scene_score/bin/libscene_score.android.arm64.so"
+android.release.arm64.single = "res://addons/scene_score/bin/libscene_score.android.arm64.so"
+android.editor.arm64.single = "res://addons/scene_score/bin/libscene_score.android.arm64.so"
+android.debug.arm32.single = "res://addons/scene_score/bin/libscene_score.android.arm32.so"
+android.release.arm32.single = "res://addons/scene_score/bin/libscene_score.android.arm32.so"
+android.editor.arm32.single = "res://addons/scene_score/bin/libscene_score.android.arm32.so"
+
+ios.debug.arm64.single = "res://addons/scene_score/bin/libscene_score.ios.arm64.dylib"
+ios.release.arm64.single = "res://addons/scene_score/bin/libscene_score.ios.arm64.dylib"
+ios.editor.arm64.single = "res://addons/scene_score/bin/libscene_score.ios.arm64.dylib"

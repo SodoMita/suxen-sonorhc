@@ -8,6 +8,30 @@
 #        GODOT_BIN=/path/to/godot tests/run_headless.sh
 set -e
 
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+# The live mixer has to be present even when Godot itself is not.
+echo "=== SceneScore extension ==="
+if [ ! -f "$ROOT/addons/scene_score/scene_score.gdextension" ]; then
+	echo "ERROR: SceneScore GDExtension is missing."
+	exit 1
+fi
+for arch in x86_64 arm64 arm32; do
+	if [ ! -f "$ROOT/addons/scene_score/bin/libscene_score.linux.${arch}.so" ]; then
+		echo "ERROR: missing SceneScore linux ${arch} library."
+		exit 1
+	fi
+done
+if ! nm -D "$ROOT/addons/scene_score/bin/libscene_score.linux.x86_64.so" | grep -q ' scene_score_library_init$'; then
+	echo "ERROR: SceneScore entry symbol is not exported."
+	exit 1
+fi
+if grep -q 'BAKE_BARS\|_bake_chunk' "$ROOT/autoloads/audio_director.gd"; then
+	echo "ERROR: procedural music is baked instead of generated live."
+	exit 1
+fi
+echo "OK: live SceneScore libraries are present."
+
 # Locate the Godot binary.
 GODOT_BIN="${GODOT_BIN:-/home/user/.local/bin/godot}"
 if [ ! -x "$GODOT_BIN" ]; then
@@ -50,32 +74,39 @@ if [ -n "$ERRORS" ]; then
 	exit 1
 fi
 
-# Step 4: Verify the 3D background actually loaded.
-# (Look for either the sky shader or a crystal mesh in the log.)
+# Step 4: The 3D nexus backdrop was removed. Dialogue uses the 2D backgrounds.
 echo ""
-echo "=== Step 4: Verifying 3D background loaded ==="
-if grep -qE "ShaderMaterial|BoxMesh|MeshInstance3D" "$RUN_LOG"; then
-	echo "OK: 3D background is referenced."
-else
-	# The 3D scene might not log explicitly. Try a stronger check by
-	# reading the scene file directly.
-	if [ -f scenes/3d/nexus_3d.tscn ]; then
-		echo "OK: scenes/3d/nexus_3d.tscn exists."
-	else
-		echo "ERROR: 3D background not loaded and scene file is missing."
-		exit 1
-	fi
-fi
-
-# Step 5: Verify the glassmorphism theme loaded.
-echo ""
-echo "=== Step 5: Verifying glassmorphism theme ==="
-if [ -f themes/glassmorphism/chrono_nexus_style.tres ]; then
-	echo "OK: chrono_nexus_style.tres exists."
-else
-	echo "ERROR: Glassmorphism theme not found."
+echo "=== Step 4: Verifying the 3D backdrop is gone ==="
+if [ -f scenes/3d/nexus_3d.tscn ] || grep -q "nexus_3d.tscn" main.tscn; then
+	echo "ERROR: the 3D background scene is still in the game."
 	exit 1
 fi
+echo "OK: no 3D background scene."
+
+# Step 5: Verify the Dialogue Manager balloon replaced Dialogic.
+echo ""
+echo "=== Step 5: Verifying vn_dialogue_demo balloon ==="
+if [ ! -f scenes/vn_balloon.tscn ] || [ ! -f addons/dialogue_manager/plugin.cfg ]; then
+	echo "ERROR: Dialogue Manager balloon is missing."
+	exit 1
+fi
+if [ -d addons/dialogic ]; then
+	echo "ERROR: Dialogic addon is still present."
+	exit 1
+fi
+if grep -q "Typewriter sound" scenes/vn_balloon.tscn || grep -q "typing_tick" scenes/vn_balloon.gd autoloads/audio_director.gd; then
+	echo "ERROR: typewriter sound is still wired up."
+	exit 1
+fi
+if ! grep -q "CHRONO NEXUS" scenes/vn_balloon.tscn; then
+	echo "ERROR: Chrono Nexus UI mark is missing from the balloon."
+	exit 1
+fi
+if [ ! -f dialogue/chrono_nexus.dialogue ]; then
+	echo "ERROR: story dialogue is missing."
+	exit 1
+fi
+echo "OK: balloon, story, and no typewriter ticks."
 
 # Step 6: Verify the GameState autoload is registered.
 echo ""

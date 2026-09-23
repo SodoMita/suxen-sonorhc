@@ -110,7 +110,6 @@ ls -A "$DEST" 2>/dev/null | head -20
 test -d "$DEST/.git" && echo "(.git/ present)" || echo "(.git/ not present)"
 test -f "$DEST/GameState.gd" && echo "OK: GameState.gd present"
 test -f "$DEST/main.gd" && echo "OK: main.gd present"
-test -f "$DEST/scenes/3d/nexus_3d.tscn" && echo "OK: nexus_3d.tscn present"
 test -f "$DEST/scripts/pack_repo.sh" && echo "OK: pack_repo.sh present"
 echo ""
 
