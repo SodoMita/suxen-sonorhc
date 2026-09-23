@@ -59,8 +59,10 @@ const RouteTravel = preload("res://scenes/route_graph/route_graph_travel.gd")
 ## The boss-key action that swaps to the panic screen.
 @export var panic_action: StringName = &"dialogue_panic"
 
-## Directory holding the arbitrary number of save slots.
-@export var saves_dir: String = "user://saves"
+## Directory holding the arbitrary number of save slots. Namespaced under
+## `user://chrono_nexus/` so Chrono Nexus never shares files with the
+## vn_dialogue_demo balloon this UI was adapted from.
+@export var saves_dir: String = "user://chrono_nexus/saves"
 
 ## How many seconds each typed character takes (overridden by saved settings).
 @export var seconds_per_step: float = 0.018
@@ -265,6 +267,9 @@ var _hold_from: Vector2 = Vector2.ZERO
 ## Set while a map jump replays lines through Dialogue Manager. Mutations still
 ## run, but they must not hide the box or play the mutation beat.
 var _silent_travel: bool = false
+## Debounce + dedupe for the viewport size_changed reflow.
+var _resize_queued: bool = false
+var _laid_out_size := Vector2(-1, -1)
 
 ## Whether the current press turned into a drag/swipe. Row handlers (slots,
 ## history entries, rebind/rot buttons) check this so a scroll gesture ending
@@ -284,11 +289,13 @@ const FILTER_LABELS: Array[String] = ["Nearest", "Linear", "Nearest mipmaps", "L
 ## setting is applied as a delta instead of flattening the rect.
 var _sprite_base_offsets: Dictionary = {}
 var save_menu_mode: String = "save"
-var _settings_path: String = "user://settings.json"
+## Game-specific namespace: the demo's `user://settings.json` / `user://seen.json`
+## / `user://saves` layout stays untouched over in vn_dialogue_demo.
+var _settings_path: String = "user://chrono_nexus/settings.json"
 
 ## Lines the player has already seen (persistent, for skip-seen-only).
 var _seen_ids: Dictionary = {}
-var _seen_path: String = "user://seen.json"
+var _seen_path: String = "user://chrono_nexus/seen.json"
 ## Whether the line currently on screen was seen before it was shown.
 var _current_was_seen: bool = false
 
@@ -388,6 +395,16 @@ func _ready() -> void:
 	_on_ui_scale_changed(ui_scale_slider.value)
 	_on_sprite_scale_changed(sprite_scale_slider.value)
 	_on_sprite_y_changed(sprite_y_slider.value)
+	# NOTIFICATION_WM_SIZE_CHANGED is delivered to the Window, not to this
+	# CanvasLayer, so a drag, fullscreen or resolution change never reached
+	# the reflow. The viewport signal does.
+	var view := get_viewport()
+	if not view.size_changed.is_connected(_on_viewport_size_changed):
+		view.size_changed.connect(_on_viewport_size_changed)
+	if DisplayServer.get_name() != "headless":
+		# Expand lets the logical size follow the window, so a taller or
+		# wider frame changes the layout instead of letterboxing 16:9.
+		view.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
 	_reflow_settings()
 	_update_slider_value_labels()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
@@ -432,9 +449,10 @@ func _process(delta: float) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_SIZE_CHANGED:
-		# Window rotation/resize may flip portrait<->landscape.
-		call_deferred("_reflow_settings")
-		call_deferred("_layout_responses")
+		# Usually a no-op on a CanvasLayer (the Window keeps this one to
+		# itself); the viewport size_changed signal in _ready() is the path
+		# that actually fires. Kept as a safety net if that ever changes.
+		_on_viewport_size_changed()
 	# Detect a change of locale and repaint the current dialogue line (text,
 	# name plate and choices) plus every authored UI string.
 	if what == NOTIFICATION_TRANSLATION_CHANGED and _locale != TranslationServer.get_locale() and is_instance_valid(dialogue_label):
@@ -1691,6 +1709,26 @@ func _set_rotation(d: int) -> void:
 	_save_settings()
 
 
+## Window, fullscreen and resolution changes. Deferred so Control layout has
+## the new visible rect before choices and sprite pivots are measured.
+func _on_viewport_size_changed() -> void:
+	if _resize_queued:
+		return
+	_resize_queued = true
+	call_deferred("_apply_viewport_resize")
+
+
+func _apply_viewport_resize() -> void:
+	_resize_queued = false
+	var vis := get_viewport().get_visible_rect().size
+	if vis == _laid_out_size:
+		return
+	_laid_out_size = vis
+	_reflow_settings()
+	_layout_responses()
+	_apply_sprite_transform()
+
+
 func _apply_rotation() -> void:
 	var win: Vector2 = get_viewport().get_visible_rect().size
 	var r: float = deg_to_rad(float(rotation_deg))
@@ -1858,7 +1896,14 @@ func _on_map_filter_selected(idx: int) -> void:
 func _apply_resolution(w: int, h: int) -> void:
 	if DisplayServer.get_name() == "headless":
 		return
+	if w < 1 or h < 1:
+		return
+	var view := get_viewport()
+	view.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
+	# The chosen resolution is the layout size, not a scaled copy of 1280x720.
+	view.content_scale_size = Vector2i(w, h)
 	DisplayServer.window_set_size(Vector2i(w, h))
+	_on_viewport_size_changed()
 
 
 func _ensure_audio_buses() -> void:
@@ -2698,24 +2743,28 @@ func _on_resume_pressed() -> void:
 func _on_pause_history_pressed() -> void:
 	pause_panel.hide()
 	dialogue_label.set_process(true)
+	_silence_audio(false)
 	open_history()
 
 
 func _on_pause_save_pressed() -> void:
 	pause_panel.hide()
 	dialogue_label.set_process(true)
+	_silence_audio(false)
 	open_save_menu("save")
 
 
 func _on_pause_load_pressed() -> void:
 	pause_panel.hide()
 	dialogue_label.set_process(true)
+	_silence_audio(false)
 	open_save_menu("load")
 
 
 func _on_pause_settings_pressed() -> void:
 	pause_panel.hide()
 	dialogue_label.set_process(true)
+	_silence_audio(false)
 	_open_overlay(settings_panel)
 	text_speed_slider.grab_focus()
 
