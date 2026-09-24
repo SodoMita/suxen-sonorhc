@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Pipeline coverage: which production expressions exist as runtime files.
-
-Does not fail the build. Missing expressions are the work list, not a
-regression — the shipped game already has an incomplete set.
-"""
+"""Wiring report plus which cast fields are still empty."""
 
 from __future__ import annotations
 
@@ -12,28 +8,18 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from sprite_pipeline.levels import load  # noqa: E402
-from sprite_pipeline.wiring import ASSETS, status_lines  # noqa: E402
+from sprite_pipeline.cast import LEVELS, load  # noqa: E402
+from sprite_pipeline.wiring import status_lines, wiring_errors  # noqa: E402
 
 
 def main() -> int:
-    doc = load()
     print("\n".join(status_lines()))
     print("")
-    print("Production expression coverage (legacy filename present?):")
-    stems = {p.stem for p in ASSETS.glob("*") if p.suffix != ".import"}
-    for ch in doc["characters"]:
-        cells = []
-        for expr, spec in ch["expressions"].items():
-            aliases = spec.get("alias") or []
-            hit = any(name in stems for name in aliases)
-            mark = "yes" if hit else "MISSING"
-            cells.append(f"{expr}={mark}")
-        print(f"  {ch['id']:<8} " + "  ".join(cells))
-    print("")
-    print("approved flags are false. New sprites stay in characters/<id>/_wip/")
-    print("until the owner sets approved and tools/install_sprite.py is run.")
-    return 0
+    for ch in load()["characters"]:
+        empty = [key for key in (*LEVELS, "clothes") if not ch.get(key)]
+        ask = ch.get("ask") or ""
+        print(f"{ch['id']}: empty={','.join(empty) or '-'}  ask={ask}")
+    return 1 if wiring_errors() else 0
 
 
 if __name__ == "__main__":

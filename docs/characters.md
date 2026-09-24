@@ -1,7 +1,5 @@
 # Characters Directory
 
-Runtime catalog of the cast as wired today. Visual production specs — the same character at several levels of detail, from a one-line glance to a generator prompt — live in `ai_agent_docs/character_levels/`. The sprite pipeline that consumes them is `ai_agent_docs/ART_PIPELINE.md`.
-
 This document catalogs the complete cast of characters configured in the *Chrono Nexus* database, including their design specs and character resources (`.dch`).
 
 ---

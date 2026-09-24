@@ -41,7 +41,6 @@ Save, load, settings, auto, and the story map live on the bottom system row.
 - `dialogue/chrono_nexus.dialogue` — the story. Stage tags: `#bg=`, `#sprite=key:left|right`, `#focus=`, `#music=`, `#sfx=`.
 - `autoloads/game_state.gd` — trust, insight, power, bonds. Choices mutate these; rollback restores them.
 - `Sprites/` — original portraits. `assets/characters/` — the same art, trimmed so it fits the left/right slots.
-- `ai_agent_docs/skills/chrono-sprite/` — sprite pipeline, adapted from [Seirin](https://github.com/SodoMita/Seirin): description ladder, saved prompts, white/black matting. Map: `ai_agent_docs/ART_PIPELINE.md`. Cast at a glance: `ai_agent_docs/character_levels/CAST_AT_A_GLANCE.md`.
 - `bgs/` — backgrounds, including the nexus still behind the title card.
 - `addons/scene_score/` — live SceneScore mixer (C GDExtension). Source is in `native/scene_score/`.
 - `addons/dialogue_manager/` — Dialogue Manager 4.1.0.
