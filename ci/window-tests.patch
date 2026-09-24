@@ -1,0 +1,68 @@
+diff --git a/.github/workflows/godot-ci.yml b/.github/workflows/godot-ci.yml
+index 208f0ad..3a23639 100644
+--- a/.github/workflows/godot-ci.yml
++++ b/.github/workflows/godot-ci.yml
+@@ -106,3 +106,63 @@ jobs:
+             exit 1
+           fi
+           echo "OK: pre-commit hook correctly rejected the fake PAT."
++
++  # The resolution setting can only fail under a window manager: a maximized
++  # or fullscreen window owns its size and silently drops a resize request,
++  # which a headless run cannot reproduce. This job runs the game under Xvfb
++  # with openbox and measures the window from outside the process.
++  window-tests:
++    name: Window-level resolution test
++    runs-on: ubuntu-latest
++    timeout-minutes: 10
++
++    steps:
++      - name: Check out the repository
++        uses: actions/checkout@v4
++
++      - name: Cache Godot 4.7 binary
++        id: cache-godot
++        uses: actions/cache@v4
++        with:
++          path: /tmp/godot-bin/godot
++          key: ${{ runner.os }}-godot-4.7-stable
++
++      - name: Install Godot 4.7 (stable)
++        if: steps.cache-godot.outputs.cache-hit != 'true'
++        shell: bash
++        run: |
++          set -e
++          mkdir -p /tmp/godot-bin
++          cd /tmp/godot-bin
++          curl -L -o godot.zip \
++            "https://github.com/godotengine/godot-builds/releases/download/4.7-stable/Godot_v4.7-stable_linux.x86_64.zip"
++          unzip -o godot.zip
++          mv "Godot_v4.7-stable_linux.x86_64" godot
++          chmod +x godot
++          rm -f godot.zip
++          ./godot --version
++
++      - name: Restore Godot binary from cache
++        if: steps.cache-godot.outputs.cache-hit == 'true'
++        shell: bash
++        run: |
++          mkdir -p /tmp/godot-bin
++          chmod +x /tmp/godot-bin/godot
++
++      - name: Install Xvfb, a window manager and xdotool
++        shell: bash
++        run: |
++          sudo apt-get update
++          sudo apt-get install -y xvfb openbox xdotool
++
++      - name: Import project resources
++        shell: bash
++        env:
++          GODOT_BIN: /tmp/godot-bin/godot
++        run: /tmp/godot-bin/godot --headless --import
++
++      - name: Run window-level resolution test
++        shell: bash
++        env:
++          GODOT_BIN: /tmp/godot-bin/godot
++        run: bash tests/resolution_window_test.sh
