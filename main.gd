@@ -3,6 +3,7 @@ extends Node
 ## Starting a route hides the card and opens the Dialogue Manager balloon.
 
 const STORY: DialogueResource = preload("res://dialogue/suxen_onorhc.dialogue")
+const DisplayScale = preload("res://scenes/display_scale.gd")
 ## The panic page leaves a return ticket when it replaces this scene; the
 ## balloon consumes it in start() and resumes at the line that was showing.
 const PanicScript = preload("res://scenes/panic_screen.gd")
@@ -11,6 +12,9 @@ const PanicScript = preload("res://scenes/panic_screen.gd")
 
 
 func _ready() -> void:
+	# The title card opens at the window the player saved, so a restart does not
+	# look like the resolution setting was forgotten.
+	DisplayScale.apply_saved_window(get_tree())
 	var dm: Node = Engine.get_singleton("DialogueManager")
 	if dm != null and not dm.dialogue_ended.is_connected(_on_dialogue_ended):
 		dm.dialogue_ended.connect(_on_dialogue_ended)

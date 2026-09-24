@@ -211,6 +211,9 @@ msgstr "Разрешение"
 msgid "Custom size"
 msgstr "Свой размер"
 
+msgid "Window fitted to %d x %d to stay on screen"
+msgstr "Окно уменьшено до %d x %d, чтобы поместиться на экране"
+
 msgid "Custom"
 msgstr "Своё"
 

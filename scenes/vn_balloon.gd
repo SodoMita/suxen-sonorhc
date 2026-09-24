@@ -1516,9 +1516,9 @@ func _load_settings() -> void:
 		vsync_check.button_pressed = bool(data.vsync)
 		_apply_vsync(bool(data.vsync))
 	if data.has("res_w") and data.has("res_h"):
-		res_width_spin.value = float(data.res_w)
-		res_height_spin.value = float(data.res_h)
-		_sync_resolution_option()
+		# One apply with the saved pair: writing the boxes one at a time would
+		# fire the two handlers above with a fresh width against a stale height.
+		_set_resolution_request(int(data.res_w), int(data.res_h))
 		_apply_resolution(int(data.res_w), int(data.res_h))
 	if data.has("glyph_scale"):
 		glyph_scale = clampi(int(data.glyph_scale), 1, 4)
@@ -2031,29 +2031,52 @@ func _sync_resolution_option() -> void:
 	for i: int in RES_PRESETS.size():
 		if RES_PRESETS[i][0] == w and RES_PRESETS[i][1] == h:
 			resolution_option.selected = i
+			_sync_resolution_availability()
 			return
 	resolution_option.selected = RES_PRESETS.size()  # "Custom"
+	_sync_resolution_availability()
+
+
+## Grey out the presets the screen cannot show. A pick that cannot change the
+## window looks like the setting is broken, which is worse than saying "no".
+func _sync_resolution_availability() -> void:
+	if not is_instance_valid(resolution_option):
+		return
+	for i: int in RES_PRESETS.size():
+		var asked := Vector2i(RES_PRESETS[i][0], RES_PRESETS[i][1])
+		resolution_option.set_item_disabled(i, DisplayScale.fit_to_screen(asked.x, asked.y) != asked)
 
 
 func _on_resolution_selected(index: int) -> void:
 	if index < RES_PRESETS.size():
-		# set_value() emits no signal, so this won't recurse into the spin handlers
-		res_width_spin.value = RES_PRESETS[index][0]
-		res_height_spin.value = RES_PRESETS[index][1]
-		_apply_resolution(RES_PRESETS[index][0], RES_PRESETS[index][1])
+		_set_resolution_request(RES_PRESETS[index][0], RES_PRESETS[index][1])
+		_apply_resolution(RES_PRESETS[index][0], RES_PRESETS[index][1], true)
 	_save_settings()
 
 
 func _on_res_width_changed(_v: float) -> void:
-	_sync_resolution_option()
-	_apply_resolution(int(res_width_spin.value), int(res_height_spin.value))
+	_set_resolution_request(int(res_width_spin.value), int(res_height_spin.value))
+	_apply_resolution(int(res_width_spin.value), int(res_height_spin.value), true)
 	_save_settings()
 
 
 func _on_res_height_changed(_v: float) -> void:
-	_sync_resolution_option()
-	_apply_resolution(int(res_width_spin.value), int(res_height_spin.value))
+	_set_resolution_request(int(res_width_spin.value), int(res_height_spin.value))
+	_apply_resolution(int(res_width_spin.value), int(res_height_spin.value), true)
 	_save_settings()
+
+
+## Write the custom-size boxes without firing their handlers. Assigning
+## SpinBox.value does emit value_changed in the tree, and a handler reading the
+## other box would apply a fresh width against a stale height.
+func _set_resolution_request(w: int, h: int) -> void:
+	res_width_spin.set_block_signals(true)
+	res_height_spin.set_block_signals(true)
+	res_width_spin.value = float(maxi(w, 1))
+	res_height_spin.value = float(maxi(h, 1))
+	res_width_spin.set_block_signals(false)
+	res_height_spin.set_block_signals(false)
+	_sync_resolution_option()
 
 
 func _sync_quality_controls() -> void:
@@ -2119,7 +2142,7 @@ func _on_map_filter_selected(idx: int) -> void:
 		route_graph_panel.set_map_filter(map_filter)
 
 
-func _apply_resolution(w: int, h: int) -> void:
+func _apply_resolution(w: int, h: int, force := false) -> void:
 	if w < 1 or h < 1:
 		return
 	# Headless has no window. Mutating the layout here turns the square
@@ -2129,8 +2152,23 @@ func _apply_resolution(w: int, h: int) -> void:
 	# Layout stays DESIGN_SIZE. The window gets the pixels. canvas_items
 	# draws that canvas at the window size, so UI and sprites are not a
 	# low-resolution picture blown up.
-	DisplayScale.apply_window(get_tree(), w, h)
+	var was_owned: bool = DisplayScale.wm_owns_size(get_tree())
+	var applied: Vector2i = DisplayScale.apply_window(get_tree(), w, h, force)
+	if applied == Vector2i.ZERO:
+		# A maximized or fullscreen window kept its size.
+		return
+	if force and was_owned and is_instance_valid(fullscreen_check):
+		# Taking the pick seriously means leaving fullscreen: show that.
+		fullscreen_check.set_pressed_no_signal(false)
+		_save_settings()
 	_on_viewport_size_changed()
+	if applied != Vector2i(w, h):
+		# The window cannot be larger than the screen. Say so, and put the size
+		# that was really applied into the boxes, so the panel stops showing a
+		# resolution the player does not have.
+		_set_resolution_request(applied.x, applied.y)
+		_save_settings()
+		_toast(tr("Window fitted to %d x %d to stay on screen") % [applied.x, applied.y])
 
 
 func _ensure_audio_buses() -> void:
