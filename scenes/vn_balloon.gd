@@ -1,5 +1,7 @@
 class_name VNBalloon extends CanvasLayer
 const RouteTravel = preload("res://scenes/route_graph/route_graph_travel.gd")
+const PanicScript = preload("res://scenes/panic_screen.gd")
+const DisplayScale = preload("res://scenes/display_scale.gd")
 ## Chrono Nexus balloon, adapted from the vn_dialogue_demo scene.
 ##
 ## Glass chrome (translucent panels, cyan edges, per-speaker name color)
@@ -11,9 +13,10 @@ const RouteTravel = preload("res://scenes/route_graph/route_graph_travel.gd")
 ##
 ## The whole UI (background stage, sprite slots, name plate, dialogue box,
 ## next indicator, responses menu, history panel, save-slot menu, settings,
-## pause menu, panic screen and the bottom system row) is AUTHORED in
-## `vn_balloon.tscn` and freely editable in the Godot editor. This script only
-## adds behaviour: it never creates structural nodes - dynamic list entries
+## pause menu and the bottom system row) is AUTHORED in `vn_balloon.tscn`.
+## The panic screen is its own scene (`panic_screen.tscn`) so that page can be
+## edited on its own. This script only adds behaviour: it never creates
+## structural nodes - dynamic list entries
 ## (history, slots) duplicate authored template buttons, the standard DM pattern.
 ##
 ## Stage direction tags supported on any dialogue line:
@@ -22,6 +25,8 @@ const RouteTravel = preload("res://scenes/route_graph/route_graph_travel.gd")
 ##   #sprite=name:slot     show a portrait in slot "left" or "right" (key of `sprites`)
 ##   #sprite=none:slot     clear a slot
 ##   #focus=slot           spotlight one slot, dim the other
+##                         a speaker's expression change (#sprite=maya_smile:left with no
+##                         #focus=) still brings that portrait in front of the other
 ##   #box=hide / #box=show hide or show the dialogue box (pure stage directions)
 
 
@@ -131,7 +136,7 @@ const RouteTravel = preload("res://scenes/route_graph/route_graph_travel.gd")
 @onready var text_size_slider: HSlider = %TextSizeSlider
 @onready var text_size_value: Label = %TextSizeValue
 @onready var skip_speed_slider: HSlider = %SkipSpeedSlider
-@onready var skip_speed_value: Label = %SkipSpeedValue
+@onready var skip_speed_value: SpinBox = %SkipSpeedValue
 @onready var skip_mode_option: OptionButton = %SkipModeOption
 @onready var advance_key_button: Button = %AdvanceKeyButton
 @onready var skip_key_button: Button = %SkipKeyButton
@@ -144,7 +149,7 @@ const RouteTravel = preload("res://scenes/route_graph/route_graph_travel.gd")
 @onready var auto_delay_slider: HSlider = %AutoDelaySlider
 @onready var auto_delay_value: Label = %AutoDelayValue
 @onready var ui_scale_slider: HSlider = %UIScaleSlider
-@onready var ui_scale_value: Label = %UIScaleValue
+@onready var ui_scale_value: SpinBox = %UIScaleValue
 @onready var settings_margin: MarginContainer = %SettingsMargin
 @onready var ui_root: Control = %UIRoot
 @onready var sprite_scale_slider: HSlider = %SpriteScaleSlider
@@ -180,8 +185,11 @@ const RouteTravel = preload("res://scenes/route_graph/route_graph_travel.gd")
 ## Pause + panic
 @onready var pause_panel: PanelContainer = %PausePanel
 @onready var resume_button: Button = %ResumeButton
-@onready var panic_screen: Control = %PanicScreen
-@onready var panic_close_button: Button = %PanicCloseButton
+## Loaded from `panic_scene_path` when panic opens. Not authored in this scene.
+var panic_screen: Control
+var panic_close_button: Button
+var _panic_place: Dictionary = {}
+@export_file("*.tscn") var panic_scene_path: String = "res://scenes/panic_screen.tscn"
 
 ## Bottom system row (wraps on narrow aspects / big UI scales)
 @onready var bottom_ui: Control = %BottomUI
@@ -237,7 +245,11 @@ var auto_mode: bool = false
 var skip_mode: bool = false
 var _seeking_choice: bool = false
 var auto_delay: float = 1.5
-var skip_delay: float = 0.1
+var skip_delay: float = 0.55
+## Previous skip slider range. Saved files stored that inverted slider value,
+## not the delay, so an expanded range must not reinterpret those numbers.
+const OLD_SKIP_MIN := 0.05
+const OLD_SKIP_MAX := 0.6
 var skip_seen_only: bool = false
 var ui_scale: float = 1.0
 var sprite_scale: float = 1.0
@@ -263,7 +275,13 @@ const HOLD_CANCEL_DIST: float = 10.0
 
 var _hold_active: bool = false
 var _hold_elapsed: float = 0.0
+## Press in the menu panel's local space. The ring is drawn in the indicator,
+## which does not inherit UI scale, so this is converted before show_at.
+var _hold_local: Vector2 = Vector2.ZERO
+## Same press in viewport space, so a swipe compared against _input (also
+## viewport space) still cancels under UI scale and rotation.
 var _hold_from: Vector2 = Vector2.ZERO
+var _hold_panel: Control = null
 ## Set while a map jump replays lines through Dialogue Manager. Mutations still
 ## run, but they must not hide the box or play the mutation beat.
 var _silent_travel: bool = false
@@ -288,6 +306,8 @@ const FILTER_LABELS: Array[String] = ["Nearest", "Linear", "Nearest mipmaps", "L
 ## Authored offset_top/bottom per sprite, captured once so the Y-offset
 ## setting is applied as a delta instead of flattening the rect.
 var _sprite_base_offsets: Dictionary = {}
+## Authored offset_left/right, so portrait layout can restore landscape.
+var _sprite_base_sides: Dictionary = {}
 var save_menu_mode: String = "save"
 ## Game-specific namespace: the demo's `user://settings.json` / `user://seen.json`
 ## / `user://saves` layout stays untouched over in vn_dialogue_demo.
@@ -302,6 +322,10 @@ var _current_was_seen: bool = false
 const RES_PRESETS: Array = [
 	[1280, 720], [1600, 900], [1920, 1080], [2560, 1440],
 ]
+## Layout size. A higher window resolution renders this canvas with more
+## pixels; it must not become the layout size, or UI and sprites are either
+## tiny or stretched (blurry / pixelated).
+const DESIGN_SIZE := Vector2i(2560, 1440)
 
 ## Every keyboard-driven VN action is remappable. Mouse/touch bindings remain
 ## alongside the chosen key (for example, right click continues to pause).
@@ -369,8 +393,10 @@ func _ready() -> void:
 	slot_template.hide()
 	settings_panel.hide()
 	pause_panel.hide()
-	panic_screen.hide()
+	if is_instance_valid(panic_screen):
+		panic_screen.hide()
 	hold_indicator.hide()
+	_bind_hold_panels()
 	if is_instance_valid(route_graph_panel):
 		route_graph_panel.hide()
 		if route_graph_panel.has_signal("travel_requested") and not route_graph_panel.travel_requested.is_connected(_on_route_travel_requested):
@@ -383,6 +409,7 @@ func _ready() -> void:
 	_bind_story_stats()
 	_refresh_stats()
 	_setup_key_bindings()
+	_prepare_sliders()
 	_load_seen()
 	_load_settings()
 	_sync_quality_controls()
@@ -432,7 +459,7 @@ func _process(delta: float) -> void:
 			_hold_elapsed += delta
 			if _hold_elapsed >= HOLD_APPEAR:
 				if not hold_indicator.visible:
-					hold_indicator.show_at(_hold_from)
+					hold_indicator.show_at(_hold_ring_point())
 					if button_sfx and audio != null:
 						audio.hold_start()
 					# inside _process, in the _hold_active branch:
@@ -498,6 +525,10 @@ func _repaint_current_line() -> void:
 func start(with_dialogue_resource: DialogueResource = null, cue: String = "", extra_game_states: Array = []) -> void:
 	temporary_game_states = [self] + extra_game_states
 	is_waiting_for_input = false
+	if PanicScript.has_ticket():
+		var place: Dictionary = PanicScript.take_ticket()
+		await _resume_from_panic(place)
+		return
 	if is_instance_valid(with_dialogue_resource):
 		dialogue_resource = with_dialogue_resource
 	if not cue.is_empty():
@@ -632,7 +663,7 @@ func next(next_id: String) -> void:
 
 func _any_overlay_open() -> bool:
 	return history_panel.visible or save_menu_panel.visible or settings_panel.visible \
-		or pause_panel.visible or panic_screen.visible or route_graph_panel.visible
+		or pause_panel.visible or _panic_open() or route_graph_panel.visible
 
 
 func _open_overlay(p: Control) -> void:
@@ -686,12 +717,22 @@ func _restore_waiting() -> void:
 
 
 func _apply_stage_tags(line: DialogueLine) -> void:
+	# A line can change the speaker's expression without repeating #focus=.
+	# Remember that slot and bring it forward after the tags, unless the line
+	# named a focus of its own.
+	var speaker_slot := ""
+	var had_focus := false
 	for tag: String in line.tags:
 		if tag.begins_with("bg="):
 			_set_background(tag.substr(3))
 		elif tag.begins_with("sprite="):
-			_set_sprite(tag.substr(7))
+			var spec := tag.substr(7)
+			_set_sprite(spec)
+			var slot := _speaker_slot_for_sprite(spec, line.character)
+			if slot != "":
+				speaker_slot = slot
 		elif tag.begins_with("focus="):
+			had_focus = true
 			_set_focus(tag.substr(6))
 		elif tag == "box=hide":
 			dialogue_box.hide()
@@ -705,6 +746,24 @@ func _apply_stage_tags(line: DialogueLine) -> void:
 			audio.request_music(tag.substr(6))
 		elif tag.begins_with("sfx=") and audio != null:
 			audio.play_sfx(tag.substr(4))
+	if not had_focus and speaker_slot != "":
+		_set_focus(speaker_slot)
+
+
+## Slot of a portrait tag that belongs to the speaking character, or "" when
+## the tag clears a slot, names someone else, or the line has no speaker.
+## "maya_smile" matches Maya; an explicit #focus= on the same line still wins.
+func _speaker_slot_for_sprite(spec: String, speaker: String) -> String:
+	var parts: PackedStringArray = spec.split(":")
+	var key := parts[0].strip_edges().to_lower()
+	var who := speaker.strip_edges().to_lower()
+	if who == "" or key == "" or key == "none":
+		return ""
+	if key != who and not key.begins_with(who + "_"):
+		return ""
+	if parts.size() == 1 or parts[1] == "left":
+		return "left"
+	return "right"
 
 
 ## Play the voiced clip for a line on the Voice bus; lines without a clip
@@ -843,6 +902,24 @@ func _set_focus(slot_name: String) -> void:
 		sprite_right.modulate.a = dim
 	elif slot_name == "right" and sprite_left.texture != null:
 		sprite_left.modulate.a = dim
+	_apply_speaker_order()
+
+
+## The speaking portrait stands in front of the other portrait only. Both stay
+## in the stage, behind the dialogue UI. Raising z_index would sort them against
+## the whole canvas and paint the speaker over the text box.
+func _apply_speaker_order() -> void:
+	sprite_left.z_index = 0
+	sprite_right.z_index = 0
+	sprite_left.z_as_relative = true
+	sprite_right.z_as_relative = true
+	var stage := sprite_left.get_parent()
+	if stage == null:
+		return
+	if _current_focus == "left":
+		stage.move_child(sprite_left, stage.get_child_count() - 1)
+	elif _current_focus == "right":
+		stage.move_child(sprite_right, stage.get_child_count() - 1)
 
 
 ## Remove BBCode markup for places that show plain text (the backlog rows).
@@ -1178,6 +1255,66 @@ func _action_released(event: InputEvent, action: StringName) -> bool:
 
 ## Capture before GUI/unhandled input so even Escape, Enter and the boss key can
 ## become a binding without also closing the panel or triggering their action.
+
+## Close wins over Pause when they share a key and a menu is open. Otherwise
+## Pause toggles. The two actions are never merged.
+func _handle_pause_or_close(event: InputEvent) -> bool:
+	if _any_overlay_open() and _action_pressed(event, close_action):
+		_close_top_overlay()
+		get_viewport().set_input_as_handled()
+		return true
+	if event.is_action_pressed(pause_action):
+		get_viewport().set_input_as_handled()
+		if pause_panel.visible:
+			close_pause()
+		elif is_instance_valid(route_graph_panel) and route_graph_panel.visible:
+			_close_route_graph()
+		else:
+			open_pause()
+		return true
+	return false
+
+
+## Sliders are short by default and easy to miss. Volume keeps its 0-100 range.
+func _prepare_sliders() -> void:
+	var track := StyleBoxFlat.new()
+	track.bg_color = Color(0.12, 0.14, 0.22, 1)
+	track.corner_radius_top_left = 6
+	track.corner_radius_top_right = 6
+	track.corner_radius_bottom_right = 6
+	track.corner_radius_bottom_left = 6
+	track.content_margin_top = 14
+	track.content_margin_bottom = 14
+	var fill := track.duplicate() as StyleBoxFlat
+	fill.bg_color = Color(0.55, 0.82, 1.0, 1)
+	_style_sliders(settings_vbox, track, fill)
+	ui_scale_value.min_value = ui_scale_slider.min_value
+	ui_scale_value.max_value = ui_scale_slider.max_value
+	ui_scale_value.step = ui_scale_slider.step
+	ui_scale_value.suffix = "x"
+	skip_speed_value.min_value = skip_speed_slider.min_value
+	skip_speed_value.max_value = skip_speed_slider.max_value
+	skip_speed_value.step = skip_speed_slider.step
+	skip_speed_value.suffix = " s"
+	for spin: SpinBox in [ui_scale_value, skip_speed_value]:
+		spin.custom_minimum_size = Vector2(120, 44)
+		spin.update_on_text_changed = true
+		spin.select_all_on_focus = true
+		spin.alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+
+func _style_sliders(node: Node, track: StyleBox, fill: StyleBox) -> void:
+	for child: Node in node.get_children():
+		if child is HSlider:
+			var slider := child as HSlider
+			slider.custom_minimum_size.y = 44
+			slider.add_theme_stylebox_override("slider", track)
+			slider.add_theme_stylebox_override("grabber_area", fill)
+			slider.add_theme_stylebox_override("grabber_area_highlight", fill)
+			slider.add_theme_constant_override("center_grabber", 1)
+		_style_sliders(child, track, fill)
+
+
 func _input(event: InputEvent) -> void:
 	# Track press -> drag so list-row handlers can tell a swipe from a tap.
 	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
@@ -1216,22 +1353,12 @@ func _input(event: InputEvent) -> void:
 			(_binding_buttons[action] as Button).grab_focus()
 			get_viewport().set_input_as_handled()
 		return
-	if not is_instance_valid(balloon) or not balloon.is_visible_in_tree() or panic_screen.visible:
+	if not is_instance_valid(balloon) or not balloon.is_visible_in_tree() or _panic_open():
 		return
-	# Pause and Close must win before focused GUI controls consume Esc or
-	# Backspace (notably OptionButton and SpinBox/LineEdit).
-	if event.is_action_pressed(pause_action):
-		if pause_panel.visible:
-			close_pause()
-		elif is_instance_valid(route_graph_panel) and route_graph_panel.visible:
-			_close_route_graph()
-		else:
-			open_pause()
-		get_viewport().set_input_as_handled()
-		return
-	if _any_overlay_open() and _action_pressed(event, close_action):
-		_close_top_overlay()
-		get_viewport().set_input_as_handled()
+	# Close and Pause are separate actions, so each can be rebound. They may
+	# both default to Esc. An open overlay closes and does not also pause.
+	# Backspace stays with SpinBox/LineEdit unless Close is rebound to it.
+	if _handle_pause_or_close(event):
 		return
 	# Keyboard skip is a hold gesture, not a latch. The toolbar button remains
 	# a conventional toggle for mouse/touch users.
@@ -1292,7 +1419,8 @@ func _serialize_key_bindings() -> Dictionary:
 	return result
 
 
-func _load_key_bindings(saved: Variant) -> void:
+func _load_key_bindings(saved: Variant, migrate_backspace: bool = true) -> bool:
+	var migrated := false
 	if saved is Dictionary:
 		for action: StringName in BINDABLE_ACTIONS:
 			var item: Variant = saved.get(String(action))
@@ -1304,8 +1432,24 @@ func _load_key_bindings(saved: Variant) -> void:
 				key.shift_pressed = bool(item.get("shift", false))
 				key.ctrl_pressed = bool(item.get("ctrl", false))
 				key.meta_pressed = bool(item.get("meta", false))
+				# The old Close default was unmodified Backspace, which eats
+				# characters in the number fields. Move that saved default to Esc
+				# once. A later intentional Backspace binding is kept.
+				if migrate_backspace and action == &"dialogue_close" and _is_unmodified_backspace(key):
+					key.keycode = KEY_ESCAPE
+					key.physical_keycode = KEY_NONE
+					migrated = true
 				_replace_action_key(action, key)
 	_refresh_binding_labels()
+	return migrated
+
+
+func _is_unmodified_backspace(key: InputEventKey) -> bool:
+	if key.alt_pressed or key.shift_pressed or key.ctrl_pressed or key.meta_pressed:
+		return false
+	if key.keycode == KEY_BACKSPACE and key.physical_keycode == KEY_NONE:
+		return true
+	return key.keycode == KEY_NONE and key.physical_keycode == KEY_BACKSPACE
 
 
 func _load_settings() -> void:
@@ -1322,7 +1466,7 @@ func _load_settings() -> void:
 		language = "ru" if TranslationServer.get_locale().left(2) == "ru" else "en"
 	language_option.selected = 1 if language == "ru" else 0
 	TranslationServer.set_locale(language)
-	_load_key_bindings(data.get("key_bindings", {}))
+	var close_migrated := _load_key_bindings(data.get("key_bindings", {}), not bool(data.get("close_key_migrated", false)))
 	if data.is_empty():
 		return
 	if data.has("text_speed"):
@@ -1331,9 +1475,10 @@ func _load_settings() -> void:
 	if data.has("text_size"):
 		text_size_slider.value = float(data.text_size)
 		_on_text_size_changed(float(data.text_size))
-	if data.has("skip_speed"):
-		skip_speed_slider.value = float(data.skip_speed)
-		_on_skip_speed_changed(float(data.skip_speed))
+	if data.has("skip_delay") or data.has("skip_speed"):
+		var skip_v := _saved_skip_slider_value(data)
+		skip_speed_slider.value = skip_v
+		_on_skip_speed_changed(skip_speed_slider.value)
 	if data.has("skip_seen_only"):
 		skip_seen_only = bool(data.skip_seen_only)
 		skip_mode_option.selected = 1 if skip_seen_only else 0
@@ -1396,6 +1541,8 @@ func _load_settings() -> void:
 	if data.has("sfx_buttons"):
 		button_sfx = bool(data.sfx_buttons)
 		button_sfx_check.button_pressed = button_sfx
+	if close_migrated:
+		_save_settings()
 
 
 func _save_settings() -> void:
@@ -1407,6 +1554,8 @@ func _save_settings() -> void:
 		"text_speed": text_speed_slider.value,
 		"text_size": text_size_slider.value,
 		"skip_speed": skip_speed_slider.value,
+		"skip_delay": skip_delay,
+		"close_key_migrated": true,
 		"skip_seen_only": skip_seen_only,
 		"auto_delay": auto_delay_slider.value,
 		"ui_scale": ui_scale_slider.value,
@@ -1465,12 +1614,46 @@ func _on_text_size_changed(v: float) -> void:
 
 
 func _on_skip_speed_changed(v: float) -> void:
-	# The control reads as speed: moving right is faster. Internally the timer
-	# needs the inverse quantity, seconds between lines.
+	# The slider reads as speed: moving right is faster. The number field edits
+	# the delay itself, in seconds. Internally the timer needs that delay.
 	skip_delay = skip_speed_slider.min_value + skip_speed_slider.max_value - v
 	skip_timer.wait_time = skip_delay
 	_update_slider_value_labels()
 	_save_settings()
+
+
+func _on_skip_speed_spin_changed(v: float) -> void:
+	var slider_v := skip_speed_slider.min_value + skip_speed_slider.max_value - v
+	slider_v = clampf(slider_v, skip_speed_slider.min_value, skip_speed_slider.max_value)
+	if is_equal_approx(skip_speed_slider.value, slider_v):
+		return
+	skip_speed_slider.value = slider_v
+
+
+func _on_ui_scale_spin_changed(v: float) -> void:
+	if is_equal_approx(ui_scale_slider.value, v):
+		return
+	ui_scale_slider.value = v
+
+
+## Saved skip_speed used to be the inverted slider position on 0.05..0.6.
+## Prefer an explicit delay when we have one, so widening the range does not
+## change a player's existing pace.
+func _saved_skip_slider_value(data: Dictionary) -> float:
+	if not data.has("skip_delay") and data.has("skip_speed"):
+		var raw := float(data.skip_speed)
+		if raw < OLD_SKIP_MIN or raw > OLD_SKIP_MAX:
+			return clampf(raw, skip_speed_slider.min_value, skip_speed_slider.max_value)
+	var delay := 0.55
+	if data.has("skip_delay"):
+		delay = float(data.skip_delay)
+	elif data.has("skip_speed"):
+		delay = OLD_SKIP_MIN + OLD_SKIP_MAX - float(data.skip_speed)
+	var slider_v := skip_speed_slider.min_value + skip_speed_slider.max_value - delay
+	slider_v = clampf(slider_v, skip_speed_slider.min_value, skip_speed_slider.max_value)
+	if skip_speed_slider.step > 0.0:
+		slider_v = snapped(slider_v, skip_speed_slider.step)
+	return slider_v
 
 
 func _on_skip_mode_selected(index: int) -> void:
@@ -1480,6 +1663,9 @@ func _on_skip_mode_selected(index: int) -> void:
 
 func _on_ui_scale_changed(v: float) -> void:
 	_apply_ui_scale(v)
+	# Scale changes the logical width the bottom row wraps against. Resize and
+	# rotation already reflow it; the slider and the number input must too.
+	_layout_system_row()
 	_update_slider_value_labels()
 	_save_settings()
 
@@ -1515,6 +1701,7 @@ func _reflow_settings() -> void:
 	# window's) decides portrait vs landscape rows.
 	portrait_mode = force_portrait or (balloon.size.y > balloon.size.x)
 	_apply_settings_layout()
+	_apply_sprite_transform()
 
 
 ## Test/override entry point for the portrait layout.
@@ -1573,9 +1760,13 @@ func _update_slider_value_labels() -> void:
 		return
 	text_speed_value.text = "%.3f s" % text_speed_slider.value
 	text_size_value.text = "%d px" % roundi(text_size_slider.value)
-	skip_speed_value.text = "%.2f s" % skip_delay
+	skip_speed_value.set_block_signals(true)
+	skip_speed_value.value = skip_delay
+	skip_speed_value.set_block_signals(false)
 	auto_delay_value.text = "%.2f s" % auto_delay_slider.value
-	ui_scale_value.text = "%.2fx" % ui_scale_slider.value
+	ui_scale_value.set_block_signals(true)
+	ui_scale_value.value = ui_scale_slider.value
+	ui_scale_value.set_block_signals(false)
 	sprite_scale_value.text = "%.2fx" % sprite_scale_slider.value
 	sprite_y_value.text = "%d px" % roundi(sprite_y_slider.value)
 	master_vol_value.text = "%d%%" % roundi(master_vol_slider.value)
@@ -1632,8 +1823,8 @@ const UI_TEXT_KEYS: Array = [
 	["SettingsHint", "Settings are saved automatically. Use Close or X to exit."],
 	["PauseTitle", "Paused"], ["ResumeButton", "Resume"], ["PauseHistoryButton", "History"],
 	["PauseSaveButton", "Save"], ["PauseLoadButton", "Load"], ["PauseSettingsButton", "Settings"],
-	["QuitButton", "Quit"], ["PanicTitle", "PHYS 201 - Quantum Mechanics II"],
-	["PanicBody", "Lecture 12: The time-independent Schroedinger equation. H psi = E psi, where H is the Hamiltonian operator. For a particle in a 1-D infinite well of width L the energy eigenvalues are E_n = n^2 h^2 / (8 m L^2). Reminder: problem set 4 is due Friday - problems 3.7, 3.9 and the derivation of the uncertainty principle for position and momentum."],
+	["QuitButton", "Quit"],
+	# The panic page is its own scene now; panic_screen.gd retranslates it.
 	["HistoryTitle", "History"],
 	["HistoryHint", "Click a line to roll back to it - H or Esc closes"],
 ]
@@ -1776,14 +1967,48 @@ func _on_sprite_y_changed(v: float) -> void:
 ## Sprite scale pivots at each sprite's bottom centre; the Y offset is a delta
 ## on top of the authored offsets so the anchored rect keeps its height.
 func _apply_sprite_transform() -> void:
+	var stage := balloon.size
+	# Portrait only. A 720-wide view used the landscape rects, so the two
+	# portraits overlapped almost completely and sat short against the height.
+	var tall := stage.y > stage.x + 1.0
 	for spr: TextureRect in [sprite_left, sprite_right]:
-		if not _sprite_base_offsets.has(spr.get_instance_id()):
-			_sprite_base_offsets[spr.get_instance_id()] = Vector2(spr.offset_top, spr.offset_bottom)
-		var base: Vector2 = _sprite_base_offsets[spr.get_instance_id()]
-		spr.offset_top = base.x + sprite_y
-		spr.offset_bottom = base.y + sprite_y
+		var id := spr.get_instance_id()
+		if not _sprite_base_offsets.has(id):
+			_sprite_base_offsets[id] = Vector2(spr.offset_top, spr.offset_bottom)
+		if not _sprite_base_sides.has(id):
+			_sprite_base_sides[id] = Vector2(spr.offset_left, spr.offset_right)
+		var base: Vector2 = _sprite_base_offsets[id]
+		var sides: Vector2 = _sprite_base_sides[id]
+		var left := sides.x
+		var right := sides.y
+		var bottom := base.y + sprite_y
+		var top := base.x + sprite_y
+		if tall:
+			var laid := _portrait_side_offsets(spr == sprite_left, stage)
+			left = laid.x
+			right = laid.y
+			var authored_h := base.y - base.x
+			top = bottom - maxf(authored_h, stage.y * 0.95)
+		spr.offset_left = left
+		spr.offset_right = right
+		spr.offset_top = top
+		spr.offset_bottom = bottom
 		spr.pivot_offset = Vector2(spr.size.x * 0.5, spr.size.y)
 		spr.scale = Vector2(sprite_scale, sprite_scale)
+	_apply_speaker_order()
+
+
+## Left offsets are from the bottom-left anchor; right offsets from the
+## bottom-right. Centers sit toward opposite edges so the pair can be large
+## without occupying the same place.
+func _portrait_side_offsets(is_left: bool, stage: Vector2) -> Vector2:
+	var width := stage.x * 0.86
+	var center := stage.x * (0.22 if is_left else 0.78)
+	var left_edge := center - width * 0.5
+	var right_edge := center + width * 0.5
+	if is_left:
+		return Vector2(left_edge, right_edge)
+	return Vector2(left_edge - stage.x, right_edge - stage.x)
 
 
 func _on_vsync_toggled(on: bool) -> void:
@@ -1894,15 +2119,16 @@ func _on_map_filter_selected(idx: int) -> void:
 
 
 func _apply_resolution(w: int, h: int) -> void:
-	if DisplayServer.get_name() == "headless":
-		return
 	if w < 1 or h < 1:
 		return
-	var view := get_viewport()
-	view.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
-	# The chosen resolution is the layout size, not a scaled copy of 1280x720.
-	view.content_scale_size = Vector2i(w, h)
-	DisplayServer.window_set_size(Vector2i(w, h))
+	# Headless has no window. Mutating the layout here turns the square
+	# dummy window into a square canvas and breaks orientation tests.
+	if DisplayServer.get_name() == "headless":
+		return
+	# Layout stays DESIGN_SIZE. The window gets the pixels. canvas_items
+	# draws that canvas at the window size, so UI and sprites are not a
+	# low-resolution picture blown up.
+	DisplayScale.apply_window(get_tree(), w, h)
 	_on_viewport_size_changed()
 
 
@@ -1971,7 +2197,9 @@ func _connect_ui_sfx() -> void:
 	for btn: Button in [qs_button, ql_button, save_button, load_button, auto_button,
 			skip_button, log_button, settings_button, panic_button, pause_button,
 			prev_choice_button, next_choice_button, settings_close_button,
-			panic_close_button, resume_button, new_slot_button, save_close_button]:
+			resume_button, new_slot_button, save_close_button]:
+		if btn == null:
+			continue
 		btn.pressed.connect(_on_ui_button_sfx)
 	responses_menu.response_selected.connect(_on_response_selected_sfx)
 
@@ -1998,18 +2226,34 @@ func _on_response_selected_sfx(response: DialogueResponse) -> void:
 ## Press-and-hold on empty menu space runs the hold-to-close gesture
 ## (containers and labels pass the press up to the full-rect panel). The panic
 ## screen deliberately has no hold-to-close: it must swallow everything.
-func _on_menu_empty_press(event: InputEvent) -> void:
+func _on_menu_empty_press(event: InputEvent, panel: Control = null) -> void:
 	if event is InputEventMouseButton:
 		var mb: InputEventMouseButton = event
-		if mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT and not _press_on_interactive(mb.position):
-			_begin_hold(mb.position)
+		if mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT and not _press_on_interactive(mb.position, panel):
+			_begin_hold(mb.position, panel)
+
+
+## The scene connects gui_input without the source. Rebind so the press position
+## can be converted out of that panel's local space.
+func _bind_hold_panels() -> void:
+	for panel: Control in [save_menu_panel, settings_panel, pause_panel, history_panel]:
+		if panel.gui_input.is_connected(_on_menu_empty_press):
+			panel.gui_input.disconnect(_on_menu_empty_press)
+		var bound := _on_menu_empty_press.bind(panel)
+		if not panel.gui_input.is_connected(bound):
+			panel.gui_input.connect(bound)
 
 
 ## True when the press landed on an interactive control (buttons pass drags up
 ## to their ScrollContainer, so their presses also reach the panel).
-func _press_on_interactive(pos: Vector2) -> bool:
+## pos is local to panel; hit rects are global, and those diverge once UIRoot
+## is scaled or the panel origin leaves the canvas origin.
+func _press_on_interactive(pos: Vector2, panel: Control = null) -> bool:
+	var global_pos := pos
+	if panel != null and is_instance_valid(panel):
+		global_pos = panel.get_global_transform() * pos
 	for menu: Control in [save_menu_panel, settings_panel, pause_panel, history_panel]:
-		if menu.visible and _hits_interactive(menu, pos):
+		if menu.visible and _hits_interactive(menu, global_pos):
 			return true
 	return false
 
@@ -2029,14 +2273,33 @@ func _hits_interactive(c: Control, pos: Vector2) -> bool:
 	return false
 
 
-func _begin_hold(pos: Vector2) -> void:
+func _begin_hold(pos: Vector2, panel: Control = null) -> void:
 	_hold_active = true
 	_hold_elapsed = 0.0
-	_hold_from = pos
+	_hold_local = pos
+	_hold_panel = panel
+	# _input reports viewport coordinates. At scale 1 / rotation 0 that matches
+	# the panel-local press, which is what the gesture tests feed in directly.
+	if panel != null and is_instance_valid(panel):
+		_hold_from = panel.get_global_transform_with_canvas() * pos
+	else:
+		_hold_from = pos
+
+
+## Indicator-local point of the press. Both nodes share the canvas, so the
+## canvas rotation applies equally and get_global_transform() is the right
+## space: it still includes UIRoot scale and the panel origin, which the
+## top_level indicator does not inherit.
+func _hold_ring_point() -> Vector2:
+	if _hold_panel == null or not is_instance_valid(_hold_panel):
+		return _hold_local
+	var on_canvas: Vector2 = _hold_panel.get_global_transform() * _hold_local
+	return hold_indicator.get_global_transform().affine_inverse() * on_canvas
 
 
 func _cancel_hold() -> void:
 	_hold_active = false
+	_hold_panel = null
 	hold_indicator.hide_ring()
 	if audio != null:
 		audio.hold_stop()
@@ -2046,6 +2309,7 @@ func _finish_hold() -> void:
 	if not _hold_active:
 		return
 	_hold_active = false
+	_hold_panel = null
 	hold_indicator.hide_ring()
 	if audio != null:
 		audio.hold_stop()
@@ -2083,17 +2347,164 @@ func close_pause() -> void:
 
 
 func toggle_panic() -> void:
-	panic_screen.visible = not panic_screen.visible
-	if panic_screen.visible:
-		auto_timer.stop()
-		is_waiting_for_input = false
-		dialogue_label.set_process(false)
+	if _panic_open():
+		_close_panic()
+	else:
+		_open_panic()
+
+
+func _panic_open() -> bool:
+	return is_instance_valid(panic_screen) and panic_screen.visible
+
+
+func _panic_can_swap() -> bool:
+	var current := get_tree().current_scene
+	# Chrono Nexus boots from main.tscn (the demo balloon used vn_scene.tscn).
+	return current != null and current.scene_file_path == "res://main.tscn"
+
+
+func _capture_panic_place() -> Dictionary:
+	var place := {
+		"scene_path": "",
+		"resource": "",
+		"line_id": "",
+		"history": history.duplicate(true),
+		"cursor": history_cursor,
+		"bg": _current_bg,
+		"left": _current_left,
+		"right": _current_right,
+		"focus": _current_focus,
+		"paused": pause_panel.visible,
+	}
+	var current := get_tree().current_scene
+	if current != null:
+		place.scene_path = current.scene_file_path
+	if is_instance_valid(dialogue_resource):
+		place.resource = dialogue_resource.resource_path
+	if is_instance_valid(dialogue_line):
+		place.line_id = dialogue_line.id
+	var game_state := get_tree().root.get_node_or_null("GameState")
+	if is_instance_valid(game_state) and game_state.has_method("snapshot"):
+		place.state = game_state.snapshot()
+	return place
+
+
+func _ensure_panic_loaded() -> bool:
+	if is_instance_valid(panic_screen):
+		return true
+	if panic_scene_path == "" or not ResourceLoader.exists(panic_scene_path):
+		_toast(tr("Nothing to show there"))
+		return false
+	panic_screen = PanicScript.load_into(ui_root, panic_scene_path)
+	if not is_instance_valid(panic_screen):
+		_toast(tr("Nothing to show there"))
+		return false
+	panic_close_button = panic_screen.find_child("PanicCloseButton", true, false) as Button
+	# The scene's own button already emits `dismissed`. Connecting pressed too
+	# would close twice and skip a line when skip mode is on.
+	if panic_screen.has_signal("dismissed") and not panic_screen.dismissed.is_connected(_close_panic):
+		panic_screen.dismissed.connect(_close_panic)
+	elif panic_close_button != null and not panic_close_button.pressed.is_connected(_on_panic_close_pressed):
+		panic_close_button.pressed.connect(_on_panic_close_pressed)
+	if panic_close_button != null and not panic_close_button.pressed.is_connected(_on_ui_button_sfx):
+		panic_close_button.pressed.connect(_on_ui_button_sfx)
+	return true
+
+
+func _open_panic() -> void:
+	var place := _capture_panic_place()
+	# The game scene can be replaced by the panic scene, then loaded back.
+	# Any other host (the UI tests, a custom parent) keeps the game loaded
+	# and covers it, because changing scene would free that host.
+	if _panic_can_swap():
+		PanicScript.ticket = place
 		_silence_audio(true)
 		_sfx("open")
-	else:
+		get_tree().change_scene_to_file(panic_scene_path)
+		return
+	_panic_place = place
+	if not _ensure_panic_loaded():
+		return
+	panic_screen.show()
+	auto_timer.stop()
+	is_waiting_for_input = false
+	dialogue_label.set_process(false)
+	_silence_audio(true)
+	_sfx("open")
+
+
+func _close_panic() -> void:
+	if is_instance_valid(panic_screen):
+		panic_screen.hide()
+	_restore_panic_place(_panic_place)
+	if is_instance_valid(dialogue_label):
 		dialogue_label.set_process(true)
+	_silence_audio(false)
+	_sfx("close")
+	_restore_waiting()
+
+
+func _restore_panic_place(place: Dictionary) -> void:
+	if place.is_empty():
+		return
+	var game_state := get_tree().root.get_node_or_null("GameState")
+	if is_instance_valid(game_state) and game_state.has_method("restore") and place.get("state") is Dictionary:
+		game_state.restore(place.state)
+	if place.get("history") is Array:
+		history = place.history
+		history_cursor = int(place.get("cursor", history_cursor))
+	var saved_id := str(place.get("line_id", ""))
+	if saved_id != "" and (not is_instance_valid(dialogue_line) or str(dialogue_line.id) != saved_id):
+		var found := int(place.get("cursor", -1))
+		if found < 0 or found >= history.size() or str(history[found].get("id", "")) != saved_id:
+			found = -1
+			for i in history.size():
+				if str(history[i].get("id", "")) == saved_id:
+					found = i
+					break
+		if found >= 0:
+			rollback_to(found)
+	_restore_stage({
+		"bg": str(place.get("bg", "")),
+		"left": str(place.get("left", "")),
+		"right": str(place.get("right", "")),
+		"focus": str(place.get("focus", "")),
+	})
+
+
+func _resume_from_panic(place: Dictionary) -> void:
+	var resource_path := str(place.get("resource", ""))
+	if resource_path != "" and ResourceLoader.exists(resource_path):
+		dialogue_resource = load(resource_path)
+	show()
+	var game_state := get_tree().root.get_node_or_null("GameState")
+	if is_instance_valid(game_state) and game_state.has_method("restore") and place.get("state") is Dictionary:
+		game_state.restore(place.state)
+	if place.get("history") is Array:
+		history = place.history
+		history_cursor = int(place.get("cursor", -1))
+	var line_id := str(place.get("line_id", ""))
+	if line_id != "" and is_instance_valid(dialogue_resource):
+		# get_next injects the file's `using` autoloads. get_line does not, so
+		# {{player_name}} would fail here and a direct game_states write would
+		# wipe Dialogue Manager's autoload map.
+		_restoring = true
+		var line: DialogueLine = await dialogue_resource.get_next_dialogue_line(line_id, temporary_game_states)
+		if line != null:
+			dialogue_line = line
+		if place.get("history") is Array:
+			history = place.history
+			history_cursor = int(place.get("cursor", history_cursor))
+	_restore_stage({
+		"bg": str(place.get("bg", "")),
+		"left": str(place.get("left", "")),
+		"right": str(place.get("right", "")),
+		"focus": str(place.get("focus", "")),
+	})
+	if bool(place.get("paused", false)):
+		open_pause()
+	else:
 		_silence_audio(false)
-		_sfx("close")
 		_restore_waiting()
 
 
@@ -2103,7 +2514,7 @@ func toggle_panic() -> void:
 func _silence_audio(on: bool) -> void:
 	# Leaving one overlay while the other is still up must keep both the bus and
 	# the current voice paused.
-	var silent: bool = on or pause_panel.visible or panic_screen.visible
+	var silent: bool = on or pause_panel.visible or _panic_open()
 	voice_player.stream_paused = silent
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), silent)
 
@@ -2118,7 +2529,7 @@ func _on_pause_button_pressed() -> void:
 
 ## Touch exit for the panic page (the boss key alone is no help on phones).
 func _on_panic_close_pressed() -> void:
-	toggle_panic()
+	_close_panic()
 
 
 func _toggle_auto() -> void:
@@ -2213,7 +2624,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	# The panic screen overrides absolutely; only the boss key closes it.
-	if panic_screen.visible:
+	if _panic_open():
 		get_viewport().set_input_as_handled()
 		if event.is_action_pressed(panic_action):
 			toggle_panic()
@@ -2242,14 +2653,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _try_system_actions(event):
 		return
 
-	if event.is_action_pressed(pause_action):
-		get_viewport().set_input_as_handled()
-		if pause_panel.visible:
-			close_pause()
-		elif is_instance_valid(route_graph_panel) and route_graph_panel.visible:
-			_close_route_graph()
-		else:
-			open_pause()
+	if _handle_pause_or_close(event):
 		return
 
 	if event.is_action_pressed(history_action):
@@ -2329,7 +2733,7 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		toggle_panic()
 		return
-	if panic_screen.visible:
+	if _panic_open():
 		get_viewport().set_input_as_handled()
 		return
 	if _try_system_actions(event):

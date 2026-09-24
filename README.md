@@ -17,17 +17,27 @@ The title card sits on the nexus still. **Step through the rift** starts the sho
 
 - **Read on:** click, Enter, or Space. The first press finishes the text reveal; the next advances.
 - **Skip:** hold Ctrl.
+- **Close overlay:** Esc. Close is its own remappable binding, separate from Pause; with a menu open, Esc backs out instead of also pausing. Backspace stays free for number fields.
 - **Log / rollback:** H, or the mouse wheel.
 - **Quick save / load:** F5 / F9.
 - **Pause:** Esc or right click.
-- **Panic screen:** F12.
+- **Panic screen:** F12. Loads `scenes/panic_screen.tscn` — an opaque physics-lecture page you can redesign on its own — and silences every sound. Closing it (boss key again or the corner X) returns to the exact line, backlog place, stage dressing, and story state.
 - **Story map:** a visited header rolls back. An unvisited header is replayed by Dialogue Manager so choices and mutations stay the engine's. A path that rewrites earlier choices waits for the spoiler toggle.
 
 Save, load, settings, auto, and the story map live on the bottom system row.
 
+### Display & settings notes
+
+- Resolution presets and any custom size keep the 2560×1440 layout and draw it at the window's pixel density, so the UI and sprites stay the same size without being stretched or blurred. The panic page applies the same scale and — when it replaces the game — the saved rotation itself.
+- Every slider except volume covers a wider range and is taller; UI scale and skip speed also have a number field beside the slider (the skip number is the delay in seconds; the slider still reads as speed, right is faster).
+- In a portrait view the sprites are larger and set apart, and the speaking portrait stands in front of the other while staying behind the dialogue UI. A line that changes the speaker's expression brings their portrait forward even without a `#focus=` tag.
+- Menus close with a press-and-hold on their empty space; the ring fills at your finger even when the UI is scaled or the view is rotated.
+
 ## Layout
 
 - `scenes/vn_balloon.tscn` — authored UI. Edit it in the Godot editor; the script does not build the chrome.
+- `scenes/panic_screen.tscn` — the panic page, its own scene (`scenes/panic_screen.gd`), restyled here as a black lecture sheet; it can be redesigned without touching the balloon.
+- `scenes/display_scale.gd` — shared window layout: the design canvas stays 2560×1440 and larger windows render it with more pixels.
 - `dialogue/chrono_nexus.dialogue` — the story. Stage tags: `#bg=`, `#sprite=key:left|right`, `#focus=`, `#music=`, `#sfx=`.
 - `autoloads/game_state.gd` — trust, insight, power, bonds. Choices mutate these; rollback restores them.
 - `Sprites/` — original portraits. `assets/characters/` — the same art, trimmed so it fits the left/right slots.

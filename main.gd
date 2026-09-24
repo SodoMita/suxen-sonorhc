@@ -3,6 +3,9 @@ extends Node
 ## Starting a route hides the card and opens the Dialogue Manager balloon.
 
 const STORY: DialogueResource = preload("res://dialogue/suxen_onorhc.dialogue")
+## The panic page leaves a return ticket when it replaces this scene; the
+## balloon consumes it in start() and resumes at the line that was showing.
+const PanicScript = preload("res://scenes/panic_screen.gd")
 
 @onready var title_layer: CanvasLayer = $TitleLayer
 
@@ -11,7 +14,17 @@ func _ready() -> void:
 	var dm: Node = Engine.get_singleton("DialogueManager")
 	if dm != null and not dm.dialogue_ended.is_connected(_on_dialogue_ended):
 		dm.dialogue_ended.connect(_on_dialogue_ended)
+	if PanicScript.has_ticket():
+		# Coming back from the panic page: skip the title card and let the
+		# balloon resume the saved line (the cue below is ignored for tickets).
+		_titleless_start()
+		return
 	_play_title_theme()
+
+
+## Start the dialogue without touching the title layer.
+func _titleless_start() -> void:
+	Engine.get_singleton("DialogueManager").show_dialogue_balloon(STORY, "")
 
 
 func _unhandled_input(event: InputEvent) -> void:
