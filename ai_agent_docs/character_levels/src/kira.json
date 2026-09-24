@@ -1,0 +1,170 @@
+{
+  "id": "kira",
+  "name": "Kira",
+  "name_local": "Кира",
+  "role": "sunfire scout who reads rift weather through ears and tail",
+  "age_status": "Age not locked. Lore recruits her as a teenager and never states a current adult age. Appeal is ears, tail, and competence. The costume stays fully covering. Do not use the shipped beachwear armor as a reference.",
+  "appeal_track": "cool",
+  "approved": false,
+  "lore": [
+    "docs/vn_specific/kira_lore.md",
+    "docs/vn_specific/characters_starting/kira_origin.md"
+  ],
+  "memory_point": "cat ears scorched pale at the tips, and a tail that ends in a hard amber light",
+  "secondary_hook": "a scratched-off academy seal on the sleeve",
+  "silhouette": {
+    "class": "compact athletic wedge with ears breaking the outline",
+    "glance": "Compact closed jacket, ears above the hair, amber tail tip.",
+    "big": "the wedge of the torso and the short hair",
+    "mid": "the ears, the jacket hem, and the tail",
+    "small": "the amber tail tip, knee pads, and the scratched sleeve",
+    "negative_space": "the gap under the raised ear and the space between arm and jacket"
+  },
+  "shape": {
+    "circle": 0.2,
+    "square": 0.25,
+    "triangle": 0.55
+  },
+  "shape_majority": "triangle",
+  "palette": {
+    "main": {
+      "name": "sun amber",
+      "hex": "#E86A1A",
+      "means": "heat she no longer has to hide"
+    },
+    "zones": {
+      "hair": {
+        "name": "sun gold",
+        "hex": "#F0C14A"
+      },
+      "skin": {
+        "name": "warm",
+        "hex": "#E6B08A"
+      },
+      "eye": {
+        "name": "amber",
+        "hex": "#E86A1A"
+      },
+      "tops1": {
+        "name": "scout rust",
+        "hex": "#C4652A"
+      },
+      "tops2": {
+        "name": "dark shirt",
+        "hex": "#3E2A24"
+      },
+      "waist": {
+        "name": "cloth belt",
+        "hex": "#6B4A32"
+      },
+      "bottom1": {
+        "name": "cargo brown",
+        "hex": "#4A3428"
+      },
+      "bottom2": {
+        "name": "knee pad",
+        "hex": "#8A5A32"
+      },
+      "shoes": {
+        "name": "boot brown",
+        "hex": "#3A2418"
+      },
+      "decoration1": {
+        "name": "tail tip",
+        "hex": "#E86A1A"
+      },
+      "decoration2": {
+        "name": "ear scorch",
+        "hex": "#F6E2B8"
+      }
+    }
+  },
+  "symbol_set": {
+    "eye": "bright amber eyes, lively, one catchlight.",
+    "brow": "slightly raised, ready to tease.",
+    "mouth": "a small closed smile at rest.",
+    "contour": "round-cheeked, not sharp.",
+    "hair": "short sun-gold hair, ears above it, tips scorched pale.",
+    "body": "compact athletic build, fully covered, not child-short."
+  },
+  "wardrobe": {
+    "default": {
+      "name": "scout jacket",
+      "when": "field scenes after she leaves the academy",
+      "glance": "a closed high-collar jacket, trousers, and boots",
+      "design": "A sun-faded scout jacket with a standing collar, worn closed over a dark shirt, cargo trousers, knee pads, and boots; the academy seal is scratched off the sleeve.",
+      "production": "Issued canvas, two chest pockets with button flaps, a cloth belt, sleeves rolled once. Lighter than the sealed academy suit, and it still covers torso, arms to the wrist, and legs to the boot. The tail leaves under the hem and ends in a hard amber tip, not a flame."
+    },
+    "alternate": {
+      "name": "academy suit",
+      "when": "flashbacks inside the sealed training suit",
+      "glance": "a fully sealed pressure suit, tail held in",
+      "design": "A sealed academy pressure suit, faceplate up, tail strapped down, worn only in a flashback.",
+      "production": "Do not draw the academy suit until a flashback label asks. It is fully sealed and has no sword."
+    }
+  },
+  "props": [
+    "signal wand on the belt"
+  ],
+  "expressions": {
+    "neutral": {
+      "read": "alert and pleased, not blank",
+      "brow": "slightly up",
+      "eye": "bright, level",
+      "mouth": "small closed smile",
+      "alias": []
+    },
+    "happy": {
+      "read": "open delight",
+      "brow": "up",
+      "eye": "narrowed",
+      "mouth": "open smile, no exaggeration",
+      "alias": [
+        "kira_happy"
+      ]
+    },
+    "sad": {
+      "read": "the joke dropped",
+      "brow": "inner corners up",
+      "eye": "lowered",
+      "mouth": "closed, flat",
+      "alias": []
+    },
+    "surprised": {
+      "read": "ears would move, but the head does not",
+      "brow": "up",
+      "eye": "wide",
+      "mouth": "small open mouth, no teeth",
+      "alias": []
+    },
+    "blush": {
+      "read": "the current face plus a cheek wash",
+      "brow": "unchanged",
+      "eye": "unchanged",
+      "mouth": "unchanged",
+      "alias": [
+        "kira_blush"
+      ]
+    }
+  },
+  "banned": [
+    "beachwear armor",
+    "exposed stomach",
+    "sword on the hip",
+    "child-coded chibi proportions"
+  ],
+  "legacy": "Shipped kira sprites are armor cut like beachwear, with an exposed stomach and a sword. They are not the production reference. Do not img2img from them.",
+  "staging": {
+    "pose": "Standing, one hand on the hip, the other relaxed, both feet in frame.",
+    "light": "Warm key from the upper left, as if from a low sun, cool fill on the jacket shadow."
+  },
+  "open_questions": [
+    "Whether the sealed academy suit is needed for a flashback in the current dialogue."
+  ],
+  "levels": {
+    "L0": "Kira reads as a compact athletic wedge with ears breaking the outline. Main colour is sun amber, not rust armor. Memory point: cat ears scorched pale at the tips, and a tail that ends in a hard amber light.",
+    "L1": "Kira is the scout who feels rift weather through her ears and tail. She reads as a compact athletic wedge with ears breaking the outline: short gold hair, a closed jacket, boots, and a tail. The thing a player names is cat ears scorched pale at the tips, and a tail that ends in a hard amber light. Main colour is sun amber, in the eyes and the tail tip, against a rust jacket and dark trousers. The default costume is the scout jacket, a closed high-collar jacket, trousers, and boots. At rest she looks alert and pleased, not fierce. A second look finds the scratched sleeve where a seal used to be. She is not the staff-bearer and not the hooded analyst. The ears and the amber tail tip are the difference. No sword. The jacket stays closed.",
+    "L2": "Kira is the warm wedge of the roster. Silhouette class: compact athletic wedge with ears breaking the outline. Memory point: cat ears scorched pale at the tips, and a tail that ends in a hard amber light. Big mass is the torso wedge and the short hair. Mid mass is the ears, the jacket hem, and the tail. Small mass is the amber tip, the knee pads, and the scratched sleeve. Negative space is the gap under each ear and the air between arm and jacket. Do not fill it with a cape or a pauldron. Eyes are bright amber, lively, one catchlight. Brow slightly up. Mouth a small closed smile at rest. Cheeks are round, not sharp. Hair is short and sun-gold. Ears sit above it, tips scorched pale. Body is compact and athletic, fully covered, not a chibi. Main colour is sun amber #E8942A, and it means heat she no longer has to hide. It is reserved for eyes and the tail tip. Jacket is scout rust #C4652A. Shirt is dark #3E2A24. Trousers #4A3428. Ear scorch is a pale #F6E2B8, a small mark, not a second focal point. Default outfit is the scout jacket. A sun-faded scout jacket with a standing collar, worn closed over a dark shirt, cargo trousers, knee pads, and boots; the academy seal is scratched off the sleeve. The alternate academy suit is a sealed pressure suit for flashbacks only, tail strapped, no weapon. Nearest neighbour in warmth is nobody; in silhouette Selene is also a triangle, but hers is a tall staff and coat tails. Kira is short-haired, eared, and amber. Selene is violet, long-haired, and staffed. In greyscale Kira is a mid-value wedge with two ear notches. That notch is the thumbnail test. #E86A1A",
+    "L3": "Production notes for Kira. Competence and the animal signs carry the appeal. The costume is work clothes. Memory point in every asset: cat ears scorched pale at the tips, and a tail that ends in a hard amber light. If the ears are missing, the same colour as the hair all the way to the tip, or the tail tip is a flame sprite, reject. Hands: one on the hip, one relaxed, five digits, no weapon. The signal wand is a folded stick on the belt, not drawn as a blade. Feet in boots, both fully in frame, on the bottom edge. Tail visible from the side or behind the leg, not wrapped as a belt. Default costume, the scout jacket: Issued canvas, two chest pockets with button flaps, a cloth belt, sleeves rolled once. Lighter than the sealed academy suit, and it still covers torso, arms to the wrist, and legs to the boot. The tail leaves under the hem and ends in a hard amber tip, not a flame. Canvas shows a little wear at the cuffs. Button flaps, not a bare chest harness. Collar stands. Zip or buttons run to the neck. No stomach gap. No thigh cutout. The scratched sleeve is a pale scrape where a patch was, small enough to miss at thumbnail size. The academy-suit alternate is fully sealed and out of scope until a flashback label exists. Expressions are face-only. The ears do not flop between differentials; an ear-move is a separate pose, not an expression. Neutral is alert and pleased. Happy, the legacy kira_happy key, is an open smile without a new pose. Sad drops the joke: inner brow up, mouth flat. Surprised widens the eyes and opens the mouth slightly, no teeth. Blush is a cheek wash on the current face. There is no legacy neutral, sad, or surprised file yet; do not pretend the happy file is neutral. Staging light is a warm key from the upper left, as if from a low sun, with a cool fill in the jacket shadow. Face box locks after the first approved sprite. Head does not translate between expressions. Height is unconfirmed. Her compactness is silhouette, not a licence to draw a child. Legacy: Shipped kira sprites are armor cut like beachwear, with an exposed stomach and a sword. They are not the production reference. Do not img2img from them. QA rejects: beachwear cut, an exposed stomach, a sword, child-short proportions, a missing tail tip, ears that do not break the outline, a cape. Age is not locked. Draw the scout, not a glamour costume. A sun-faded scout jacket with a standing collar, worn closed over a dark shirt, cargo trousers, knee pads, and boots; the academy seal is scratched off the sleeve. #E86A1A"
+  }
+}

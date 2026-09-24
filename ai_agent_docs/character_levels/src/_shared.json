@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "style_bible": {
+    "render": "Anime visual-novel standing sprite, clean closed ink line, flat cel colour with two shadow steps, one catchlight per eye",
+    "line": "Uniform dark line, no sketch strokes, no painterly edges, no photoreal skin",
+    "eye_render": "Large anime eyes, one catchlight, iris colour exact to the stated hex"
+  },
+  "global_exclude": "No text, no watermark, no extra limbs, no cropped feet, no scenery, no nudity, no transparent clothing, no sexual pose, no child proportions, fully clothed, no living-artist name.",
+  "required_expressions": ["neutral", "happy", "sad", "surprised", "blush"],
+  "prompt_char_max": 1500,
+  "shared_open_questions": [
+    "Exact height in centimetres, and whether the cast shares one world scale.",
+    "Owner approval of this level doc. approved stays false until then.",
+    "Which outfit is worn in which dialogue label.",
+    "Whether the memory-point prop is a separate overlay or painted into the sprite."
+  ]
+}

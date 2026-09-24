@@ -1,0 +1,7 @@
+FORMAT: Full-body VN sprite, one figure, tall portrait, flat mid-grey background, head to soles, margin. Early exclude: no text, no watermark, no extra limbs, no nudity, no transparent clothing, no sexual pose, fully clothed.
+STYLE: Anime VN tachie, closed ink line, flat cel, two shadow steps.
+IDENTITY: Selene. Twilight scholar with a staff and a chained book. Class: tall inverted triangle of staff and coat tails. Tall dark figure, coat tails to the floor, a staff taller than the shoulder, long violet hair. Eyes: pale violet eyes, level, knowing, one catchlight. Hair: long deep-violet hair, one braid optional, not a bell. Defining feature: a crystal-headed staff held at her side, taller than her shoulder.
+WARDROBE: Twilight coat. A closed dark coat, boots, and a tall staff. Props: crystal staff, chained spellbook.
+COLOR: Main twilight violet #5B2E86. Hair #3A2158. Eyes #C9A6E8. Outer #2A2148. Accent #B388E0.
+STAGING: Standing, staff in one hand, book hand at the belt, coat tails spread, feet together. Neutral, alert, eyes to camera. A cool rim on the hair and a small warm glint in the crystal, face evenly lit. Focal point: a crystal-headed staff held at her side, taller than her shoulder, fully visible.
+EXCLUDE: No text, no watermark, no extra limbs, no cropped feet, no scenery, no nudity, no transparent clothing, no sexual pose, no child proportions, fully clothed, no living-artist name. Also: slipping robe; staff replaced by a sword; open coat; child-coded proportions.

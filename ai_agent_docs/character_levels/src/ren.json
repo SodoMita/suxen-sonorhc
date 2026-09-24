@@ -1,0 +1,170 @@
+{
+  "id": "ren",
+  "name": "Ren",
+  "name_local": "Рен",
+  "role": "shadow protagonist in a school uniform",
+  "age_status": "Minor-coded. The prologue places him at about sixteen, in a school uniform. Appeal is the shadow and the eyes. Do not age him up, and do not redesign the uniform.",
+  "appeal_track": "shadow",
+  "approved": false,
+  "lore": [
+    "docs/vn_specific/ren_lore.md",
+    "docs/vn_specific/characters_starting/ren_origin.md"
+  ],
+  "memory_point": "a face that is only two cyan eyes in a black school-uniform shadow",
+  "secondary_hook": "smoke leaving the calves, with holes in it",
+  "silhouette": {
+    "class": "narrow unlit column with no face",
+    "glance": "Narrow black school-uniform figure, face unreadable except two cyan eyes, smoke at the calves.",
+    "big": "the unlit column of the gakuran from collar to shoes",
+    "mid": "short hair mass and the smoke at the calves",
+    "small": "two cyan eyes and a five-button line",
+    "negative_space": "the gap between the free arm and the torso, plus the holes in the smoke"
+  },
+  "shape": {
+    "circle": 0.05,
+    "square": 0.8,
+    "triangle": 0.15
+  },
+  "shape_majority": "square",
+  "palette": {
+    "main": {
+      "name": "void black",
+      "hex": "#1A1C24",
+      "means": "a person who learned to be unseen"
+    },
+    "zones": {
+      "hair": {
+        "name": "shadow black",
+        "hex": "#1A1C24"
+      },
+      "skin": {
+        "name": "unlit",
+        "hex": "#14161C"
+      },
+      "eye": {
+        "name": "eye cyan",
+        "hex": "#3DFFE8"
+      },
+      "tops1": {
+        "name": "gakuran black",
+        "hex": "#141820"
+      },
+      "tops2": {
+        "name": "hidden shirt",
+        "hex": "#101218"
+      },
+      "waist": {
+        "name": "button line",
+        "hex": "#2A3038"
+      },
+      "bottom1": {
+        "name": "trouser black",
+        "hex": "#12141A"
+      },
+      "bottom2": {
+        "name": "crease grey",
+        "hex": "#2C3138"
+      },
+      "shoes": {
+        "name": "shoe black",
+        "hex": "#0C0E12"
+      },
+      "decoration1": {
+        "name": "eye cyan",
+        "hex": "#3DFFE8"
+      },
+      "decoration2": {
+        "name": "smoke grey",
+        "hex": "#6A7278"
+      }
+    }
+  },
+  "symbol_set": {
+    "eye": "two narrow cyan eyes, no mouth.",
+    "brow": "a level shadow line, not a drawn brow.",
+    "mouth": "absent. Do not invent one.",
+    "contour": "a sharp jaw lost in the same black as the collar.",
+    "hair": "short black hair lost in the shadow.",
+    "body": "narrow build under a square uniform, not broad and not child-short."
+  },
+  "wardrobe": {
+    "default": {
+      "name": "shadow gakuran",
+      "when": "every scene after the drift, including the classroom prologue",
+      "glance": "a closed black school uniform with a high collar",
+      "design": "A black gakuran with a standing collar, five buttons, straight trousers, and plain black shoes, the cloth reading as one dark mass.",
+      "production": "The collar stands about two fingers high and closes with a hidden hook; five dark buttons run down the centre; shoulders are square and unpadded; trousers break once over plain black shoes; no shirt cuff shows. Smoke is a soft edge at the calves, not a floor shadow under the shoes."
+    },
+    "alternate": {
+      "name": "pre-drift coat",
+      "when": "only if a pre-drift flashback is later approved",
+      "glance": "the same cut in ordinary wool",
+      "design": "The same gakuran cut in ordinary wool, still fully closed, and only if a flashback is approved.",
+      "production": "Do not draw the pre-drift coat until that question is answered. If it is drawn, the cut stays identical."
+    }
+  },
+  "props": [
+    "none beyond the uniform and the eye-light"
+  ],
+  "expressions": {
+    "neutral": {
+      "read": "steady and present, not angry",
+      "brow": "level shadow",
+      "eye": "medium cyan, level gaze",
+      "mouth": "none",
+      "alias": [
+        "ren",
+        "ren_shadow"
+      ]
+    },
+    "happy": {
+      "read": "a small ease",
+      "brow": "unchanged",
+      "eye": "slightly narrowed, cyan steady",
+      "mouth": "none",
+      "alias": []
+    },
+    "sad": {
+      "read": "withdrawn",
+      "brow": "unchanged",
+      "eye": "lowered a little, cyan dimmer",
+      "mouth": "none",
+      "alias": []
+    },
+    "surprised": {
+      "read": "caught",
+      "brow": "unchanged",
+      "eye": "wider, cyan brighter",
+      "mouth": "none",
+      "alias": []
+    },
+    "blush": {
+      "read": "a faint warm rim on the cheek shadow",
+      "brow": "unchanged",
+      "eye": "unchanged",
+      "mouth": "none",
+      "alias": []
+    }
+  },
+  "banned": [
+    "readable mouth",
+    "lit face",
+    "glamour redesign of the uniform",
+    "cape filling the arm gap"
+  ],
+  "legacy": "Shipped ren.webp and ren_shadow.webp are the same opaque-on-black picture. They already match this identity. Do not img2img them into a readable face, a different uniform, or a brighter body.",
+  "staging": {
+    "pose": "Standing, one hand in a pocket, the other clear of the torso, feet on the bottom edge.",
+    "light": "Almost no key light. The eyes are the only bright source."
+  },
+  "open_questions": [
+    "Whether the calf smoke is a second sprite layer.",
+    "Whether a pre-drift flashback sprite is in scope."
+  ],
+  "levels": {
+    "L0": "Ren reads as a narrow unlit column with no face. Main colour is void black, not the cyan of the eyes. Memory point: a face that is only two cyan eyes in a black school-uniform shadow.",
+    "L1": "Ren is the exchange student whose body settled into a stable dark after the Nexus drift. He reads as a narrow unlit column with no face: closed black uniform, one hand pocketed, smoke at the calves, no readable mouth. The thing a player names is a face that is only two cyan eyes in a black school-uniform shadow. Main colour is void black. Hair and cloth are the same dark; only the eyes are cyan. The default costume is the shadow gakuran, a closed high-collar uniform, not a coat and not armor. At rest the eyes are steady and alert, not angry. A second look finds the button line and the holes in the smoke. He is the darkest figure in the cast. Nobody else has an absent face. Aurora's cyan is a pane; his cyan is only the eyes.",
+    "L2": "Ren is the cast's dark anchor. Silhouette class: narrow unlit column with no face. Memory point, stated once and kept in every asset: a face that is only two cyan eyes in a black school-uniform shadow. Big mass is the unlit column of the gakuran from collar to shoes. Mid mass is the short hair and the smoke at the calves. Small mass is the two eyes and the five-button line. Negative space is the gap between the free arm and the torso, plus the holes in the smoke. Do not close either hole with a cape, a scarf, or a painted floor shadow. Eyes are two narrow cyan lights with no iris drawing and no mouth under them. The brow is only a level shadow. Hair is short and disappears into the same black as the collar. The body is a narrow teenage build inside a square uniform. Main colour is void black #1A1C24, and it means a person who learned to be unseen. The eye cyan #3DFFE8 is reserved: it appears in the eyes and nowhere else. Hair, skin, and cloth stay inside the black family. Smoke is a grey #6A7278, softer than the suit. Default outfit is the shadow gakuran. A black gakuran with a standing collar, five buttons, straight trousers, and plain black shoes, the cloth reading as one dark mass. The alternate, the pre-drift coat, is the same cut in ordinary wool and is not drawn until a flashback is approved. Nearest neighbour is Aurora, who also uses cyan. The difference is placement: her cyan is a tall pane and trim on a pale coat; his is two eyes in a void. In greyscale he is the darkest sprite on the roster.",
+    "L3": "Production notes for Ren. Identity is locked before polish. If a beautiful frame gives him a mouth, a lit cheek, or a brighter suit, it is off-model and it is rejected. The memory point stays verbatim in every asset: a face that is only two cyan eyes in a black school-uniform shadow. The free arm must not touch the torso. The smoke must not become a puddle or a ground shadow. Feet sit on the bottom edge of the canvas, shoes fully in frame. Hands: one is a simple pocket shape, the other a closed hand with a thumb, five digits, no extra fingers. Do not hide both hands; the pocket is allowed, the second hand is not. Default costume, the shadow gakuran, in construction: The collar stands about two fingers high and closes with a hidden hook; five dark buttons run down the centre; shoulders are square and unpadded; trousers break once over plain black shoes; no shirt cuff shows. Smoke is a soft edge at the calves, not a floor shadow under the shoes. Cloth weight is wool, matte, almost no highlight. Buttons are the same value as the cloth, readable by shape, not by shine. The alternate pre-drift coat is out of scope until the open question is answered. Do not invent a civilian outfit, a scarf, or a weapon. Expressions change only the eye region and, for blush, a faint warm rim on the cheek shadow. Neutral: eyes level, medium cyan, gaze to camera. Happy: eyes slightly narrowed, cyan unchanged. Sad: gaze lowered a little, cyan dimmer. Surprised: eyes wider, cyan brighter. Blush is an overlay, not a new pose, and it must not create a readable mouth. Hair silhouette stays byte-stable across the set. There is no happy-open-mouth version. There is no crying version with tears drawn as white streaks down a lit face. Staging: standing, weight even, pocket hand on the viewer's right or left but consistent once the first sprite is approved. Light is almost none. A thin cool rim may separate the shoulder from a dark scene; it must not reveal a nose, lips, or skin tone. Face box: lock it on the first approved sprite, around the eyes only, and never move it. Do not invent pixel numbers before that sprite exists. Relative height is unconfirmed. Do not scale him against the cast until the owner states centimetres. Legacy files: Shipped ren.webp and ren_shadow.webp are the same opaque-on-black picture. They already match this identity. Do not img2img them into a readable face, a different uniform, or a brighter body. Black-key matting will delete him. Alpha comes only from a white plate and a black plate. QA rejects: a mouth; a lit face; a cape; a coloured streak in the hair; cropped shoes; a ground shadow; any costume that reads as glamour rather than a school uniform. He is minor-coded. The uniform stays a uniform. A black gakuran with a standing collar, five buttons, straight trousers, and plain black shoes, the cloth reading as one dark mass. #1A1C24"
+  }
+}

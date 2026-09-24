@@ -1,0 +1,22 @@
+# 00_level_sprite — nova
+
+Verdict: UNSENT
+
+This file is the current L4 sprite prompt, rendered from
+`ai_agent_docs/character_levels/src/`.
+It has not been sent to a generator.
+
+When you send a prompt, copy the text you actually send to the next
+numbered file (`01_sprite.txt`, `02_sprite.txt`, …) and write a
+result note beside it. Do not edit this rendered file by hand.
+Change the level source and re-render.
+
+```text
+FORMAT: Full-body VN sprite, one figure, tall portrait, flat mid-grey background, head to soles, margin. Early exclude: no text, no watermark, no extra limbs, no nudity, no transparent clothing, no sexual pose, fully clothed.
+STYLE: Anime VN tachie, closed ink line, flat cel, two shadow steps.
+IDENTITY: Nova. Quiet analyst who hides in an oversized jacket. Class: boxy oversized jacket with a floating pane offset to one side. Boxy dark jacket, hood down, small pane held out to one side. Eyes: cool eyes, a little wary, one catchlight. Hair: short dark hair with one magenta streak. Defining feature: an oversized hood she does not put up, and a diagnostic pane held up like a shield.
+WARDROBE: Analyst jacket. An oversized closed jacket, hood down, pane in hand. Props: diagnostic pane.
+COLOR: Main signal magenta #E23E8C. Hair #E23E8C. Eyes #7EC8E0. Outer #3A4150. Accent #7EC8E0.
+STAGING: Standing, one hand holding the pane out, the other at the belt, feet together. Neutral, alert, eyes to camera. Cool lab key from the front-left, a little cyan spill from the pane onto the glove only. Focal point: an oversized hood she does not put up, and a diagnostic pane held up like a shield, fully visible.
+EXCLUDE: No text, no watermark, no extra limbs, no cropped feet, no scenery, no nudity, no transparent clothing, no sexual pose, no child proportions, fully clothed, no living-artist name. Also: jacket open at the waist; fitted tactical suit; hood up; pane as tall as the body.
+```

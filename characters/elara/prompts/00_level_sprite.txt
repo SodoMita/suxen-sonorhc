@@ -1,0 +1,7 @@
+FORMAT: Full-body VN sprite, one figure, tall portrait, flat mid-grey background, head to soles, margin. Early exclude: no text, no watermark, no extra limbs, no nudity, no transparent clothing, no sexual pose, fully clothed.
+STYLE: Anime VN tachie, closed ink line, flat cel, two shadow steps.
+IDENTITY: Elara. Moon-grove healer in layered vestments. Class: wide floor-length bell with a side braid. Wide pale gown to the floor, long silver hair, one braid at the side, elf ears. Eyes: calm green eyes, lowered lids, one catchlight. Hair: long silver hair with one side braid. Defining feature: a crescent clasp at the throat and a second crescent on the skirt, both the same silver-green.
+WARDROBE: Moon vestments. An opaque pale gown with two crescent clasps. Props: crescent clasps.
+COLOR: Main moon green #7EAE8A. Hair #E4E8F0. Eyes #7EAE8A. Outer #F7FBFF. Accent #7EAE8A.
+STAGING: Standing, hands lightly open at her sides, skirt spreading, feet together under the hem. Neutral, alert, eyes to camera. Cool moonlight from above and slightly in front, soft shadow in the skirt folds. Focal point: a crescent clasp at the throat and a second crescent on the skirt, both the same silver-green, fully visible.
+EXCLUDE: No text, no watermark, no extra limbs, no cropped feet, no scenery, no nudity, no transparent clothing, no sexual pose, no child proportions, fully clothed, no living-artist name. Also: thinner dress; lifting hem; transparent silk; hidden crescents.

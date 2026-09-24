@@ -1,0 +1,7 @@
+FORMAT: Full-body VN sprite, one figure, tall portrait, flat mid-grey background, head to soles, margin. Early exclude: no text, no watermark, no extra limbs, no nudity, no transparent clothing, no sexual pose, fully clothed.
+STYLE: Anime VN tachie, closed ink line, flat cel, two shadow steps.
+IDENTITY: Aria. Sky sanctum keeper with wings and a ring halo. Class: wide wing bar under a thin ring halo. White gown, wings spread wider than the skirt, a thin ring above the head, a feather in one hand. Eyes: soft blue eyes, gentle, one catchlight. Hair: long white hair, a small gold pin, not a braid. Defining feature: a thin gold ring halo, and one loose feather held at the chest.
+WARDROBE: Sanctum gown. A closed white gown, wings, and a thin ring. Props: held feather, ring halo.
+COLOR: Main halo gold #E4C36A. Hair #F4F7FB. Eyes #8EB4E8. Outer #FFFEFB. Accent #E4C36A.
+STAGING: Standing, one hand holding a feather at the chest, the other relaxed, wings spread, bare feet on the bottom edge. Neutral, alert, eyes to camera. Soft warm key on the face, gold glint only on the ring and the waist band. Focal point: a thin gold ring halo, and one loose feather held at the chest, fully visible.
+EXCLUDE: No text, no watermark, no extra limbs, no cropped feet, no scenery, no nudity, no transparent clothing, no sexual pose, no child proportions, fully clothed, no living-artist name. Also: glowing disc halo; thinner gown; elf ears; code pane.

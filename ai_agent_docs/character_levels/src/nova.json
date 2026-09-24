@@ -1,0 +1,170 @@
+{
+  "id": "nova",
+  "name": "Nova",
+  "name_local": "Нова",
+  "role": "quiet analyst who hides in an oversized jacket",
+  "age_status": "Age not locked. Lore has her as a junior researcher in youth. Appeal is the hood, the pane, and the competence of the kit. The jacket is a shield, not a costume slip.",
+  "appeal_track": "cool",
+  "approved": false,
+  "lore": [
+    "docs/vn_specific/nova_lore.md",
+    "docs/vn_specific/characters_starting/nova_origin.md"
+  ],
+  "memory_point": "an oversized hood she does not put up, and a diagnostic pane held up like a shield",
+  "secondary_hook": "a magenta streak in otherwise dark hair",
+  "silhouette": {
+    "class": "boxy oversized jacket with a floating pane offset to one side",
+    "glance": "Boxy dark jacket, hood down, small pane held out to one side.",
+    "big": "the oversized jacket box",
+    "mid": "the hood mass on the back and the held pane",
+    "small": "the magenta streak, knee pads, boot lights",
+    "negative_space": "the offset between the body and the pane, which must not touch the jacket"
+  },
+  "shape": {
+    "circle": 0.1,
+    "square": 0.7,
+    "triangle": 0.2
+  },
+  "shape_majority": "square",
+  "palette": {
+    "main": {
+      "name": "signal magenta",
+      "hex": "#E23E8C",
+      "means": "a person inside the equipment"
+    },
+    "zones": {
+      "hair": {
+        "name": "magenta streak",
+        "hex": "#E23E8C"
+      },
+      "skin": {
+        "name": "fair cool",
+        "hex": "#E8C2B4"
+      },
+      "eye": {
+        "name": "pane cyan",
+        "hex": "#7EC8E0"
+      },
+      "tops1": {
+        "name": "jacket grey",
+        "hex": "#3A4150"
+      },
+      "tops2": {
+        "name": "hood lining",
+        "hex": "#2A3038"
+      },
+      "waist": {
+        "name": "belt",
+        "hex": "#4A5560"
+      },
+      "bottom1": {
+        "name": "trouser grey",
+        "hex": "#2E3540"
+      },
+      "bottom2": {
+        "name": "knee pad",
+        "hex": "#3E4652"
+      },
+      "shoes": {
+        "name": "boot",
+        "hex": "#232830"
+      },
+      "decoration1": {
+        "name": "diagnostic pane",
+        "hex": "#7EC8E0"
+      },
+      "decoration2": {
+        "name": "hair streak",
+        "hex": "#E23E8C"
+      }
+    }
+  },
+  "symbol_set": {
+    "eye": "cool eyes, a little wary, one catchlight.",
+    "brow": "slightly drawn, not angry.",
+    "mouth": "closed, small, reserved.",
+    "contour": "soft face half-framed by the hood behind.",
+    "hair": "short dark hair with one magenta streak.",
+    "body": "narrow build lost inside a too-big jacket."
+  },
+  "wardrobe": {
+    "default": {
+      "name": "analyst jacket",
+      "when": "lab and field scenes after the incident",
+      "glance": "an oversized closed jacket, hood down, pane in hand",
+      "design": "An oversized dark analyst jacket, hood down, worn closed over a high-neck layer, with cargo trousers, knee pads, boots, and a small diagnostic pane in one hand.",
+      "production": "At least one size too big: dropped shoulders, sleeves past the wrist, hem at the thigh, zip pulled to the collar. The hood sits on the back and is never up in the default sprite. Under it is a closed high-neck shirt, no gap at the waist. The diagnostic pane is a flat cyan rectangle held out at chest height, smaller than Aurora's pane and clearly in the hand."
+    },
+    "alternate": {
+      "name": "station coat",
+      "when": "only a Prometheus corridor flashback",
+      "glance": "a fitted station coat, still closed, no pane",
+      "design": "A fitted closed station coat, hoodless, pane absent, for a corridor flashback if one is approved.",
+      "production": "Do not draw the station coat for the default sprite. The default is the oversized jacket with the pane."
+    }
+  },
+  "props": [
+    "diagnostic pane"
+  ],
+  "expressions": {
+    "neutral": {
+      "read": "reserved and watching",
+      "brow": "slightly drawn",
+      "eye": "wary, level",
+      "mouth": "closed, small",
+      "alias": [
+        "nova_neutral"
+      ]
+    },
+    "happy": {
+      "read": "a private relief",
+      "brow": "relaxed",
+      "eye": "softer",
+      "mouth": "a tiny closed smile",
+      "alias": [
+        "nova_happy"
+      ]
+    },
+    "sad": {
+      "read": "the shield failing",
+      "brow": "inner corners up",
+      "eye": "lowered",
+      "mouth": "flat, closed",
+      "alias": []
+    },
+    "surprised": {
+      "read": "the reading jumped",
+      "brow": "up",
+      "eye": "wider",
+      "mouth": "slightly open, no teeth",
+      "alias": []
+    },
+    "blush": {
+      "read": "the current face plus a faint cheek wash",
+      "brow": "unchanged",
+      "eye": "unchanged",
+      "mouth": "unchanged",
+      "alias": []
+    }
+  },
+  "banned": [
+    "jacket open at the waist",
+    "fitted tactical suit",
+    "hood up",
+    "pane as tall as the body"
+  ],
+  "legacy": "Shipped nova sprites are a fitted tactical suit with the jacket open at the waist. They are not the production reference. Do not img2img from them.",
+  "staging": {
+    "pose": "Standing, one hand holding the pane out, the other at the belt, feet together.",
+    "light": "Cool lab key from the front-left, a little cyan spill from the pane onto the glove only."
+  },
+  "open_questions": [
+    "Whether sad, surprised, and blush masters are in the first production batch."
+  ],
+  "levels": {
+    "L0": "Nova reads as a boxy oversized jacket with a floating pane offset to one side. Main colour is signal magenta, not cyan. Memory point: an oversized hood she does not put up, and a diagnostic pane held up like a shield.",
+    "L1": "Nova is the quiet analyst, the one who hides in a jacket that is too big and holds a scanner like a shield. She reads as a boxy oversized jacket with a floating pane offset to one side: dark kit, hood down, a small pane in one hand. The thing a player names is an oversized hood she does not put up, and a diagnostic pane held up like a shield. Main colour is signal magenta, a streak in dark hair, against a grey jacket and a small cyan pane. The default costume is the analyst jacket, closed to the collar, hood down, trousers and boots. At rest she is reserved, not blank and not fierce. A second look finds the streak. She is not Aurora. Aurora's pane is a tall rectangle behind the body. Nova's pane is small and in the hand. The jacket stays closed.",
+    "L2": "Nova is the box in the roster. Silhouette class: boxy oversized jacket with a floating pane offset to one side. Memory point: an oversized hood she does not put up, and a diagnostic pane held up like a shield. Big mass is the oversized jacket. Mid mass is the hood on the back and the held pane. Small mass is the magenta streak, the knee pads, and the boot lights. Negative space is the offset between body and pane. The pane must not touch the jacket, or it becomes Aurora's halo-pane. Eyes are cool and a little wary, one catchlight. Brow slightly drawn, not angry. Mouth closed and small. Hair is short and dark with one magenta streak. The body is a narrow build lost in the jacket. Main colour is signal magenta #E23E8C, and it means a person inside the equipment. It is reserved for the streak. Jacket is grey #3A4150. The pane is cyan #7EC8E0, smaller than a torso, and it is not her main colour. Default outfit is the analyst jacket. An oversized dark analyst jacket, hood down, worn closed over a high-neck layer, with cargo trousers, knee pads, boots, and a small diagnostic pane in one hand. The station-coat alternate is a fitted flashback coat with no pane, not the default. Nearest tech figure is Aurora. Separate them by mass and by where the light sits: Aurora is a pale column with a pane behind her; Nova is a dark box with a pane in her hand. In greyscale Nova is a mid-dark rectangle with a small light rectangle offset to one side. The hood bump on the back keeps her from reading as a plain coat.",
+    "L3": "Production notes for Nova. The jacket is a psychological shield from the lore, drawn as volume, not as a slip off the shoulder. Both halves of the memory point must be visible: an oversized hood she does not put up, and a diagnostic pane held up like a shield. If the hood is up, the pane touches the body, or the streak is missing, reject. The pane hand is a gloved hand with five digits around the edge of the rectangle. The belt hand is also gloved, five digits, no weapon. Boots fully in frame, on the bottom edge. Knee pads are small and do not become armor plates. Default costume, the analyst jacket: At least one size too big: dropped shoulders, sleeves past the wrist, hem at the thigh, zip pulled to the collar. The hood sits on the back and is never up in the default sprite. Under it is a closed high-neck shirt, no gap at the waist. The diagnostic pane is a flat cyan rectangle held out at chest height, smaller than Aurora's pane and clearly in the hand. Zip to the collar. No waist gap. No crop layer. The hood's lining is a darker grey and is seen only because the hood is down. The pane may show abstract bars. It must not show readable words. It is smaller than her torso. The station-coat alternate is out of scope for the default set. Expressions are face-only. Neutral is reserved and watching. Happy is a tiny closed smile, the legacy nova_happy key. Sad and surprised have no legacy files yet. Sad raises the inner brow. Surprised widens the eyes and parts the lips, no teeth. Blush is a faint cheek wash. The hood and the pane do not move between expressions. Do not overwrite nova_neutral or nova_happy. Light is a cool lab key from the front-left. Cyan spill from the pane hits the glove only, not the whole face. Face box locks on the first approved master. The hood sits behind the head and stays outside the box. Age is not locked. Do not draw a child, and do not draw the fitted open suit from the shipped files. Height is unconfirmed. Legacy: Shipped nova sprites are a fitted tactical suit with the jacket open at the waist. They are not the production reference. Do not img2img from them. QA rejects: jacket open at the waist, a fitted tactical suit, hood up, a pane as tall as the body, readable UI text, a sword, cropped boots. She is the shield and the reading, not a costume malfunction. An oversized dark analyst jacket, hood down, worn closed over a high-neck layer, with cargo trousers, knee pads, boots, and a small diagnostic pane in one hand. #E23E8C"
+  }
+}
