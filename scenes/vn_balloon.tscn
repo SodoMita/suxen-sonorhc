@@ -1532,7 +1532,9 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 17
-texte name="ProceduralMusicCheck" type="CheckBox" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/ProceduralMusicRow" unique_id=1731735529]
+text = "Generated music"
+
+[node name="ProceduralMusicCheck" type="CheckBox" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/ProceduralMusicRow" unique_id=1731735529]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
@@ -2078,6 +2080,3 @@ unique_name_in_owner = true
 [connection signal="timeout" from="ToastTimer" to="." method="_on_toast_timeout"]
 [connection signal="timeout" from="AutoTimer" to="." method="_on_auto_timeout"]
 [connection signal="timeout" from="SkipTimer" to="." method="_on_skip_timeout"]
-ethod="_on_skip_timeout"]
-om="SkipTimer" to="." method="_on_skip_timeout"]
-ethod="_on_skip_timeout"]
