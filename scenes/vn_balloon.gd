@@ -298,6 +298,11 @@ var portrait_mode: bool = false
 var force_portrait: bool = false
 var rotation_deg: int = 0
 var language: String = "en"
+## The window size the player last chose. The panel shows the window that is
+## actually open; this is the value that gets saved and restored.
+var _res_pref := Vector2i(1280, 720)
+## Throttle for the settings panel's follow-the-window poll.
+var _res_ui_poll: float = 0.0
 var glyph_scale: int = 2
 var game_filter: int = 1
 var map_filter: int = 1
@@ -453,6 +458,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if _swipe_guard_frames > 0:
 		_swipe_guard_frames -= 1
+	_poll_resolution_row(delta)
 	if _hold_active:
 		if not _any_overlay_open():
 			_cancel_hold()
@@ -671,6 +677,11 @@ func _open_overlay(p: Control) -> void:
 	auto_timer.stop()
 	is_waiting_for_input = false
 	p.show()
+	if p == settings_panel:
+		# Open on the window the player actually has. The panel used to show the
+		# stored preference, so a maximized or fullscreen window was described
+		# by a size it did not have.
+		_sync_resolution_from_window()
 	_sfx("open")
 
 
@@ -1568,8 +1579,8 @@ func _save_settings() -> void:
 		"language": language,
 		"fullscreen": fullscreen_check.button_pressed,
 		"vsync": vsync_check.button_pressed,
-		"res_w": int(res_width_spin.value),
-		"res_h": int(res_height_spin.value),
+		"res_w": _res_pref.x,
+		"res_h": _res_pref.y,
 		"glyph_scale": glyph_scale,
 		"game_filter": game_filter,
 		"map_filter": map_filter,
@@ -1606,6 +1617,9 @@ func _apply_fullscreen(on: bool) -> void:
 	DisplayServer.window_set_mode(
 		DisplayServer.WINDOW_MODE_FULLSCREEN if on else DisplayServer.WINDOW_MODE_WINDOWED
 	)
+	# The panel is the thing the player is looking at; describe the window it
+	# now has instead of leaving the last size on screen.
+	_sync_resolution_from_window()
 
 
 func _on_text_size_changed(v: float) -> void:
@@ -1916,6 +1930,10 @@ func _apply_viewport_resize() -> void:
 	if vis == _laid_out_size:
 		return
 	_laid_out_size = vis
+	if is_instance_valid(settings_panel) and settings_panel.visible:
+		# Fires when the layout size really changed. With the canvas pinned to
+		# DESIGN_SIZE it usually does not, which is why _process polls too.
+		_sync_resolution_from_window()
 	_reflow_settings()
 	_layout_responses()
 	_apply_sprite_transform()
@@ -2070,6 +2088,14 @@ func _on_res_height_changed(_v: float) -> void:
 ## SpinBox.value does emit value_changed in the tree, and a handler reading the
 ## other box would apply a fresh width against a stale height.
 func _set_resolution_request(w: int, h: int) -> void:
+	_res_pref = Vector2i(maxi(w, 1), maxi(h, 1))
+	_write_resolution_boxes(_res_pref.x, _res_pref.y)
+
+
+## Write the custom-size boxes without firing their handlers. Assigning
+## SpinBox.value does emit value_changed in the tree, and a handler reading the
+## other box would apply a fresh width against a stale height.
+func _write_resolution_boxes(w: int, h: int) -> void:
 	res_width_spin.set_block_signals(true)
 	res_height_spin.set_block_signals(true)
 	res_width_spin.value = float(maxi(w, 1))
@@ -2077,6 +2103,42 @@ func _set_resolution_request(w: int, h: int) -> void:
 	res_width_spin.set_block_signals(false)
 	res_height_spin.set_block_signals(false)
 	_sync_resolution_option()
+
+
+## The settings panel follows the window while it is up, so maximizing,
+## fullscreening or a window-manager resize is described correctly. The canvas
+## is pinned to DESIGN_SIZE, so the viewport never reports a size change for a
+## window resize: this asks the window directly, four times a second, and stays
+## away while a size box has focus so it cannot fight the player's typing.
+func _poll_resolution_row(delta: float) -> void:
+	if not is_instance_valid(settings_panel) or not settings_panel.visible:
+		_res_ui_poll = 0.0
+		return
+	_res_ui_poll += delta
+	if _res_ui_poll < 0.25:
+		return
+	_res_ui_poll = 0.0
+	if res_width_spin.has_focus() or res_height_spin.has_focus():
+		return
+	_sync_resolution_from_window()
+
+
+## Show the window that is open right now, without touching the stored
+## preference: the boxes are a readout of reality, settings.json keeps the
+## resolution the player chose. Called when the panel opens and whenever the
+## window changes while it is up, so maximizing, fullscreening or a window
+## manager resize is described correctly instead of showing a stale size.
+func _sync_resolution_from_window() -> void:
+	if DisplayServer.get_name() == "headless":
+		return
+	if not is_instance_valid(res_width_spin) or not is_instance_valid(res_height_spin):
+		return
+	var live := DisplayServer.window_get_size()
+	if live.x < 1 or live.y < 1:
+		return
+	if Vector2i(int(res_width_spin.value), int(res_height_spin.value)) == live:
+		return
+	_write_resolution_boxes(live.x, live.y)
 
 
 func _sync_quality_controls() -> void:
@@ -2162,11 +2224,12 @@ func _apply_resolution(w: int, h: int, force := false) -> void:
 		fullscreen_check.set_pressed_no_signal(false)
 		_save_settings()
 	_on_viewport_size_changed()
+	# The boxes now show the window that is really open, while the preference
+	# keeps the size the player asked for (it is what a bigger screen restores).
+	_sync_resolution_from_window()
 	if applied != Vector2i(w, h):
-		# The window cannot be larger than the screen. Say so, and put the size
-		# that was really applied into the boxes, so the panel stops showing a
-		# resolution the player does not have.
-		_set_resolution_request(applied.x, applied.y)
+		# The window cannot be larger than the screen. Say so, so the panel
+		# stops showing a resolution the player does not have.
 		_save_settings()
 		_toast(tr("Window fitted to %d x %d to stay on screen") % [applied.x, applied.y])
 

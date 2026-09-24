@@ -26,6 +26,32 @@ func _expected(w: int, h: int) -> Vector2i:
 	return Vector2i(maxi(int(w * fit), 1), maxi(int(h * fit), 1))
 
 
+## What the panel is showing.
+func _panel_size() -> Vector2i:
+	var sw: SpinBox = balloon.get_node("%ResWidthSpin")
+	var sh: SpinBox = balloon.get_node("%ResHeightSpin")
+	return Vector2i(int(sw.value), int(sh.value))
+
+
+## The stored preference: what the next launch will open with.
+func _saved_pref() -> Vector2i:
+	var path := "user://chrono_nexus/settings.json"
+	if not FileAccess.file_exists(path):
+		return Vector2i.ZERO
+	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not data is Dictionary:
+		return Vector2i.ZERO
+	return Vector2i(int(data.get("res_w", 0)), int(data.get("res_h", 0)))
+
+
+## Frames are not seconds under a software renderer; wait on the clock. The
+## panel's follow-the-window poll runs four times a second.
+func _wait(seconds: float) -> void:
+	var deadline := Time.get_ticks_msec() + int(seconds * 1000.0)
+	while Time.get_ticks_msec() < deadline:
+		await get_tree().process_frame
+
+
 func _check(label: String, ok: bool, detail := "") -> void:
 	if not ok:
 		failures += 1
@@ -161,6 +187,53 @@ func _ready() -> void:
 		_check("preset %s %s on a %s screen" % [str(asked), "selectable" if fits else "greyed out",
 			str(DisplayServer.screen_get_usable_rect().size)],
 			opt.is_item_disabled(i) == not fits, "disabled=%s" % str(opt.is_item_disabled(i)))
+
+	# 8. The panel describes the window that is open, not the stored preference.
+	# The player has to be looking at the panel for this to matter, so open it.
+	print("### panel follows the window")
+	_pick(0)                                   # 1280x720, and out of fullscreen
+	await _wait(0.6)
+
+	balloon.call("_on_settings_pressed")
+	await _wait(0.4)
+	_check("opening the panel describes the window", _panel_size() == _win(),
+		"panel=%s window=%s" % [str(_panel_size()), str(_win())])
+
+	# A window-manager resize, from a plain window so the resize really lands.
+	DisplayServer.window_set_size(Vector2i(1000, 700))
+	await _wait(1.2)
+	_check("the resize took effect", _win() == Vector2i(1000, 700), "window=%s" % str(_win()))
+	_check("panel follows a window-manager resize while open", _panel_size() == _win(),
+		"panel=%s window=%s" % [str(_panel_size()), str(_win())])
+
+	# Maximizing changes the window, but it is not a resolution the player
+	# chose: the saved preference must stay the picked 1280x720.
+	get_window().mode = Window.MODE_MAXIMIZED
+	await _wait(1.2)
+	_check("panel follows a maximized window", _panel_size() == _win(),
+		"panel=%s window=%s" % [str(_panel_size()), str(_win())])
+	_check("maximizing leaves the saved preference alone", _saved_pref() == Vector2i(1280, 720),
+		"saved=%s" % str(_saved_pref()))
+
+	balloon.call("_on_settings_close_pressed")
+	await _wait(0.3)
+	balloon.call("_on_settings_pressed")
+	await _wait(0.4)
+	_check("reopening the panel describes the window", _panel_size() == _win(),
+		"panel=%s window=%s" % [str(_panel_size()), str(_win())])
+
+	# The panel's own Fullscreen checkbox changes the window too.
+	balloon.call("_on_fullscreen_toggled", true)
+	await _wait(1.4)
+	_check("panel follows the Fullscreen checkbox", _panel_size() == _win(),
+		"panel=%s window=%s" % [str(_panel_size()), str(_win())])
+	balloon.call("_on_fullscreen_toggled", false)
+	await _wait(1.4)
+	_check("panel follows leaving fullscreen", _panel_size() == _win(),
+		"panel=%s window=%s" % [str(_panel_size()), str(_win())])
+	balloon.call("_on_settings_close_pressed")
+	_check("preference still the picked size", _saved_pref() == Vector2i(1280, 720),
+		"saved=%s" % str(_saved_pref()))
 
 	print("=== e2e done: ", failures, " failure(s) ===")
 	get_tree().quit(1 if failures > 0 else 0)
