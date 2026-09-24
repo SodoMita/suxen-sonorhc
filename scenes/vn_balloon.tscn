@@ -5,52 +5,53 @@
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/nodes/responses_menu/dialogue_responses_menu.gd" id="3_menu"]
 [ext_resource type="FontFile" uid="uid://ctxcxi25fm0pu" path="res://assets/fonts/DejaVuSerif.ttf" id="4_serif"]
 [ext_resource type="FontFile" uid="uid://ex3s7gibjgfb" path="res://assets/fonts/DejaVuSerif-Bold.ttf" id="5_serifbold"]
+[ext_resource type="Script" uid="uid://dvxki2gr62k4a" path="res://scenes/hold_indicator.gd" id="11_hold"]
+[ext_resource type="PackedScene" uid="uid://ba4pj5dj4gjtc" path="res://scenes/route_graph/route_graph_panel.tscn" id="12_route"]
+[ext_resource type="PackedScene" uid="uid://d0cqtl0jlh8ol" path="res://scenes/panic_screen.tscn" id="50_kd80d"]
+[ext_resource type="Texture2D" uid="uid://c88ys72uu5he1" path="res://bgs/cyberpunk_alley.jpg" id="bg_alley"]
 [ext_resource type="Texture2D" uid="uid://d0f8gteurtol" path="res://bgs/japanese_school_class.jpg" id="bg_classroom"]
+[ext_resource type="Texture2D" uid="uid://dxxs1bydii1v7" path="res://bgs/core.jpg" id="bg_core"]
+[ext_resource type="Texture2D" uid="uid://3q1nsjakfw0i" path="res://bgs/festival_night.jpg" id="bg_festival"]
+[ext_resource type="Texture2D" uid="uid://btmtxlxqsjcng" path="res://bgs/forest_grove.jpg" id="bg_grove"]
+[ext_resource type="Texture2D" uid="uid://q83j30h1bkiq" path="res://bgs/lab_station.jpg" id="bg_lab"]
+[ext_resource type="Texture2D" uid="uid://bg8n5mk51cgde" path="res://bgs/lighthouse.jpg" id="bg_lighthouse"]
 [ext_resource type="Texture2D" uid="uid://cao4hs88e08tp" path="res://bgs/nexus_chamber.jpg" id="bg_nexus"]
 [ext_resource type="Texture2D" uid="uid://e7hmj5seh7dn" path="res://bgs/rift.jpg" id="bg_rift"]
 [ext_resource type="Texture2D" uid="uid://cmyla2ad3x7r8" path="res://bgs/sanctum.jpg" id="bg_sanctum"]
-[ext_resource type="Texture2D" uid="uid://btmtxlxqsjcng" path="res://bgs/forest_grove.jpg" id="bg_grove"]
 [ext_resource type="Texture2D" uid="uid://dyokj47i0voog" path="res://bgs/beach_sunset.jpg" id="bg_shore"]
-[ext_resource type="Texture2D" uid="uid://dxxs1bydii1v7" path="res://bgs/core.jpg" id="bg_core"]
-[ext_resource type="Texture2D" uid="uid://3q1nsjakfw0i" path="res://bgs/festival_night.jpg" id="bg_festival"]
-[ext_resource type="Texture2D" uid="uid://q83j30h1bkiq" path="res://bgs/lab_station.jpg" id="bg_lab"]
-[ext_resource type="Texture2D" uid="uid://c88ys72uu5he1" path="res://bgs/cyberpunk_alley.jpg" id="bg_alley"]
-[ext_resource type="Texture2D" uid="uid://bg8n5mk51cgde" path="res://bgs/lighthouse.jpg" id="bg_lighthouse"]
-[ext_resource type="Texture2D" path="res://assets/characters/ai_serious_face.webp" id="sp_ai_serious_face"]
-[ext_resource type="Texture2D" path="res://assets/characters/aria_blush.webp" id="sp_aria_blush"]
-[ext_resource type="Texture2D" path="res://assets/characters/aria_happy.webp" id="sp_aria_happy"]
-[ext_resource type="Texture2D" path="res://assets/characters/aria_neutral.webp" id="sp_aria_neutral"]
-[ext_resource type="Texture2D" path="res://assets/characters/aria_sad.webp" id="sp_aria_sad"]
-[ext_resource type="Texture2D" path="res://assets/characters/aria_surprised.webp" id="sp_aria_surprised"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_blush.webp" id="sp_aurora_blush"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_blush_face.webp" id="sp_aurora_blush_face"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_gorgeous.webp" id="sp_aurora_gorgeous"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_happy.webp" id="sp_aurora_happy"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_sad.webp" id="sp_aurora_sad"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_sad_face.webp" id="sp_aurora_sad_face"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_serious.webp" id="sp_aurora_serious"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_serious_face.webp" id="sp_aurora_serious_face"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_smile_face.webp" id="sp_aurora_smile_face"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_surprised.webp" id="sp_aurora_surprised"]
-[ext_resource type="Texture2D" path="res://assets/characters/aurora_surprised_face.webp" id="sp_aurora_surprised_face"]
-[ext_resource type="Texture2D" path="res://assets/characters/elara_blush.webp" id="sp_elara_blush"]
-[ext_resource type="Texture2D" path="res://assets/characters/elara_happy.webp" id="sp_elara_happy"]
-[ext_resource type="Texture2D" path="res://assets/characters/elara_neutral.webp" id="sp_elara_neutral"]
-[ext_resource type="Texture2D" path="res://assets/characters/elara_sad.webp" id="sp_elara_sad"]
-[ext_resource type="Texture2D" path="res://assets/characters/elara_surprised.webp" id="sp_elara_surprised"]
-[ext_resource type="Texture2D" path="res://assets/characters/kira_blush.webp" id="sp_kira_blush"]
-[ext_resource type="Texture2D" path="res://assets/characters/kira_happy.webp" id="sp_kira_happy"]
-[ext_resource type="Texture2D" path="res://assets/characters/nova_happy.webp" id="sp_nova_happy"]
-[ext_resource type="Texture2D" path="res://assets/characters/nova_neutral.webp" id="sp_nova_neutral"]
-[ext_resource type="Texture2D" path="res://assets/characters/ren.webp" id="sp_ren"]
-[ext_resource type="Texture2D" path="res://assets/characters/ren_shadow.webp" id="sp_ren_shadow"]
-[ext_resource type="Texture2D" path="res://assets/characters/selene_blush.webp" id="sp_selene_blush"]
-[ext_resource type="Texture2D" path="res://assets/characters/selene_happy.webp" id="sp_selene_happy"]
-[ext_resource type="Texture2D" path="res://assets/characters/selene_neutral.webp" id="sp_selene_neutral"]
-[ext_resource type="Texture2D" path="res://assets/characters/selene_sad.webp" id="sp_selene_sad"]
-[ext_resource type="Texture2D" path="res://assets/characters/selene_surprised.webp" id="sp_selene_surprised"]
-[ext_resource type="Script" uid="uid://dvxki2gr62k4a" path="res://scenes/hold_indicator.gd" id="11_hold"]
-[ext_resource type="PackedScene" uid="uid://ba4pj5dj4gjtc" path="res://scenes/route_graph/route_graph_panel.tscn" id="12_route"]
+[ext_resource type="Texture2D" uid="uid://11txsa25hk78" path="res://assets/characters/ai_serious_face.webp" id="sp_ai_serious_face"]
+[ext_resource type="Texture2D" uid="uid://bsdommtmfn5mq" path="res://assets/characters/aria_blush.webp" id="sp_aria_blush"]
+[ext_resource type="Texture2D" uid="uid://cymjt1ooovm2e" path="res://assets/characters/aria_happy.webp" id="sp_aria_happy"]
+[ext_resource type="Texture2D" uid="uid://bqobknifp022b" path="res://assets/characters/aria_neutral.webp" id="sp_aria_neutral"]
+[ext_resource type="Texture2D" uid="uid://kp8teday6ju4" path="res://assets/characters/aria_sad.webp" id="sp_aria_sad"]
+[ext_resource type="Texture2D" uid="uid://dae70ljiei2ph" path="res://assets/characters/aria_surprised.webp" id="sp_aria_surprised"]
+[ext_resource type="Texture2D" uid="uid://1q71fqhb2d6p" path="res://assets/characters/aurora_blush.webp" id="sp_aurora_blush"]
+[ext_resource type="Texture2D" uid="uid://bx0oicfwxg1i8" path="res://assets/characters/aurora_blush_face.webp" id="sp_aurora_blush_face"]
+[ext_resource type="Texture2D" uid="uid://df2lxbkdsv8bg" path="res://assets/characters/aurora_gorgeous.webp" id="sp_aurora_gorgeous"]
+[ext_resource type="Texture2D" uid="uid://dfilpa68s4u5v" path="res://assets/characters/aurora_happy.webp" id="sp_aurora_happy"]
+[ext_resource type="Texture2D" uid="uid://cd3gxc552rfr3" path="res://assets/characters/aurora_sad.webp" id="sp_aurora_sad"]
+[ext_resource type="Texture2D" uid="uid://c0juxfi5k4lag" path="res://assets/characters/aurora_sad_face.webp" id="sp_aurora_sad_face"]
+[ext_resource type="Texture2D" uid="uid://e1vqqdehh6wo" path="res://assets/characters/aurora_serious.webp" id="sp_aurora_serious"]
+[ext_resource type="Texture2D" uid="uid://c1pnqxbijdjne" path="res://assets/characters/aurora_serious_face.webp" id="sp_aurora_serious_face"]
+[ext_resource type="Texture2D" uid="uid://c7n8afl7oe7f" path="res://assets/characters/aurora_smile_face.webp" id="sp_aurora_smile_face"]
+[ext_resource type="Texture2D" uid="uid://cmte3fqvhn8g7" path="res://assets/characters/aurora_surprised.webp" id="sp_aurora_surprised"]
+[ext_resource type="Texture2D" uid="uid://c8r7n5uvesd4v" path="res://assets/characters/aurora_surprised_face.webp" id="sp_aurora_surprised_face"]
+[ext_resource type="Texture2D" uid="uid://dyg44brpvteil" path="res://assets/characters/elara_blush.webp" id="sp_elara_blush"]
+[ext_resource type="Texture2D" uid="uid://c1ere5ic8sqqx" path="res://assets/characters/elara_happy.webp" id="sp_elara_happy"]
+[ext_resource type="Texture2D" uid="uid://b5pk42xif7nra" path="res://assets/characters/elara_neutral.webp" id="sp_elara_neutral"]
+[ext_resource type="Texture2D" uid="uid://pt02whu04ctc" path="res://assets/characters/elara_sad.webp" id="sp_elara_sad"]
+[ext_resource type="Texture2D" uid="uid://k7cmm1ndhy8l" path="res://assets/characters/elara_surprised.webp" id="sp_elara_surprised"]
+[ext_resource type="Texture2D" uid="uid://pmjbr2xtojlw" path="res://assets/characters/kira_blush.webp" id="sp_kira_blush"]
+[ext_resource type="Texture2D" uid="uid://dsvrielrng0lg" path="res://assets/characters/kira_happy.webp" id="sp_kira_happy"]
+[ext_resource type="Texture2D" uid="uid://56qa00chappw" path="res://assets/characters/nova_happy.webp" id="sp_nova_happy"]
+[ext_resource type="Texture2D" uid="uid://piwchfpjnw6f" path="res://assets/characters/nova_neutral.webp" id="sp_nova_neutral"]
+[ext_resource type="Texture2D" uid="uid://n8c537bo462x" path="res://assets/characters/ren.webp" id="sp_ren"]
+[ext_resource type="Texture2D" uid="uid://bb6brnuhromjq" path="res://assets/characters/ren_shadow.webp" id="sp_ren_shadow"]
+[ext_resource type="Texture2D" uid="uid://defpn1yp6ysvw" path="res://assets/characters/selene_blush.webp" id="sp_selene_blush"]
+[ext_resource type="Texture2D" uid="uid://cp67aq7hr2ri1" path="res://assets/characters/selene_happy.webp" id="sp_selene_happy"]
+[ext_resource type="Texture2D" uid="uid://dd1mcudopuhmp" path="res://assets/characters/selene_neutral.webp" id="sp_selene_neutral"]
+[ext_resource type="Texture2D" uid="uid://cuxgb4mu4tpbc" path="res://assets/characters/selene_sad.webp" id="sp_selene_sad"]
+[ext_resource type="Texture2D" uid="uid://dmx86b5ybswq3" path="res://assets/characters/selene_surprised.webp" id="sp_selene_surprised"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_box"]
 bg_color = Color(0.035, 0.045, 0.11, 0.8)
@@ -58,7 +59,7 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.58, 0.76, 1.0, 0.5)
+border_color = Color(0.58, 0.76, 1, 0.5)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
@@ -73,12 +74,12 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.62, 0.8, 1.0, 0.72)
+border_color = Color(0.62, 0.8, 1, 0.72)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-shadow_color = Color(0.35, 0.55, 1.0, 0.28)
+shadow_color = Color(0.35, 0.55, 1, 0.28)
 shadow_size = 10
 shadow_offset = Vector2(0, 4)
 
@@ -147,7 +148,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.55, 0.74, 1.0, 0.72)
+border_color = Color(0.55, 0.74, 1, 0.72)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -179,7 +180,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.55, 0.74, 1.0, 0.72)
+border_color = Color(0.55, 0.74, 1, 0.72)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -206,9 +207,9 @@ default_font = ExtResource("4_serif")
 default_font_size = 20
 Button/colors/font_color = Color(0.95, 0.94, 0.9, 1)
 Button/colors/font_disabled_color = Color(0.5, 0.5, 0.55, 1)
-Button/colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-Button/colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
-Button/colors/font_pressed_color = Color(0.78, 0.91, 1.0, 1)
+Button/colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+Button/colors/font_hover_color = Color(0.78, 0.91, 1, 1)
+Button/colors/font_pressed_color = Color(0.78, 0.91, 1, 1)
 Button/styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
 Button/styles/focus = SubResource("StyleBoxFlat_btn_hot")
 Button/styles/hover = SubResource("StyleBoxFlat_btn_hot")
@@ -221,23 +222,23 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.55, 0.74, 1.0, 0.55)
+border_color = Color(0.55, 0.74, 1, 0.55)
 
 [node name="VNBalloon" type="CanvasLayer" unique_id=309007023]
 layer = 100
 script = ExtResource("1_balloon")
 backgrounds = Dictionary[String, Texture2D]({
+"alley": ExtResource("bg_alley"),
 "classroom": ExtResource("bg_classroom"),
+"core": ExtResource("bg_core"),
+"festival": ExtResource("bg_festival"),
+"grove": ExtResource("bg_grove"),
+"lab": ExtResource("bg_lab"),
+"lighthouse": ExtResource("bg_lighthouse"),
 "nexus": ExtResource("bg_nexus"),
 "rift": ExtResource("bg_rift"),
 "sanctum": ExtResource("bg_sanctum"),
-"grove": ExtResource("bg_grove"),
-"shore": ExtResource("bg_shore"),
-"core": ExtResource("bg_core"),
-"festival": ExtResource("bg_festival"),
-"lab": ExtResource("bg_lab"),
-"alley": ExtResource("bg_alley"),
-"lighthouse": ExtResource("bg_lighthouse")
+"shore": ExtResource("bg_shore")
 })
 sprites = Dictionary[String, Texture2D]({
 "ai_serious_face": ExtResource("sp_ai_serious_face"),
@@ -348,19 +349,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BrandMark" type="Label" parent="Balloon/UIRoot"]
+[node name="BrandMark" type="Label" parent="Balloon/UIRoot" unique_id=449803750]
 layout_mode = 0
 offset_left = 28.0
 offset_top = 16.0
 offset_right = 360.0
 offset_bottom = 42.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.74, 0.88, 1, 0.78)
 theme_override_fonts/font = ExtResource("5_serifbold")
 theme_override_font_sizes/font_size = 16
 text = "CHRONO NEXUS"
 
-[node name="BrandRule" type="ColorRect" parent="Balloon/UIRoot"]
+[node name="BrandRule" type="ColorRect" parent="Balloon/UIRoot" unique_id=1360638980]
 layout_mode = 0
 offset_left = 28.0
 offset_top = 44.0
@@ -369,7 +369,7 @@ offset_bottom = 46.0
 mouse_filter = 2
 color = Color(0.58, 0.8, 1, 0.75)
 
-[node name="StatStrip" type="Label" parent="Balloon/UIRoot"]
+[node name="StatStrip" type="Label" parent="Balloon/UIRoot" unique_id=25866061]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -380,7 +380,6 @@ offset_top = 16.0
 offset_right = -24.0
 offset_bottom = 44.0
 grow_horizontal = 0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.78, 0.88, 1, 0.82)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
@@ -427,7 +426,7 @@ theme_override_constants/separation = 4
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/default_color = Color(0.9, 0.95, 1.0, 1)
+theme_override_colors/default_color = Color(0.9, 0.95, 1, 1)
 text = "..."
 
 [node name="NamePlate" type="PanelContainer" parent="Balloon/UIRoot/BottomUI" unique_id=155575693]
@@ -452,7 +451,7 @@ theme_override_constants/margin_bottom = 5
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
-theme_override_colors/default_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/default_color = Color(0.72, 0.86, 1, 1)
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -473,7 +472,7 @@ mouse_filter = 2
 
 [node name="NextIndicator" type="Polygon2D" parent="Balloon/UIRoot/BottomUI/IndicatorHolder" unique_id=1415914473]
 unique_name_in_owner = true
-color = Color(0.72, 0.86, 1.0, 1)
+color = Color(0.72, 0.86, 1, 1)
 polygon = PackedVector2Array(0, 0, 40, 0, 20, 14)
 
 [node name="IndicatorTween" type="AnimationPlayer" parent="Balloon/UIRoot/BottomUI/IndicatorHolder" unique_id=997917757]
@@ -499,8 +498,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -514,8 +513,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -529,8 +528,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -544,8 +543,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -559,8 +558,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -574,8 +573,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -589,8 +588,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(84, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -604,8 +603,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(84, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -619,8 +618,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(56, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -634,8 +633,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(56, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -649,8 +648,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -664,8 +663,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -674,14 +673,13 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_hist_hot")
 theme_override_styles/focus = SubResource("StyleBoxFlat_hist_hot")
 text = "Pause"
 
-
-[node name="RouteButton" type="Button" parent="Balloon/UIRoot/BottomUI/SystemRow"]
+[node name="RouteButton" type="Button" parent="Balloon/UIRoot/BottomUI/SystemRow" unique_id=1810992428]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -747,7 +745,7 @@ theme_override_constants/separation = 8
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/font_color = Color(0.72, 0.86, 1, 1)
 theme_override_fonts/font = ExtResource("5_serifbold")
 theme_override_font_sizes/font_size = 26
 text = "Save"
@@ -764,8 +762,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -793,8 +791,8 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -839,7 +837,7 @@ theme_override_constants/separation = 14
 
 [node name="SettingsTitle" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox" unique_id=1125802707]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/font_color = Color(0.72, 0.86, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 20
 text = "Settings"
@@ -1003,7 +1001,7 @@ popup/item_1/id = 1
 
 [node name="ControlsHeader" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox" unique_id=818078538]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/font_color = Color(0.72, 0.86, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 20
 text = "Controls"
@@ -1246,7 +1244,7 @@ text = "—"
 
 [node name="DisplayHeader" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox" unique_id=240786325]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/font_color = Color(0.72, 0.86, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 20
 text = "Display"
@@ -1413,11 +1411,11 @@ min_value = 1.0
 max_value = 4320.0
 value = 720.0
 
-[node name="GlyphScaleRow" type="BoxContainer" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox"]
+[node name="GlyphScaleRow" type="BoxContainer" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox" unique_id=365495752]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="GlyphScaleRowLabel" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/GlyphScaleRow"]
+[node name="GlyphScaleRowLabel" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/GlyphScaleRow" unique_id=788827807]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
@@ -1425,12 +1423,13 @@ theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 17
 text = "Glyph scale"
 
-[node name="GlyphScaleOption" type="OptionButton" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/GlyphScaleRow"]
+[node name="GlyphScaleOption" type="OptionButton" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/GlyphScaleRow" unique_id=172755303]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
 theme_override_font_sizes/font_size = 16
+selected = 1
 item_count = 4
 popup/item_0/text = "1× Low"
 popup/item_0/id = 0
@@ -1440,13 +1439,12 @@ popup/item_2/text = "3× High"
 popup/item_2/id = 2
 popup/item_3/text = "4× Ultra"
 popup/item_3/id = 3
-selected = 1
 
-[node name="GameFilterRow" type="BoxContainer" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox"]
+[node name="GameFilterRow" type="BoxContainer" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox" unique_id=1446067446]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="GameFilterRowLabel" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/GameFilterRow"]
+[node name="GameFilterRowLabel" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/GameFilterRow" unique_id=2039751956]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
@@ -1454,12 +1452,13 @@ theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 17
 text = "Game filter"
 
-[node name="GameFilterOption" type="OptionButton" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/GameFilterRow"]
+[node name="GameFilterOption" type="OptionButton" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/GameFilterRow" unique_id=1963667593]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
 theme_override_font_sizes/font_size = 16
+selected = 1
 item_count = 4
 popup/item_0/text = "Nearest"
 popup/item_0/id = 0
@@ -1469,13 +1468,12 @@ popup/item_2/text = "Nearest mipmaps"
 popup/item_2/id = 2
 popup/item_3/text = "Linear mipmaps"
 popup/item_3/id = 3
-selected = 1
 
-[node name="MapFilterRow" type="BoxContainer" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox"]
+[node name="MapFilterRow" type="BoxContainer" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox" unique_id=1139219877]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="MapFilterRowLabel" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/MapFilterRow"]
+[node name="MapFilterRowLabel" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/MapFilterRow" unique_id=223979785]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
@@ -1483,12 +1481,13 @@ theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 17
 text = "Map filter"
 
-[node name="MapFilterOption" type="OptionButton" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/MapFilterRow"]
+[node name="MapFilterOption" type="OptionButton" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox/MapFilterRow" unique_id=1457614652]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
 theme_override_font_sizes/font_size = 16
+selected = 1
 item_count = 4
 popup/item_0/text = "Nearest"
 popup/item_0/id = 0
@@ -1498,11 +1497,10 @@ popup/item_2/text = "Nearest mipmaps"
 popup/item_2/id = 2
 popup/item_3/text = "Linear mipmaps"
 popup/item_3/id = 3
-selected = 1
 
 [node name="AudioHeader" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox" unique_id=1390737954]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/font_color = Color(0.72, 0.86, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 20
 text = "Audio"
@@ -1657,7 +1655,7 @@ text = "on"
 
 [node name="SpritesHeader" type="Label" parent="Balloon/UIRoot/SettingsPanel/SettingsMargin/SettingsScroll/SettingsVBox" unique_id=2479799]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/font_color = Color(0.72, 0.86, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 20
 text = "Sprites"
@@ -1753,7 +1751,7 @@ alignment = 1
 
 [node name="PauseTitle" type="Label" parent="Balloon/UIRoot/PausePanel/PauseMargin/PauseVBox" unique_id=1208187843]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/font_color = Color(0.72, 0.86, 1, 1)
 theme_override_fonts/font = ExtResource("5_serifbold")
 theme_override_font_sizes/font_size = 30
 text = "Paused"
@@ -1764,8 +1762,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -1779,8 +1777,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -1794,8 +1792,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -1809,8 +1807,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -1824,8 +1822,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -1839,8 +1837,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -1849,79 +1847,10 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_hist_hot")
 theme_override_styles/focus = SubResource("StyleBoxFlat_hist_hot")
 text = "Quit"
 
-[node name="PanicScreen" type="Control" parent="Balloon/UIRoot" unique_id=289853429]
+[node name="PanicScreen" parent="Balloon/UIRoot" unique_id=86685885 instance=ExtResource("50_kd80d")]
 unique_name_in_owner = true
 visible = false
-z_index = 20
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanicPaper" type="ColorRect" parent="Balloon/UIRoot/PanicScreen" unique_id=1663299739]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.98, 0.98, 0.96, 1)
-
-[node name="PanicMargin" type="MarginContainer" parent="Balloon/UIRoot/PanicScreen" unique_id=776933891]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 90
-theme_override_constants/margin_top = 60
-theme_override_constants/margin_right = 90
-theme_override_constants/margin_bottom = 60
-
-[node name="PanicScroll" type="ScrollContainer" parent="Balloon/UIRoot/PanicScreen/PanicMargin" unique_id=1433317678]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="PanicVBox" type="VBoxContainer" parent="Balloon/UIRoot/PanicScreen/PanicMargin/PanicScroll" unique_id=950744333]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 18
-
-[node name="PanicTitle" type="Label" parent="Balloon/UIRoot/PanicScreen/PanicMargin/PanicScroll/PanicVBox" unique_id=1390964353]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_fonts/font = ExtResource("5_serifbold")
-theme_override_font_sizes/font_size = 30
-text = "PHYS 201 - Quantum Mechanics II"
-
-[node name="PanicBody" type="Label" parent="Balloon/UIRoot/PanicScreen/PanicMargin/PanicScroll/PanicVBox" unique_id=80379779]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.15, 0.15, 0.15, 1)
-theme_override_fonts/font = ExtResource("4_serif")
-theme_override_font_sizes/font_size = 18
-text = "Lecture 12: The time-independent Schroedinger equation. H psi = E psi, where H is the Hamiltonian operator. For a particle in a 1-D infinite well of width L the energy eigenvalues are E_n = n^2 h^2 / (8 m L^2). Reminder: problem set 4 is due Friday - problems 3.7, 3.9 and the derivation of the uncertainty principle for position and momentum."
-autowrap_mode = 2
-
-[node name="PanicCloseButton" type="Button" parent="Balloon/UIRoot/PanicScreen" unique_id=1452608062]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -64.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = 52.0
-grow_horizontal = 0
-theme_override_colors/font_color = Color(0.45, 0.45, 0.5, 1)
-theme_override_colors/font_focus_color = Color(0.2, 0.2, 0.25, 1)
-theme_override_colors/font_hover_color = Color(0.2, 0.2, 0.25, 1)
-theme_override_font_sizes/font_size = 22
-text = "X"
 
 [node name="HistoryPanel" type="PanelContainer" parent="Balloon/UIRoot" unique_id=2022090504]
 unique_name_in_owner = true
@@ -1952,7 +1881,7 @@ theme_override_constants/separation = 12
 
 [node name="HistoryTitle" type="Label" parent="Balloon/UIRoot/HistoryPanel/HistoryMargin/HistoryVBox/HistoryHeader" unique_id=955157271]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/font_color = Color(0.72, 0.86, 1, 1)
 theme_override_fonts/font = ExtResource("5_serifbold")
 theme_override_font_sizes/font_size = 26
 text = "History"
@@ -1984,9 +1913,9 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/font_color = Color(0.92, 0.92, 0.95, 1)
-theme_override_colors/font_focus_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_pressed_color = Color(0.78, 0.91, 1.0, 1)
-theme_override_colors/font_hover_color = Color(0.78, 0.91, 1.0, 1)
+theme_override_colors/font_focus_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.78, 0.91, 1, 1)
+theme_override_colors/font_hover_color = Color(0.78, 0.91, 1, 1)
 theme_override_fonts/font = ExtResource("4_serif")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_hist_normal")
@@ -2022,22 +1951,15 @@ offset_top = 60.0
 offset_right = -14.0
 offset_bottom = 92.0
 grow_horizontal = 0
-theme_override_colors/font_color = Color(0.72, 0.86, 1.0, 1)
+theme_override_colors/font_color = Color(0.72, 0.86, 1, 1)
 theme_override_fonts/font = ExtResource("5_serifbold")
 theme_override_font_sizes/font_size = 18
 text = "Saved"
 horizontal_alignment = 2
 
-[node name="RouteGraphPanel" parent="Balloon/UIRoot" instance=ExtResource("12_route")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="RouteGraphPanel" parent="Balloon/UIRoot" unique_id=123914182 instance=ExtResource("12_route")]
 z_index = 15
+layout_mode = 1
 
 [node name="SettingsCloseButton" type="Button" parent="Balloon/UIRoot" unique_id=1725658527]
 unique_name_in_owner = true
@@ -2133,7 +2055,6 @@ unique_name_in_owner = true
 [connection signal="pressed" from="Balloon/UIRoot/PausePanel/PauseMargin/PauseVBox/PauseLoadButton" to="." method="_on_pause_load_pressed"]
 [connection signal="pressed" from="Balloon/UIRoot/PausePanel/PauseMargin/PauseVBox/PauseSettingsButton" to="." method="_on_pause_settings_pressed"]
 [connection signal="pressed" from="Balloon/UIRoot/PausePanel/PauseMargin/PauseVBox/QuitButton" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="Balloon/UIRoot/PanicScreen/PanicCloseButton" to="." method="_on_panic_close_pressed"]
 [connection signal="gui_input" from="Balloon/UIRoot/HistoryPanel" to="." method="_on_menu_empty_press"]
 [connection signal="pressed" from="Balloon/UIRoot/SettingsCloseButton" to="." method="_on_settings_close_pressed"]
 [connection signal="timeout" from="ToastTimer" to="." method="_on_toast_timeout"]

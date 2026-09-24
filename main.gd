@@ -2,7 +2,7 @@ extends Node
 ## Chrono Nexus entry. A still of the nexus sits behind a glass title card.
 ## Starting a route hides the card and opens the Dialogue Manager balloon.
 
-const STORY: DialogueResource = preload("res://dialogue/chrono_nexus.dialogue")
+const STORY: DialogueResource = preload("res://dialogue/suxen_onorhc.dialogue")
 
 @onready var title_layer: CanvasLayer = $TitleLayer
 
@@ -28,15 +28,7 @@ func _start(cue: String) -> void:
 
 
 func _on_begin_pressed() -> void:
-	_start("opening")
-
-
-func _on_prologue_pressed() -> void:
-	_start("beginning")
-
-
-func _on_lab_pressed() -> void:
-	_start("lab")
+	_start("начало")
 
 
 func _on_dialogue_ended(_resource: Resource) -> void:
