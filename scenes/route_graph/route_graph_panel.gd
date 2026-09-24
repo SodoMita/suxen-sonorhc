@@ -43,14 +43,15 @@ func _ready() -> void:
 	_sync_toggle_look()
 
 
-func set_glyph_scale(scale: int, rebuild: bool = true) -> void:
+func set_glyph_scale(value: int, rebuild: bool = true) -> void:
 	if view != null and is_instance_valid(view) and view.has_method("set_glyph_scale"):
-		view.set_glyph_scale(scale, rebuild)
+		view.set_glyph_scale(value, rebuild)
 
 
-func set_map_filter(index: int, rebuild: bool = true) -> void:
+## The sampler hint is the whole change, so there is no rebuild to forward.
+func set_map_filter(index: int) -> void:
 	if view != null and is_instance_valid(view) and view.has_method("set_map_filter"):
-		view.set_map_filter(index, rebuild)
+		view.set_map_filter(index)
 
 
 func show_graph(resource = null, player: Dictionary = {}, glyph_scale: int = -1) -> void:

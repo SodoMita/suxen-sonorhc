@@ -2076,7 +2076,7 @@ func _apply_display_quality() -> void:
 		if route_graph_panel.has_method("set_glyph_scale"):
 			route_graph_panel.set_glyph_scale(glyph_scale, false)
 		if route_graph_panel.has_method("set_map_filter"):
-			route_graph_panel.set_map_filter(map_filter, false)
+			route_graph_panel.set_map_filter(map_filter)
 
 
 func _apply_game_filter() -> void:
@@ -2886,7 +2886,7 @@ func _on_route_button_pressed() -> void:
 		_open_overlay(route_graph_panel)
 		if route_graph_panel.has_method("show_graph"):
 			if route_graph_panel.has_method("set_map_filter"):
-				route_graph_panel.set_map_filter(map_filter, false)
+				route_graph_panel.set_map_filter(map_filter)
 			route_graph_panel.show_graph(dialogue_resource, _route_player_state(), glyph_scale)
 	else:
 		_toast("Route graph not available")

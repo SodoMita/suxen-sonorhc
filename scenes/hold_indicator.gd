@@ -12,7 +12,9 @@ var _age: float = 0.0
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	size = Vector2(2 * RADIUS + 64, 2 * RADIUS + 64)
+	# The ring is drawn around _point, not around this rect: the balloon gives
+	# the node full-rect anchors, which the layout applies right after _ready()
+	# and which would discard a size set here.
 	set_process(false)
 	hide()
 
