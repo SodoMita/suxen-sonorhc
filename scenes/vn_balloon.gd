@@ -324,8 +324,9 @@ const RES_PRESETS: Array = [
 ]
 ## Layout size. A higher window resolution renders this canvas with more
 ## pixels; it must not become the layout size, or UI and sprites are either
-## tiny or stretched (blurry / pixelated).
-const DESIGN_SIZE := Vector2i(2560, 1440)
+## tiny or stretched (blurry / pixelated). Matches the authored chrome
+## geometry (1280x720), same as the demo balloon this was adapted from.
+const DESIGN_SIZE := Vector2i(1280, 720)
 
 ## Every keyboard-driven VN action is remappable. Mouse/touch bindings remain
 ## alongside the chosen key (for example, right click continues to pause).

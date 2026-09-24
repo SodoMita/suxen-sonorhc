@@ -28,7 +28,7 @@ Save, load, settings, auto, and the story map live on the bottom system row.
 
 ### Display & settings notes
 
-- Resolution presets and any custom size keep the 2560×1440 layout and draw it at the window's pixel density, so the UI and sprites stay the same size without being stretched or blurred. The panic page applies the same scale and — when it replaces the game — the saved rotation itself.
+- Resolution presets and any custom size keep the 1280×720 layout and draw it at the window's pixel density, so the UI and sprites stay the same size without being stretched or blurred (a resolution larger than the screen clamps the window to the work area; the layout is unaffected). The panic page applies the same scale and — when it replaces the game — the saved rotation itself.
 - Every slider except volume covers a wider range and is taller; UI scale and skip speed also have a number field beside the slider (the skip number is the delay in seconds; the slider still reads as speed, right is faster).
 - In a portrait view the sprites are larger and set apart, and the speaking portrait stands in front of the other while staying behind the dialogue UI. A line that changes the speaker's expression brings their portrait forward even without a `#focus=` tag.
 - Menus close with a press-and-hold on their empty space; the ring fills at your finger even when the UI is scaled or the view is rotated.
@@ -37,7 +37,7 @@ Save, load, settings, auto, and the story map live on the bottom system row.
 
 - `scenes/vn_balloon.tscn` — authored UI. Edit it in the Godot editor; the script does not build the chrome.
 - `scenes/panic_screen.tscn` — the panic page, its own scene (`scenes/panic_screen.gd`), restyled here as a black lecture sheet; it can be redesigned without touching the balloon.
-- `scenes/display_scale.gd` — shared window layout: the design canvas stays 2560×1440 and larger windows render it with more pixels.
+- `scenes/display_scale.gd` — shared window layout: the design canvas stays at the authored 1280×720 and larger windows render it with more pixels (never a window bigger than the screen).
 - `dialogue/chrono_nexus.dialogue` — the story. Stage tags: `#bg=`, `#sprite=key:left|right`, `#focus=`, `#music=`, `#sfx=`.
 - `autoloads/game_state.gd` — trust, insight, power, bonds. Choices mutate these; rollback restores them.
 - `Sprites/` — original portraits. `assets/characters/` — the same art, trimmed so it fits the left/right slots.
