@@ -5,7 +5,6 @@ extends RefCounted
 
 
 const CompilerScript = preload("res://scenes/route_graph/route_graph_compiler.gd")
-const DMConstants = preload("res://addons/dialogue_manager/constants.gd")
 
 const STEP_LIMIT := 400
 

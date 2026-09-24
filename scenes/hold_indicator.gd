@@ -12,7 +12,8 @@ var _age: float = 0.0
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	size = Vector2(2 * RADIUS + 64, 2 * RADIUS + 64)
+	# The authored full-rect anchors size this surface to the window; a manual
+	# size here would be overridden right after _ready (and warns about it).
 	set_process(false)
 	hide()
 

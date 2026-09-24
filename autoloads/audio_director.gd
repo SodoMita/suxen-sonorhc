@@ -340,11 +340,11 @@ func _begin_score(theme_name: StringName, score: Dictionary) -> void:
 	current_theme = theme_name
 	music_source = "procedural"
 	_auto_loop = false
-	var seed := hash(String(theme_name) + _scene_mood) ^ music_seed
-	_rng.seed = seed
+	var seed_value := hash(String(theme_name) + _scene_mood) ^ music_seed
+	_rng.seed = seed_value
 	if _engine != null:
 		var first := not bool(_engine.call("active"))
-		_engine.call("transition", _pack_score(score), 0.35 if first else 0.8, hash(String(theme_name)), seed)
+		_engine.call("transition", _pack_score(score), 0.35 if first else 0.8, hash(String(theme_name)), seed_value)
 		_ensure_playback()
 		return
 	_bar_index = 0
@@ -512,15 +512,15 @@ func _play_stream(stream: AudioStream, pitch: float = 1.0) -> void:
 
 
 ## Re-roll plucks that have not been scheduled yet. Sounding notes stay put.
-func reroll(seed: int = 0) -> void:
-	if seed == 0:
-		seed = music_seed ^ int(Time.get_ticks_usec() & 0x7fffffff)
-		if seed == 0:
-			seed = 1
-	music_seed = seed
-	_rng.seed = seed
+func reroll(new_seed: int = 0) -> void:
+	if new_seed == 0:
+		new_seed = music_seed ^ int(Time.get_ticks_usec() & 0x7fffffff)
+		if new_seed == 0:
+			new_seed = 1
+	music_seed = new_seed
+	_rng.seed = new_seed
 	if _engine != null:
-		_engine.call("reseed", seed)
+		_engine.call("reseed", new_seed)
 
 
 func _attach_engine() -> void:
@@ -685,6 +685,7 @@ func _trim_voices() -> void:
 ## Scale degree -> MIDI note (wraps across octaves).
 func _degree_midi(deg: int, root: int, scale: Array) -> int:
 	var n: int = scale.size()
+	@warning_ignore("integer_division")
 	var oct: int = deg / n if deg >= 0 else -((-deg + n - 1) / n)
 	return root + 12 * oct + scale[posmod(deg, n)]
 
