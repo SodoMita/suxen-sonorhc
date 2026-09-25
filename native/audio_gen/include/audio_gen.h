@@ -56,6 +56,7 @@
 #include "ag_biome.h"
 #include "ag_ambience_3d.h"
 #include "ag_soundscape.h"
+#include "ag_material.h"
 
 #ifdef __cplusplus
 extern "C" {
