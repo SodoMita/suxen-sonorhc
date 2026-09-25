@@ -7,23 +7,23 @@
 #include "ag_weather.h"
 #include "ag_reverb.h"
 #include "ag_delay.h"
+#include "ag_nature.h"
+#include "ag_fire.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* 3D Ambience System - places multiple environment sound sources in 3D space,
- * with listener, reverb zones, occlusion, and dynamic weather/time.
- */
+/* High-quality 3D Ambience System */
 
 #define AG_AMB_3D_MAX_LAYERS 8
 #define AG_AMB_3D_MAX_POINT_SOURCES 16
 
 typedef enum {
-    AG_AMB_LAYER_BED = 0,      /* non-spatialized stereo bed (e.g., wind) */
-    AG_AMB_LAYER_POINT,        /* 3D point source (e.g., bird, fire) */
-    AG_AMB_LAYER_ZONE,         /* area sound (e.g., river, ocean) */
-    AG_AMB_LAYER_REVERB        /* reverb return */
+    AG_AMB_LAYER_BED = 0,
+    AG_AMB_LAYER_POINT,
+    AG_AMB_LAYER_ZONE,
+    AG_AMB_LAYER_REVERB
 } AgAmbLayerType;
 
 typedef struct AgAmbLayer {
@@ -32,18 +32,14 @@ typedef struct AgAmbLayer {
     float gain;
     float gain_target;
     float gain_step;
-    /* For point sources */
     AgSource source;
     AgSpatializer spatializer;
-    /* For beds: simple gain */
-    /* For zones: position + radius + biome */
     AgBiome biome;
     int has_biome;
     AgVec3 zone_pos;
     float zone_radius;
-    /* Generator state - we use generic function pointer via enum */
-    int gen_type; /* 0=wind,1=ocean,2=river,3=fire,4=birds,etc */
-    void *gen_state; /* not used, we store directly in biome */
+    int gen_type;
+    void *gen_state;
 } AgAmbLayer;
 
 typedef struct AgAmbience3D {
@@ -53,6 +49,10 @@ typedef struct AgAmbience3D {
     AgSpatializer point_spats[AG_AMB_3D_MAX_POINT_SOURCES];
     float point_gains[AG_AMB_3D_MAX_POINT_SOURCES];
     int point_active[AG_AMB_3D_MAX_POINT_SOURCES];
+    int point_gen_type[AG_AMB_3D_MAX_POINT_SOURCES]; /* 0=bird,1=cricket,2=fire */
+    AgBird point_birds[AG_AMB_3D_MAX_POINT_SOURCES];
+    AgCricket point_crickets[AG_AMB_3D_MAX_POINT_SOURCES];
+    AgFire point_fires[AG_AMB_3D_MAX_POINT_SOURCES];
     int point_count;
 
     AgReverb reverb;
@@ -67,8 +67,8 @@ typedef struct AgAmbience3D {
     float master_target;
     float master_step;
 
-    double time; /* sec elapsed */
-    float time_of_day; /* 0..1 */
+    double time;
+    float time_of_day;
     float weather_intensity;
 
     AgRng rng;
@@ -91,7 +91,6 @@ void ag_ambience_3d_set_master_gain(AgAmbience3D *amb, float gain, float fade_se
 void ag_ambience_3d_render(AgAmbience3D *amb, float *stereo_interleaved, int frames);
 float ag_ambience_3d_next(AgAmbience3D *amb, float *out_l, float *out_r);
 
-/* Helper: create common ambiences */
 void ag_ambience_3d_preset_forest(AgAmbience3D *amb);
 void ag_ambience_3d_preset_cave(AgAmbience3D *amb);
 void ag_ambience_3d_preset_ocean(AgAmbience3D *amb);

@@ -11,51 +11,21 @@ void ag_biome_params_default(AgBiomeParams *p, AgBiomeType type) {
     p->weather_type=AG_WEATHER_CLEAR;
     p->weather=0.0f;
     switch(type){
-        case AG_BIOME_FOREST:
-            p->wind=0.3f; p->water=0.2f; p->birds=0.7f; p->insects=0.5f; p->humidity=0.6f;
-            break;
-        case AG_BIOME_CAVE:
-            p->wind=0.1f; p->water=0.6f; p->birds=0.0f; p->insects=0.1f; p->humidity=0.9f;
-            break;
-        case AG_BIOME_DESERT:
-            p->wind=0.6f; p->water=0.0f; p->birds=0.1f; p->insects=0.3f; p->humidity=0.1f;
-            break;
-        case AG_BIOME_OCEAN:
-            p->wind=0.5f; p->water=1.0f; p->birds=0.3f; p->insects=0.0f; p->humidity=0.8f;
-            break;
-        case AG_BIOME_CITY:
-            p->wind=0.2f; p->water=0.1f; p->birds=0.2f; p->insects=0.0f; p->humidity=0.4f;
-            break;
-        case AG_BIOME_MOUNTAIN:
-            p->wind=0.7f; p->water=0.2f; p->birds=0.3f; p->insects=0.1f; p->humidity=0.3f;
-            break;
-        case AG_BIOME_JUNGLE:
-            p->wind=0.2f; p->water=0.5f; p->birds=0.9f; p->insects=0.9f; p->humidity=0.9f;
-            break;
-        case AG_BIOME_SWAMP:
-            p->wind=0.15f; p->water=0.7f; p->birds=0.3f; p->insects=0.8f; p->humidity=0.9f;
-            break;
-        case AG_BIOME_TUNDRA:
-            p->wind=0.8f; p->water=0.1f; p->birds=0.1f; p->insects=0.0f; p->humidity=0.2f;
-            break;
-        case AG_BIOME_GRASSLAND:
-            p->wind=0.4f; p->water=0.1f; p->birds=0.6f; p->insects=0.6f; p->humidity=0.4f;
-            break;
-        case AG_BIOME_RIVER:
-            p->wind=0.2f; p->water=0.9f; p->birds=0.5f; p->insects=0.4f; p->humidity=0.6f;
-            break;
-        case AG_BIOME_BEACH:
-            p->wind=0.4f; p->water=0.8f; p->birds=0.4f; p->insects=0.2f; p->humidity=0.7f;
-            break;
-        case AG_BIOME_NEXUS:
-            p->wind=0.3f; p->water=0.3f; p->birds=0.2f; p->insects=0.2f; p->humidity=0.5f;
-            break;
-        case AG_BIOME_RIFT:
-            p->wind=0.5f; p->water=0.1f; p->birds=0.0f; p->insects=0.0f; p->humidity=0.3f;
-            break;
-        case AG_BIOME_LAB:
-            p->wind=0.05f; p->water=0.0f; p->birds=0.0f; p->insects=0.0f; p->humidity=0.2f;
-            break;
+        case AG_BIOME_FOREST: p->wind=0.32f; p->water=0.22f; p->birds=0.72f; p->insects=0.52f; p->humidity=0.62f; break;
+        case AG_BIOME_CAVE: p->wind=0.12f; p->water=0.62f; p->birds=0.0f; p->insects=0.12f; p->humidity=0.92f; break;
+        case AG_BIOME_DESERT: p->wind=0.62f; p->water=0.0f; p->birds=0.12f; p->insects=0.32f; p->humidity=0.12f; break;
+        case AG_BIOME_OCEAN: p->wind=0.52f; p->water=1.0f; p->birds=0.32f; p->insects=0.0f; p->humidity=0.82f; break;
+        case AG_BIOME_CITY: p->wind=0.22f; p->water=0.12f; p->birds=0.22f; p->insects=0.0f; p->humidity=0.42f; break;
+        case AG_BIOME_MOUNTAIN: p->wind=0.72f; p->water=0.22f; p->birds=0.32f; p->insects=0.12f; p->humidity=0.32f; break;
+        case AG_BIOME_JUNGLE: p->wind=0.22f; p->water=0.52f; p->birds=0.92f; p->insects=0.92f; p->humidity=0.92f; break;
+        case AG_BIOME_SWAMP: p->wind=0.16f; p->water=0.72f; p->birds=0.32f; p->insects=0.82f; p->humidity=0.92f; break;
+        case AG_BIOME_TUNDRA: p->wind=0.82f; p->water=0.12f; p->birds=0.12f; p->insects=0.0f; p->humidity=0.22f; break;
+        case AG_BIOME_GRASSLAND: p->wind=0.42f; p->water=0.12f; p->birds=0.62f; p->insects=0.62f; p->humidity=0.42f; break;
+        case AG_BIOME_RIVER: p->wind=0.22f; p->water=0.92f; p->birds=0.52f; p->insects=0.42f; p->humidity=0.62f; break;
+        case AG_BIOME_BEACH: p->wind=0.42f; p->water=0.82f; p->birds=0.42f; p->insects=0.22f; p->humidity=0.72f; break;
+        case AG_BIOME_NEXUS: p->wind=0.32f; p->water=0.32f; p->birds=0.22f; p->insects=0.22f; p->humidity=0.52f; break;
+        case AG_BIOME_RIFT: p->wind=0.52f; p->water=0.12f; p->birds=0.0f; p->insects=0.0f; p->humidity=0.32f; break;
+        case AG_BIOME_LAB: p->wind=0.06f; p->water=0.0f; p->birds=0.0f; p->insects=0.0f; p->humidity=0.22f; break;
         default: break;
     }
 }
@@ -68,10 +38,10 @@ void ag_biome_init(AgBiome *biome, const AgBiomeParams *params, double sr) {
     ag_rng_seed(&biome->rng, params->seed?params->seed:1);
 
     ag_wind_sys_init(&biome->wind, sr);
-    ag_wind_sys_set(&biome->wind, params->wind*0.5f, params->wind*0.6f, params->wind*0.4f);
+    ag_wind_sys_set(&biome->wind, params->wind*0.52f, params->wind*0.62f, params->wind*0.42f);
 
     ag_ocean_init(&biome->ocean, sr);
-    ag_ocean_set(&biome->ocean, params->water, 0.4f);
+    ag_ocean_set(&biome->ocean, params->water, 0.45f);
 
     ag_river_init(&biome->river, sr);
     ag_stream_init(&biome->stream, sr);
@@ -80,7 +50,7 @@ void ag_biome_init(AgBiome *biome, const AgBiomeParams *params, double sr) {
 
     ag_fire_init(&biome->fire, sr);
 
-    for(int i=0;i<4;i++) ag_bird_init(&biome->birds[i], sr, i%4);
+    for(int i=0;i<4;i++) ag_bird_init(&biome->birds[i], sr, (i+ (int)params->seed)%5);
     for(int i=0;i<2;i++) ag_cricket_init(&biome->crickets[i], sr);
     for(int i=0;i<2;i++) ag_cicada_init(&biome->cicadas[i], sr);
     for(int i=0;i<2;i++) ag_frog_init(&biome->frogs[i], sr);
@@ -92,17 +62,12 @@ void ag_biome_init(AgBiome *biome, const AgBiomeParams *params, double sr) {
 
     ag_drone_init(&biome->drone, sr, 55.0f);
     ag_granular_init(&biome->granular, sr, 110.0f);
-
-    /* Adjust based on time of day */
-    float tod = params->time_of_day;
-    /* Night = more crickets, owls, less birds */
-    /* Day = more birds */
 }
 
 void ag_biome_set_params(AgBiome *biome, const AgBiomeParams *params) {
     biome->params=*params;
-    ag_wind_sys_set(&biome->wind, params->wind*0.5f, params->wind*0.6f, params->wind*0.4f);
-    ag_ocean_set(&biome->ocean, params->water, 0.4f);
+    ag_wind_sys_set(&biome->wind, params->wind*0.52f, params->wind*0.62f, params->wind*0.42f);
+    ag_ocean_set(&biome->ocean, params->water, 0.45f);
     ag_weather_mixer_set(&biome->weather, params->weather_type, params->weather);
 }
 
@@ -112,97 +77,160 @@ float ag_biome_next(AgBiome *biome) {
 void ag_biome_next_stereo(AgBiome *biome, float *out_l, float *out_r) {
     float mix_l=0, mix_r=0;
 
-    /* Wind always */
-    float wind = ag_wind_sys_next(&biome->wind) * biome->params.wind;
-    mix_l+=wind*0.3f; mix_r+=wind*0.3f;
+    /* Wind HQ */
+    float wind_l, wind_r;
+    ag_wind_sys_next_stereo(&biome->wind, &wind_l, &wind_r);
+    wind_l *= biome->params.wind;
+    wind_r *= biome->params.wind;
+    mix_l+=wind_l*0.32f;
+    mix_r+=wind_r*0.32f;
 
-    /* Water based on biome */
+    /* Water HQ */
     if(biome->params.water > 0.01f){
         float water_l=0, water_r=0;
         switch(biome->params.type){
             case AG_BIOME_OCEAN:
             case AG_BIOME_BEACH:
-                { float o=ag_ocean_next(&biome->ocean); water_l=o*0.5f; water_r=o*0.5f; }
+                ag_ocean_next_stereo(&biome->ocean, &water_l, &water_r);
                 break;
             case AG_BIOME_RIVER:
-                { float r=ag_river_next(&biome->river); water_l=r*0.5f; water_r=r*0.5f; }
+                ag_river_next_stereo(&biome->river, &water_l, &water_r);
                 break;
             case AG_BIOME_CAVE:
-                { ag_drip_auto(&biome->drip, biome->params.water); float d=ag_drip_next(&biome->drip); water_l=d*0.5f; water_r=d*0.5f; }
+                ag_drip_auto(&biome->drip, biome->params.water);
+                ag_drip_next_stereo(&biome->drip, &water_l, &water_r);
+                /* add subtle river for cave */
+                {
+                    float rl, rr;
+                    ag_river_next_stereo(&biome->river, &rl, &rr);
+                    water_l += rl*0.15f;
+                    water_r += rr*0.15f;
+                }
+                break;
+            case AG_BIOME_MOUNTAIN:
+            case AG_BIOME_TUNDRA:
+                ag_waterfall_next_stereo(&biome->waterfall, &water_l, &water_r);
                 break;
             default:
-                { float s=ag_stream_next(&biome->stream); water_l=s*0.4f; water_r=s*0.4f; }
+                ag_stream_next_stereo(&biome->stream, &water_l, &water_r);
                 break;
         }
-        mix_l+=water_l*biome->params.water;
-        mix_r+=water_r*biome->params.water;
+        /* humidity affects low-pass for water */
+        float hum = biome->params.humidity;
+        float water_gain = biome->params.water * (0.8f + hum*0.3f);
+        mix_l+=water_l*water_gain;
+        mix_r+=water_r*water_gain;
     }
 
-    /* Birds */
+    /* Birds HQ - stereo */
     if(biome->params.birds > 0.01f){
-        float bird_mix=0;
+        float day_factor = sinf(biome->params.time_of_day * (float)AG_PI);
+        day_factor = ag_clamp_f(day_factor, 0,1);
+        float bird_gain = biome->params.birds * (0.4f + day_factor*0.8f);
+        float bl=0, br=0;
         for(int i=0;i<4;i++){
-            ag_bird_auto(&biome->birds[i], biome->params.birds * (0.5f + biome->params.time_of_day*0.5f));
-            bird_mix+=ag_bird_next(&biome->birds[i]);
+            ag_bird_auto(&biome->birds[i], biome->params.birds * (0.5f + day_factor*0.6f) * (0.8f + i*0.1f));
+            float l,r;
+            ag_bird_next_stereo(&biome->birds[i], &l, &r);
+            /* pan birds around */
+            float pan = sinf((float)i*1.3f + biome->params.time_of_day*2.0f) * 0.6f;
+            float pl, pr;
+            ag_buffer_pan_stereo(l+r, pan, &pl, &pr);
+            bl+=pl*0.22f; br+=pr*0.22f;
         }
-        mix_l+=bird_mix*0.2f*biome->params.birds;
-        mix_r+=bird_mix*0.2f*biome->params.birds;
+        mix_l+=bl*bird_gain;
+        mix_r+=br*bird_gain;
     }
 
-    /* Insects */
+    /* Insects HQ */
     if(biome->params.insects > 0.01f){
         float insect_l=0,insect_r=0;
-        /* Day insects: cicada, swarm; Night: crickets */
-        float day_factor = sinf(biome->params.time_of_day * (float)AG_PI); /* 0 at midnight, 1 at noon */
+        float day_factor = sinf(biome->params.time_of_day * (float)AG_PI);
         float night_factor = 1.0f - day_factor;
+        day_factor = ag_clamp_f(day_factor,0,1);
+        night_factor = ag_clamp_f(night_factor,0,1);
 
-        if(day_factor>0.2f){
-            for(int i=0;i<2;i++) { float c=ag_cicada_next(&biome->cicadas[i]); insect_l+=c*0.15f; insect_r+=c*0.15f; }
-            ag_swarm_next_stereo(&biome->swarm, &insect_l, &insect_r);
+        if(day_factor>0.15f){
+            for(int i=0;i<2;i++){
+                float l,r;
+                ag_cicada_next_stereo(&biome->cicadas[i], &l, &r);
+                insect_l+=l*0.16f*day_factor;
+                insect_r+=r*0.16f*day_factor;
+            }
+            float sl, sr;
+            ag_swarm_next_stereo(&biome->swarm, &sl, &sr);
+            insect_l+=sl*0.35f*day_factor;
+            insect_r+=sr*0.35f*day_factor;
         }
-        if(night_factor>0.2f){
-            for(int i=0;i<2;i++) { float c=ag_cricket_next(&biome->crickets[i]); insect_l+=c*0.15f; insect_r+=c*0.15f; }
+        if(night_factor>0.15f){
+            for(int i=0;i<2;i++){
+                float l,r;
+                ag_cricket_next_stereo(&biome->crickets[i], &l, &r);
+                /* night crickets panned wide */
+                float pan = (i==0?-0.7f:0.7f) + sinf(biome->params.time_of_day*0.5f+i)*0.2f;
+                float pl,pr;
+                ag_buffer_pan_stereo(l+r, pan, &pl, &pr);
+                insect_l+=pl*0.18f*night_factor;
+                insect_r+=pr*0.18f*night_factor;
+            }
         }
-        /* Frogs in swamp/jungle at night */
         if(biome->params.type==AG_BIOME_SWAMP || biome->params.type==AG_BIOME_JUNGLE){
-            for(int i=0;i<2;i++) { float f=ag_frog_next(&biome->frogs[i]); insect_l+=f*0.2f; insect_r+=f*0.2f; }
+            for(int i=0;i<2;i++){
+                float l,r;
+                ag_frog_next_stereo(&biome->frogs[i], &l, &r);
+                insect_l+=l*0.22f;
+                insect_r+=r*0.22f;
+            }
         }
-        /* Owls at night */
-        if(night_factor>0.5f){
-            for(int i=0;i<1;i++) { float o=ag_owl_next(&biome->owls[i]); insect_l+=o*0.2f; insect_r+=o*0.2f; }
+        if(night_factor>0.45f){
+            for(int i=0;i<1;i++){
+                float l,r;
+                ag_owl_next_stereo(&biome->owls[i], &l, &r);
+                insect_l+=l*0.22f;
+                insect_r+=r*0.22f;
+            }
         }
 
         mix_l+=insect_l*biome->params.insects;
         mix_r+=insect_r*biome->params.insects;
     }
 
-    /* Fire */
+    /* Fire HQ */
     if(biome->params.fire > 0.01f){
-        float f=ag_fire_next(&biome->fire);
-        mix_l+=f*biome->params.fire*0.5f;
-        mix_r+=f*biome->params.fire*0.5f;
+        float fl, fr;
+        ag_fire_next_stereo(&biome->fire, &fl, &fr);
+        mix_l+=fl*biome->params.fire*0.52f;
+        mix_r+=fr*biome->params.fire*0.52f;
     }
 
-    /* Weather */
+    /* Weather HQ */
     if(biome->params.weather > 0.01f){
-        float wl,wr; ag_weather_mixer_next_stereo(&biome->weather, &wl, &wr);
-        mix_l+=wl*biome->params.weather;
-        mix_r+=wr*biome->params.weather;
+        float wl,wr;
+        ag_weather_mixer_next_stereo(&biome->weather, &wl, &wr);
+        mix_l+=wl*biome->params.weather*0.9f;
+        mix_r+=wr*biome->params.weather*0.9f;
     }
 
-    /* Drone for cave/nexus/rift */
+    /* Drone for cave/nexus/rift with filtering */
     if(biome->params.type==AG_BIOME_CAVE || biome->params.type==AG_BIOME_NEXUS || biome->params.type==AG_BIOME_RIFT){
-        float d=ag_drone_next(&biome->drone) * 0.3f;
-        mix_l+=d; mix_r+=d;
+        float d=ag_drone_next(&biome->drone) * 0.32f;
+        /* add subtle stereo chorus */
+        float chorus = sinf((float)biome->sr * 0.0001f) * 0.05f;
+        mix_l+=d*(0.5f+chorus);
+        mix_r+=d*(0.5f-chorus);
     }
     if(biome->params.type==AG_BIOME_NEXUS){
-        float g=ag_granular_next(&biome->granular) * 0.2f;
-        mix_l+=g; mix_r+=g;
+        float g=ag_granular_next(&biome->granular) * 0.22f;
+        mix_l+=g*0.6f;
+        mix_r+=g*0.4f;
     }
 
-    /* Soft clip */
-    mix_l = ag_soft_clip(mix_l);
-    mix_r = ag_soft_clip(mix_r);
+    /* High-quality soft clip with tanh + slight saturation */
+    mix_l = tanhf(mix_l*0.92f)*1.08f;
+    mix_r = tanhf(mix_r*0.92f)*1.08f;
+    /* gentle high-shelf for air */
+    mix_l = ag_clamp_f(mix_l, -1.2f, 1.2f);
+    mix_r = ag_clamp_f(mix_r, -1.2f, 1.2f);
 
     *out_l = mix_l * biome->gain;
     *out_r = mix_r * biome->gain;
@@ -232,7 +260,6 @@ AgBiomeType ag_biome_from_string(const char *str) {
     if(strcmp(str,"nexus")==0) return AG_BIOME_NEXUS;
     if(strcmp(str,"rift")==0) return AG_BIOME_RIFT;
     if(strcmp(str,"lab")==0) return AG_BIOME_LAB;
-    /* scene names from Chrono Nexus */
     if(strcmp(str,"classroom")==0) return AG_BIOME_CITY;
     if(strcmp(str,"grove")==0) return AG_BIOME_FOREST;
     if(strcmp(str,"shore")==0) return AG_BIOME_BEACH;

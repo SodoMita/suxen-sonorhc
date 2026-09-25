@@ -10,34 +10,34 @@
 extern "C" {
 #endif
 
-/* High-level Soundscape - evolves over time, combines biome + weather + music + 3D points
- * Designed for VN scenes: classroom, grove, shore, nexus, rift, etc.
- */
+/* High-quality Soundscape - with sidechain, limiter, HQ mixing */
 
 typedef struct AgSoundscapeParams {
     AgBiomeType biome;
-    AgMood mood; /* for background music */
+    AgMood mood;
     AgWeatherType weather;
     float weather_intensity;
-    float time_of_day; /* 0..1 */
+    float time_of_day;
     float music_gain;
     float ambience_gain;
     float master_gain;
     uint64_t seed;
-    int use_3d; /* if true, use 3D ambience */
-    int use_music; /* if true, include proc music */
+    int use_3d;
+    int use_music;
 } AgSoundscapeParams;
 
 typedef struct AgSoundscape {
     AgSoundscapeParams params;
     AgAmbience3D ambience_3d;
-    AgBiome biome; /* fallback if not 3D */
+    AgBiome biome;
     AgProcMixer music_mixer;
     AgWeatherMixer weather;
     double sr;
     double time;
     float gain;
     AgRng rng;
+    float limiter_gain;
+    float limiter_env;
 } AgSoundscape;
 
 void ag_soundscape_params_default(AgSoundscapeParams *p);
@@ -52,7 +52,6 @@ void ag_soundscape_set_mood(AgSoundscape *ss, AgMood mood, float fade_sec);
 void ag_soundscape_render(AgSoundscape *ss, float *stereo_interleaved, int frames);
 float ag_soundscape_next(AgSoundscape *ss, float *l, float *r);
 
-/* Presets for Chrono Nexus scenes */
 void ag_soundscape_preset_classroom(AgSoundscape *ss);
 void ag_soundscape_preset_grove(AgSoundscape *ss);
 void ag_soundscape_preset_shore(AgSoundscape *ss);
