@@ -28,10 +28,10 @@ typedef enum {
 
 typedef struct AgDrumParams {
     AgDrumType type;
-    float tune;       /* 0.5..2.0 multiplier */
-    float decay;      /* sec */
-    float snap;       /* 0..1 attack click */
-    float noise_mix;  /* 0..1 */
+    float tune;
+    float decay;
+    float snap;
+    float noise_mix;
     float gain;
     uint64_t seed;
 } AgDrumParams;
@@ -40,15 +40,20 @@ typedef struct AgDrumVoice {
     AgDrumParams params;
     AgOsc osc;
     AgOsc osc2;
+    AgOsc osc_click;
     AgNoise noise;
+    AgNoise noise2;
     AgBiquad filter;
+    AgBiquad filter2;
+    AgBiquad filter_hp;
+    AgDCBlock dc_block;
     AgEnv env_amp;
     AgEnv env_pitch;
     AgEnv env_noise;
+    AgEnv env_click;
     double t;
     double sr;
     int active;
-    /* clap: multiple bursts */
     int clap_burst;
     double clap_timer;
 } AgDrumVoice;
@@ -61,19 +66,17 @@ float ag_drum_voice_next(AgDrumVoice *v);
 int ag_drum_render(const AgDrumParams *params, float *out, int max_frames, float sr);
 int ag_drum_render_stereo(const AgDrumParams *params, float *stereo_interleaved, int max_frames, float sr);
 
-/* Convenience one-shots */
 int ag_drum_kick(float *out, int max_frames, float sr, float tune);
 int ag_drum_snare(float *out, int max_frames, float sr, float tune);
 int ag_drum_hihat(float *out, int max_frames, float sr, int open);
 int ag_drum_clap(float *out, int max_frames, float sr);
 
-/* Drum machine pattern */
 #define AG_DRUM_PATTERN_STEPS 16
 #define AG_DRUM_TRACKS 8
 
 typedef struct AgDrumPattern {
-    int steps[AG_DRUM_TRACKS][AG_DRUM_PATTERN_STEPS]; /* 0/1 or velocity 0..127 */
-    float swing;  /* 0..0.6 */
+    int steps[AG_DRUM_TRACKS][AG_DRUM_PATTERN_STEPS];
+    float swing;
     float bpm;
     AgDrumParams kits[AG_DRUM_TRACKS];
 } AgDrumPattern;
@@ -91,11 +94,12 @@ typedef struct AgDrumMachine {
     double next_step_time;
     double step_dur;
     AgRng rng;
+    float humanize;
 } AgDrumMachine;
 
 void ag_drum_machine_init(AgDrumMachine *dm, const AgDrumPattern *pat, float sr);
 void ag_drum_machine_trigger_step(AgDrumMachine *dm, int step);
-float ag_drum_machine_next(AgDrumMachine *dm); /* mono mix */
+float ag_drum_machine_next(AgDrumMachine *dm);
 void ag_drum_machine_render(AgDrumMachine *dm, float *out, int frames);
 
 #ifdef __cplusplus

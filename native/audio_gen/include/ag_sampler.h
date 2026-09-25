@@ -2,18 +2,17 @@
 #define AG_SAMPLER_H
 
 #include "ag_common.h"
+#include "ag_filter.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Simple sampler with linear interpolation and pitch shifting */
-
 typedef struct AgSample {
-    float *data; /* mono */
+    float *data;
     int frames;
     int sr;
-    int owned; /* if 1, free on destroy */
+    int owned;
 } AgSample;
 
 typedef struct AgSamplerVoice {
@@ -26,6 +25,9 @@ typedef struct AgSamplerVoice {
     int loop;
     int loop_start;
     int loop_end;
+    AgBiquad aa_filter;
+    int aa_on;
+    AgDCBlock dc;
 } AgSamplerVoice;
 
 void ag_sample_init(AgSample *s);
@@ -40,8 +42,8 @@ int ag_sampler_voice_active(const AgSamplerVoice *v);
 float ag_sampler_voice_next(AgSamplerVoice *v);
 void ag_sampler_voice_next_stereo(AgSamplerVoice *v, float *l, float *r);
 
-/* Multi-sample instrument */
 #define AG_SAMPLER_MAX_ZONES 16
+#define AG_SAMPLER_MAX_VOICES 16
 
 typedef struct AgSamplerZone {
     AgSample sample;
@@ -49,6 +51,8 @@ typedef struct AgSamplerZone {
     int low_midi;
     int high_midi;
     float tune_cents;
+    float gain;
+    float pan;
 } AgSamplerZone;
 
 typedef struct AgSamplerInstrument {
@@ -62,9 +66,11 @@ AgSamplerZone* ag_sampler_inst_find_zone(AgSamplerInstrument *inst, int midi);
 
 typedef struct AgSamplerPoly {
     AgSamplerInstrument *inst;
-    AgSamplerVoice voices[16];
+    AgSamplerVoice voices[AG_SAMPLER_MAX_VOICES];
     int voice_count;
     double sr;
+    float gain;
+    AgRng rng;
 } AgSamplerPoly;
 
 void ag_sampler_poly_init(AgSamplerPoly *poly, AgSamplerInstrument *inst, double sr);

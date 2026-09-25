@@ -5,12 +5,12 @@
 #include "ag_osc.h"
 #include "ag_envelope.h"
 #include "ag_filter.h"
+#include "ag_reverb.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Karplus-Strong plucked string */
 #define AG_KS_MAX_DELAY 4096
 
 typedef struct AgKarplus {
@@ -19,7 +19,11 @@ typedef struct AgKarplus {
     int pos;
     float feedback;
     float damping;
-    AgBiquad filter;
+    AgBiquad filter, filter2;
+    AgDCBlock dc;
+    float ap_coeff;
+    float ap_last;
+    int ap_pos;
     double sr;
     int active;
     float gain;
@@ -30,15 +34,16 @@ void ag_ks_pluck(AgKarplus *ks, float freq, float damping, float gain);
 float ag_ks_next(AgKarplus *ks);
 int ag_ks_active(const AgKarplus *ks);
 
-/* Music box tine - damped sine + overtone */
 typedef struct AgTine {
     AgOsc osc;
-    AgOsc overtone;
+    AgOsc overtone, overtone2;
     AgEnv env;
-    AgBiquad filter;
+    AgBiquad filter, filter2;
+    AgDCBlock dc;
     double sr;
     int active;
     float gain;
+    float vel;
 } AgTine;
 
 void ag_tine_init(AgTine *t, double sr);
@@ -46,18 +51,21 @@ void ag_tine_hit(AgTine *t, float freq, float vel);
 float ag_tine_next(AgTine *t);
 int ag_tine_active(const AgTine *t);
 
-/* Bell - sum of inharmonic partials */
 #define AG_BELL_PARTIALS 8
 
 typedef struct AgBell {
     AgOsc partials[AG_BELL_PARTIALS];
+    AgBiquad filters[AG_BELL_PARTIALS];
     float amps[AG_BELL_PARTIALS];
     float decays[AG_BELL_PARTIALS];
     float envs[AG_BELL_PARTIALS];
+    AgDCBlock dc;
+    AgRng rng;
     double sr;
     int active;
     float gain;
     double t;
+    float vel;
 } AgBell;
 
 void ag_bell_init(AgBell *b, double sr);
@@ -65,10 +73,10 @@ void ag_bell_hit(AgBell *b, float freq, float vel);
 float ag_bell_next(AgBell *b);
 int ag_bell_active(const AgBell *b);
 
-/* Kalimba - similar to tine but with more wood */
 typedef struct AgKalimba {
     AgTine tine;
     AgKarplus wood;
+    AgBiquad body;
     float mix;
 } AgKalimba;
 
@@ -76,12 +84,11 @@ void ag_kalimba_init(AgKalimba *k, double sr);
 void ag_kalimba_hit(AgKalimba *k, float freq, float vel);
 float ag_kalimba_next(AgKalimba *k);
 
-/* Music box sequencer - plays a melody on tines */
 #define AG_MUSICBOX_VOICES 16
 #define AG_MUSICBOX_NOTES 128
 
 typedef struct AgMusicBoxNote {
-    float time; /* sec */
+    float time;
     int midi;
     float vel;
 } AgMusicBoxNote;
@@ -95,6 +102,7 @@ typedef struct AgMusicBox {
     int next_note;
     float gain;
     int looping;
+    AgReverb reverb;
 } AgMusicBox;
 
 void ag_musicbox_init(AgMusicBox *mb, double sr);

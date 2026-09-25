@@ -30,7 +30,7 @@ void ag_ocean_init(AgOcean *o, double sr) {
     ag_osc_init(&o->foam_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&o->foam_lfo, 0.31f);
     ag_osc_init(&o->crash_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&o->crash_lfo, 0.15f);
     ag_osc_init(&o->spray_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&o->spray_lfo, 0.51f);
-    AgADSR adsr={0.02f,0.8f,0.0f,1.2f,0.5f,1.5f,1.0f};
+    AgADSR adsr = {0.02f,0.8f,0.0f,1.2f,0.5f,1.5f,1.0f,0,0};
     ag_env_init(&o->crash_env, adsr, sr);
     o->decor_l=0.0f; o->decor_r=0.0f;
 }
@@ -181,7 +181,7 @@ void ag_stream_init(AgStream *s, double sr) {
     ag_rng_seed(&s->rng, 0x51A);
     s->sparkle_chance=0.035f;
     ag_osc_init(&s->droplet_osc, AG_OSC_SINE, sr);
-    AgADSR adsr={0.001f,0.08f,0.0f,0.03f,0.8f,1.2f,1.0f};
+    AgADSR adsr = {0.001f,0.08f,0.0f,0.03f,0.8f,1.2f,1.0f,0,0};
     ag_env_init(&s->droplet_env, adsr, sr);
     ag_biquad_init(&s->droplet_bp); ag_biquad_set(&s->droplet_bp, AG_FILTER_BP, 3000, 2.0f, 0, (float)sr);
     s->next_droplet=0.4f;
@@ -286,9 +286,9 @@ void ag_drip_init(AgDrip *d, double sr) {
     ag_osc_init(&d->osc_main, AG_OSC_SINE, sr);
     ag_osc_init(&d->osc_mode2, AG_OSC_SINE, sr);
     ag_osc_init(&d->osc_mode3, AG_OSC_SINE, sr);
-    AgADSR adsr={0.0008f,0.18f,0.0f,0.06f,0.4f,1.8f,1.0f};
+    AgADSR adsr = {0.0008f,0.18f,0.0f,0.06f,0.4f,1.8f,1.0f,0,0};
     ag_env_init(&d->env_main, adsr, sr);
-    AgADSR adsr2={0.001f,0.35f,0.0f,0.12f,0.3f,1.2f,1.0f};
+    AgADSR adsr2 = {0.001f,0.35f,0.0f,0.12f,0.3f,1.2f,1.0f,0,0};
     ag_env_init(&d->env_ripple, adsr2, sr);
     ag_biquad_init(&d->filter_main); ag_biquad_set(&d->filter_main, AG_FILTER_BP, 1200, 2.8f, 0, (float)sr);
     ag_biquad_init(&d->filter_mode2); ag_biquad_set(&d->filter_mode2, AG_FILTER_BP, 2400, 2.2f, 0, (float)sr);
@@ -374,7 +374,7 @@ void ag_bubbles_init(AgBubbles *b, double sr) {
     ag_rng_seed(&b->rng, 0xB0B);
     for(int i=0;i<AG_BUBBLES_MAX_VOICES;i++){
         ag_osc_init(&b->voices[i].osc, AG_OSC_SINE, sr);
-        AgADSR adsr={0.005f,0.22f,0.0f,0.06f,1,1,1};
+        AgADSR adsr = {0.005f,0.22f,0.0f,0.06f,1,1,1,0,0};
         ag_env_init(&b->voices[i].env, adsr, sr);
         ag_biquad_init(&b->voices[i].formant);
         ag_osc_init(&b->voices[i].wobble_lfo, AG_OSC_SINE, sr);
@@ -397,7 +397,7 @@ static void bubble_trigger(AgBubbles *b, int idx) {
     ag_osc_set_freq(&v->wobble_lfo, ag_rng_range_f32(&b->rng, 8.0f, 18.0f));
     float attack = 0.003f + (1.0f/size)*0.004f;
     float decay = 0.15f + size*0.15f;
-    AgADSR adsr={attack,decay,0.0f,0.05f,1,1,1};
+    AgADSR adsr = {attack,decay,0.0f,0.05f,1,1,1,0,0};
     ag_env_init(&v->env, adsr, b->sr);
     ag_env_trigger(&v->env);
     v->active=1;

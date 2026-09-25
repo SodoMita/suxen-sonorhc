@@ -24,9 +24,9 @@ void ag_bird_init(AgBird *b, double sr, int species) {
     ag_osc_set_freq(&b->mod, 85);
     ag_osc_set_freq(&b->vib_lfo, 12.0f);
     ag_osc_set_freq(&b->sweep_lfo, 18.0f);
-    AgADSR adsr={0.008f,0.10f,0.0f,0.07f,0.75f,1.3f,1.0f};
+    AgADSR adsr = {0.008f,0.10f,0.0f,0.07f,0.75f,1.3f,1.0f,0,0};
     ag_env_init(&b->env, adsr, sr);
-    AgADSR adsr2={0.006f,0.09f,0.0f,0.06f,0.7f,1.2f,1.0f};
+    AgADSR adsr2 = {0.006f,0.09f,0.0f,0.06f,0.7f,1.2f,1.0f,0,0};
     ag_env_init(&b->env2, adsr2, sr);
     ag_biquad_init(&b->filter); ag_biquad_set(&b->filter, AG_FILTER_BP, b->base_freq, 2.4f, 0, (float)sr);
     ag_biquad_init(&b->formant); ag_biquad_set(&b->formant, AG_FILTER_BP, b->base_freq*1.8f, 1.6f, 0, (float)sr);
@@ -133,9 +133,9 @@ void ag_cricket_init(AgCricket *c, double sr) {
     ag_osc_init(&c->osc2, AG_OSC_SINE, sr); ag_osc_set_freq(&c->osc2, 4620);
     ag_osc_init(&c->am_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&c->am_lfo, 30.0f);
     ag_osc_init(&c->pulse_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&c->pulse_lfo, 55.0f);
-    AgADSR adsr={0.004f,0.08f,0.0f,0.025f,1,1,1};
+    AgADSR adsr = {0.004f,0.08f,0.0f,0.025f,1,1,1,0,0};
     ag_env_init(&c->env, adsr, sr);
-    AgADSR adsr2={0.003f,0.06f,0.0f,0.02f,1,1,1};
+    AgADSR adsr2 = {0.003f,0.06f,0.0f,0.02f,1,1,1,0,0};
     ag_env_init(&c->env2, adsr2, sr);
     ag_biquad_init(&c->bp1); ag_biquad_set(&c->bp1, AG_FILTER_BP, 4550, 3.5f, 0, (float)sr);
     ag_biquad_init(&c->bp2); ag_biquad_set(&c->bp2, AG_FILTER_BP, 4600, 3.0f, 0, (float)sr);
@@ -240,9 +240,9 @@ void ag_frog_init(AgFrog *f, double sr) {
     ag_biquad_init(&f->formant); ag_biquad_set(&f->formant, AG_FILTER_BP, 600.0f, 1.6f, 0, (float)sr);
     ag_biquad_init(&f->formant2);ag_biquad_set(&f->formant2,AG_FILTER_BP,1200.0f,1.2f,0,(float)sr);
     ag_biquad_init(&f->lp); ag_biquad_set(&f->lp, AG_FILTER_LP, 1800.0f,0.7f,0,(float)sr);
-    AgADSR adsr={0.012f,0.22f,0.0f,0.12f,1,1,1};
+    AgADSR adsr = {0.012f,0.22f,0.0f,0.12f,1,1,1,0,0};
     ag_env_init(&f->env, adsr, sr);
-    AgADSR adsr2={0.008f,0.18f,0.0f,0.09f,1,1,1};
+    AgADSR adsr2 = {0.008f,0.18f,0.0f,0.09f,1,1,1,0,0};
     ag_env_init(&f->env2, adsr2, sr);
     ag_rng_seed(&f->rng, 0xF1109);
     f->next_croak=ag_rng_range_f32(&f->rng, 0.8f, 2.0f);
@@ -356,9 +356,9 @@ void ag_owl_init(AgOwl *o, double sr) {
     ag_osc_init(&o->osc, AG_OSC_SINE, sr); ag_osc_set_freq(&o->osc, 380);
     ag_osc_init(&o->osc2, AG_OSC_SINE, sr); ag_osc_set_freq(&o->osc2, 570);
     ag_osc_init(&o->vib_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&o->vib_lfo, 4.5f);
-    AgADSR adsr={0.055f,0.38f,0.0f,0.22f,1,1,1};
+    AgADSR adsr = {0.055f,0.38f,0.0f,0.22f,1,1,1,0,0};
     ag_env_init(&o->env, adsr, sr);
-    AgADSR adsr2={0.045f,0.32f,0.0f,0.18f,1,1,1};
+    AgADSR adsr2 = {0.045f,0.32f,0.0f,0.18f,1,1,1,0,0};
     ag_env_init(&o->env2, adsr2, sr);
     ag_biquad_init(&o->filter); ag_biquad_set(&o->filter, AG_FILTER_LP, 850.0f, 0.75f, 0, (float)sr);
     ag_biquad_init(&o->formant); ag_biquad_set(&o->formant, AG_FILTER_BP, 620.0f, 1.3f, 0, (float)sr);

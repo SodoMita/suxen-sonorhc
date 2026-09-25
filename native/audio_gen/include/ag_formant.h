@@ -9,8 +9,6 @@
 extern "C" {
 #endif
 
-/* Formant synthesis for vowel-like sounds and speech-ish textures */
-
 typedef struct AgFormant {
     float freq;
     float bw;
@@ -19,18 +17,23 @@ typedef struct AgFormant {
 
 typedef struct AgVowel {
     const char *name;
-    AgFormant f[3]; /* first 3 formants */
+    AgFormant f[3];
 } AgVowel;
 
-/* Common vowels */
 extern const AgVowel AG_VOWEL_A;
 extern const AgVowel AG_VOWEL_E;
 extern const AgVowel AG_VOWEL_I;
 extern const AgVowel AG_VOWEL_O;
 extern const AgVowel AG_VOWEL_U;
 
+#define AG_FORMANT_COUNT 3
+
 typedef struct AgFormantFilter {
-    AgBiquad filters[3];
+    AgBiquad filters[AG_FORMANT_COUNT];
+    AgBiquad filters2[AG_FORMANT_COUNT];
+    float gains[AG_FORMANT_COUNT];
+    int count;
+    AgDCBlock dc;
     double sr;
 } AgFormantFilter;
 
@@ -39,10 +42,12 @@ void ag_formant_filter_set_vowel(AgFormantFilter *ff, const AgVowel *vowel);
 void ag_formant_filter_set_formants(AgFormantFilter *ff, const AgFormant *formants, int count);
 float ag_formant_filter_process(AgFormantFilter *ff, float in);
 
-/* Formant oscillator - source is buzz (saw) + formant filters */
 typedef struct AgFormantVoice {
-    AgOsc src; /* saw or pulse */
+    AgOsc src;
     AgFormantFilter filter;
+    AgBiquad pre_hp;
+    AgLFO vibrato;
+    float base_freq;
     float gain;
     double sr;
 } AgFormantVoice;
@@ -52,11 +57,11 @@ void ag_formant_voice_set_vowel(AgFormantVoice *v, const AgVowel *vowel);
 void ag_formant_voice_set_freq(AgFormantVoice *v, float freq);
 float ag_formant_voice_next(AgFormantVoice *v);
 
-/* Morph between two vowels */
 typedef struct AgVowelMorph {
     AgVowel a,b;
-    float morph; /* 0..1 */
+    float morph;
     AgFormantFilter filter;
+    double sr;
 } AgVowelMorph;
 
 void ag_vowel_morph_init(AgVowelMorph *vm, double sr, const AgVowel *a, const AgVowel *b);

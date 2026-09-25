@@ -23,7 +23,7 @@ void ag_rain_sys_init(AgRainSystem *rs, double sr) {
     ag_biquad_init(&rs->bp_drop2);   ag_biquad_set(&rs->bp_drop2,AG_FILTER_BP, 5200.0f,1.2f,0,(float)sr);
     ag_osc_init(&rs->drizzle_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&rs->drizzle_lfo, 0.31f);
     for(int i=0;i<AG_RAIN_MAX_DROPS;i++){
-        AgADSR adsr={0.001f,0.04f,0.0f,0.02f,0.8f,1.2f,1.0f};
+        AgADSR adsr = {0.001f,0.04f,0.0f,0.02f,0.8f,1.2f,1.0f,0,0};
         ag_env_init(&rs->drops[i].env, adsr, sr);
         ag_biquad_init(&rs->drops[i].bp);
         rs->drops[i].active=0;
@@ -58,7 +58,7 @@ static void rain_trigger_drop(AgRainSystem *rs) {
             ag_biquad_set(&rs->drops[i].bp, AG_FILTER_BP, freq, 1.8f + ag_rng_next_f32(&rs->rng)*0.6f, 0, (float)rs->sr);
             float attack = ag_rng_range_f32(&rs->rng, 0.0005f, 0.002f);
             float decay = ag_rng_range_f32(&rs->rng, 0.02f, 0.06f);
-            AgADSR adsr={attack,decay,0.0f,0.015f,0.8f,1.2f,1.0f};
+            AgADSR adsr = {attack,decay,0.0f,0.015f,0.8f,1.2f,1.0f,0,0};
             ag_env_init(&rs->drops[i].env, adsr, rs->sr);
             ag_env_trigger(&rs->drops[i].env);
             rs->drops[i].active=1;
@@ -148,9 +148,9 @@ void ag_thunder_init(AgThunder *th, double sr) {
     ag_osc_init(&th->roll_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&th->roll_lfo, 1.47f);
     ag_rng_seed(&th->rng, 0x7414);
     th->next_thunder=ag_rng_range_f32(&th->rng, 4.0f, 9.0f);
-    AgADSR adsr_crack={0.008f,0.35f,0.0f,0.25f,1,1,1};
+    AgADSR adsr_crack = {0.008f,0.35f,0.0f,0.25f,1,1,1,0,0};
     ag_env_init(&th->env_crack, adsr_crack, sr);
-    AgADSR adsr_rumble={0.12f,2.2f,0.0f,1.2f,1,1,1};
+    AgADSR adsr_rumble = {0.12f,2.2f,0.0f,1.2f,1,1,1,0,0};
     ag_env_init(&th->env_rumble, adsr_rumble, sr);
     for(int i=0;i<AG_THUNDER_MAX_ECHOES;i++) th->echoes[i].active=0;
 }
@@ -292,7 +292,7 @@ void ag_wind_sys_init(AgWindSystem *ws, double sr) {
     ag_osc_init(&ws->turbulence_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&ws->turbulence_lfo, 1.53f);
     ag_osc_init(&ws->howl_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&ws->howl_lfo, 0.31f);
     ag_osc_init(&ws->sway_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&ws->sway_lfo, 0.051f);
-    AgADSR adsr={0.8f,1.5f,0.0f,1.2f,0.6f,1.2f,1.0f};
+    AgADSR adsr = {0.8f,1.5f,0.0f,1.2f,0.6f,1.2f,1.0f,0,0};
     ag_env_init(&ws->gust_env, adsr, sr);
     ag_rng_seed(&ws->rng, 0x1111);
     ws->next_gust=ag_rng_range_f32(&ws->rng, 2.0f, 5.0f);

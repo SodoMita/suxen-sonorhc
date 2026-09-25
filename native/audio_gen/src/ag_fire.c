@@ -28,7 +28,7 @@ void ag_fire_init(AgFire *f, double sr) {
     ag_osc_init(&f->flicker_lfo3, AG_OSC_SINE, sr); ag_osc_set_freq(&f->flicker_lfo3, 5.3f); f->flicker_lfo3.phase=0.71f;
     ag_osc_init(&f->lick_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&f->lick_lfo, 1.21f);
     ag_osc_init(&f->hiss_lfo, AG_OSC_SINE, sr); ag_osc_set_freq(&f->hiss_lfo, 14.3f);
-    AgADSR adsr={0.005f,0.12f,0.0f,0.08f,0.6f,1.2f,1.0f};
+    AgADSR adsr = {0.005f,0.12f,0.0f,0.08f,0.6f,1.2f,1.0f,0,0};
     ag_env_init(&f->lick_env, adsr, sr);
     f->next_lick=0.3;
 }

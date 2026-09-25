@@ -7,7 +7,7 @@ void ag_chip_square_init(AgChipSquare *sq, double sr) {
     sq->sr = sr>0?sr:AG_SR_DEFAULT;
     sq->duty = 2;
     sq->volume = 0.5f;
-    AgADSR adsr = {0.01f,0.1f,0.7f,0.15f,1,1,1};
+    AgADSR adsr = {0.01f,0.1f,0.7f,0.15f,1,1,1,0,0};
     ag_env_init(&sq->env, adsr, sr);
 }
 void ag_chip_square_note_on(AgChipSquare *sq, float freq, float vol, int duty) {
@@ -64,7 +64,7 @@ void ag_chip_noise_init(AgChipNoise *ns, double sr) {
     ns->sr = sr>0?sr:AG_SR_DEFAULT;
     ns->lfsr = 1;
     ns->volume = 0.5f;
-    AgADSR adsr = {0.001f,0.15f,0.0f,0.05f,1,1,1};
+    AgADSR adsr = {0.001f,0.15f,0.0f,0.05f,1,1,1,0,0};
     ag_env_init(&ns->env, adsr, sr);
 }
 void ag_chip_noise_note_on(AgChipNoise *ns, float freq, float vol, int short_mode) {
