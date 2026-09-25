@@ -180,7 +180,81 @@ High-level live score, similar to SceneScore but more genres.
 - Render: block 256, schedule ahead, spawn due, mix voices with shape (0 sine,1 asin warm,2 hard clip 0.72), saturation, gain ramp, reverb/delay, drums
 - Mixer: 2 layers, primary index, master gain ramp, transition crossfades (retiring layer gain->0), adjust keeps id/seed but updates bpm and next_bar, reseed changes rng, active check
 
-## 19. WAV (`ag_wav`)
+## 19. 3D Audio (`ag_3d`)
+
+- Vec3 math: add/sub/mul/dot/cross/len/norm/dist
+- Listener: pos/vel/forward/up/right, speed_of_sound 343, doppler_factor, air_absorption
+- Source: pos/vel/gain/min_dist/max_dist/rolloff/dist_model/cone (dir/inner/outer/outer_gain), is_ambient
+- Distance models: linear (1-roll*(d-min)/(max-min)), inverse (min/(min+roll*(d-min))), exp (pow(min/d, roll)), none
+- Cone gain: angle = acos(dot(to_listener, cone_dir)), lerp outer_gain
+- Doppler: pitch = (c + v_l*dot)/(c + v_s*dot), clamped 0.25..4
+- Panning stereo: right_dot = dot(dir, right), forward_dot = dot(dir, forward), pan = right_dot * (0.7 if behind), equal-power cos/sin, ITD 0.3ms*pan, ILD 6dB*pan; binaural enhances ITD*1.2 ILD*1.5
+- Air absorption: fc = base*exp(-dist*0.008)
+- Occlusion: gain 1-ob*0.8, LP fc 4000*(1-ob*0.8)+200
+- Spatializer: air LP L/R, occ LP L/R, ITD buffer 1024, occlusion, process mono->stereo with attenuation*cone*occ_gain * pan gains + air LP + occ LP + ITD delay
+- ReverbZone: pos/radius/reverb_gain/damping/room_size, gain = (1-d/radius)*reverb_gain
+- 3D Mixer: 32 sources, listener, spatializers, gains, active, sr, master_gain, add_source, set_pos, set_listener, render (in_mono_per_source [src*frames] -> stereo interleaved, peak return)
+
+## 20. Water (`ag_water`)
+
+- Ocean: white 0.2 + pink 0.8 -> LP800 + swell LFO 0.07Hz * strength + crash LFO 0.15Hz + random crash BP300 burst 0.02 chance every 2 sec
+- River: pink 0.7 + white 0.3 -> LP1200 HP40 + flow LFO 0.3Hz turbulence + burst 0.001 chance
+- Stream: river + sparkle BP3500 chance 0.02
+- Waterfall: white 0.4 + pink 0.6 -> LP2000 + LP600 low roar + HP80 + roar LFO 0.12Hz
+- Drip: sine BP 2.5Q ADSR 0.001/0.15, trigger freq/gain, auto random interval 0.2-2s / density
+- Bubbles: sine rising pitch (freq+=freq*0.0005 per sample) ADSR, random interval 0.1-0.8s / (rate*0.3+0.1)
+- Underwater: river + LP600 muffle + pressure LFO 0.08Hz mod fc 500±200
+
+## 21. Fire (`ag_fire`)
+
+- Fire: pink 0.5 + white 0.2 -> LP2500 HP40 + flicker LFO 8Hz, crackle = white^3 BP800 chance density*0.02, mix base 0.7 + crackle 0.6
+- Fireplace: fire + room LP1200 + LFO 0.2Hz, mix fire 0.6 + room 0.4+lfo
+- Torch: fire + wind LFO 1.2Hz *0.2
+- Bonfire: fire + brown LP120 rumble 0.3
+
+## 22. Nature (`ag_nature`)
+
+- Bird: FM chirp sine + mod 40-120Hz 200Hz depth + BP 2.5Q + ADSR 0.01/0.12, species 0 sparrow 2000Hz,1 robin 2500,2 crow 3000,3 owl 3500,4 seagull 4000, auto timer 0.5-4s / density
+- Cricket: 2 sines 4500/4600 + AM LFO 30Hz, ADSR 0.005/0.08, next_chirp 0.1-0.4s, trigger immediately
+- Cicada: white BP4000 Q3 + AM 120Hz, random fc 3500-5000 every 0.5s
+- Frog: sine 150-350 + BP formant 2.5x freq Q1.2 + ADSR 0.01/0.25, next_croak 0.8-3s
+- InsectSwarm: 16 grains sine 3000-8000 random pan, spawn chance density*0.2 every 0.05s, decay 0.98
+- Owl: sine 400 LP800 ADSR 0.05/0.4, next_hoot 2-6s
+
+## 23. Weather (`ag_weather`)
+
+- RainSystem: white LP4000 + BP2500 drops density*0.15 chance every 0.005s, freq 1500-6000 (hail 2000-8000, snow 800-2000), types light density0.15 gain0.25, med 0.35/0.45, heavy 0.7/0.7, thunderstorm 0.6/0.6, etc, gain *=0.5+intensity*0.5
+- Thunder: brown 0.6 + white 0.2 -> LP200 BP80 + rumble LFO 0.08Hz, ADSR 0.05/1.5, active 0.8-2.5s, auto next 3-12s / intensity, trigger chance intensity*0.5
+- WindSystem: white 0.25 + pink 0.75 -> LP800+LP400 + gust LFOs 0.11/0.23Hz + turbulence LFO 1.5Hz, env = base + (gust1*0.5+gust2*0.3)*gust + turb*0.2
+- WeatherMixer: rain+thunder+wind stereo (wind slight stereo l+0.1 r-0.05)
+
+## 24. Biome (`ag_biome`)
+
+- BiomeParams: type, wind, water, birds, insects, fire, weather, weather_type, time_of_day 0..1 (0 midnight,0.5 noon), humidity, seed
+- Default per type: forest wind0.3 water0.2 birds0.7 insects0.5 hum0.6, cave wind0.1 water0.6 birds0 insects0.1 hum0.9, desert wind0.6 water0 birds0.1 insects0.3 hum0.1, ocean wind0.5 water1 birds0.3 hum0.8, city wind0.2 water0.1 birds0.2, mountain wind0.7 water0.2 birds0.3, jungle wind0.2 water0.5 birds0.9 insects0.9 hum0.9, swamp wind0.15 water0.7 birds0.3 insects0.8 hum0.9, tundra wind0.8 water0.1, grassland wind0.4 water0.1 birds0.6 insects0.6, river wind0.2 water0.9 birds0.5 insects0.4, beach wind0.4 water0.8 birds0.4 insects0.2 hum0.7, nexus wind0.3 water0.3 birds0.2 insects0.2, rift wind0.5 water0.1, lab wind0.05
+- Biome: params, wind, ocean, river, stream, waterfall, drip, fire, 4 birds, 2 crickets, 2 cicadas, 2 frogs, 1 owl, swarm, weather, drone 55Hz, granular 110Hz, RNG, sr, gain. Init all generators, time_of_day affects day_factor = sin(tod*PI) for birds vs crickets, night_factor =1-day. Render: wind*wind + water (ocean/river/stream/drip based on type)*water + birds (auto density * (0.5+tod*0.5)) + insects (day: cicada+swarm, night: cricket, swamp/jungle: frogs, night: owls)*insects + fire*fire + weather*weather + drone for cave/nexus/rift + granular for nexus, soft clip.
+
+## 25. 3D Ambience (`ag_ambience_3d`)
+
+- Layer types: BED (stereo bed), POINT (3D point), ZONE (area), REVERB
+- Layer: type, active, gain ramping, source, spatializer, biome (has_biome), zone pos/radius, gen_type
+- Ambience3D: listener, layers 8, point sources 16 (source/spat/gain/active), reverb + 4 reverb zones, biome_params, weather, sr, master gain ramping, time, time_of_day, weather_intensity, RNG
+- Init: listener, reverb (room 0.5 damp 0.5 wet 0.25 dry 0.85), weather, biome_params forest, tod 0.5, RNG, spatializers
+- Set listener, set biome (updates layers with biome), set weather, add point source (pos/min/max/gain), set pos/gain, remove, add reverb zone (pos/radius/gain/damp/room), set master gain
+- Render: time+=1/sr, mix layers (biome beds) + point sources (procedural sine+noise placeholder spatialized) + weather + reverb zones (gain sum, set reverb wet = gain*0.4, process stereo), master gain, soft clip
+- Presets: forest (biome forest layer 0.6), cave (forest? actually cave layer 0.5 + reverb zone 20m 0.8), ocean (ocean layer 0.7), city (city layer 0.4), nexus (nexus layer 0.6 + reverb 30m 0.6), for_scene maps scene names to biome via ag_biome_from_string + reverb for cave/nexus
+
+## 26. Soundscape (`ag_soundscape`)
+
+- Params: biome, mood, weather, weather_intensity, time_of_day, music_gain, ambience_gain, master_gain, seed, use_3d, use_music
+- Default: forest/calm/clear/tod0.5 music0.6 amb1.0 master1.0 seed1 use_3d1 use_music1
+- For scene: classroom city calm tod0.6 music0.4 amb0.3, grove forest dream tod0.5 music0.45 amb0.6, shore beach warm tod0.6 music0.4 amb0.7, nexus nexus tense tod0.5 music0.5 amb0.6, rift rift rift tod0.2 music0.6 amb0.5, core cave tense tod0, lab lab lab tod0.7 music0.5 amb0.2, festival city festival tod0.8 music0.6 amb0.5, sanctum cave ambient tod0.3 music0.5 amb0.6, alley city night tod0.1 music0.45 amb0.4 rain light 0.3, lighthouse ocean calm tod0.4 music0.4 amb0.7
+- Soundscape: params, ambience_3d, biome fallback, proc mixer music, weather mixer, sr, time, gain, RNG
+- Init: ambience_3d preset for scene, set biome/weather, biome, proc mixer transition mood seed, weather mixer
+- Set params with fade (transitions proc mixer, sets ambience master, etc), set time_of_day, set weather, set mood
+- Render: malloc temp buffers amb/music/weather (frames*2), amb = 3D or biome, music = proc mixer, weather = weather mixer next stereo, mix = amb*amb_gain + music*music_gain + weather*weather_intensity*0.5, soft clip, master_gain. Presets for scenes.
+
+## 27. WAV (`ag_wav`)
 
 - Write float32 (format 3) or int16 (format 1), header 44 bytes little-endian
 - Mem writer: realloc buffer, same header

@@ -219,6 +219,93 @@ int main(void) {
         expect(sum>0.5f, "formant audible");
     }
 
+    /* 3D */
+    {
+        AgListener lis; ag_listener_init(&lis, ag_vec3(0,0,0));
+        ag_listener_set_orientation(&lis, ag_vec3(0,0,-1), ag_vec3(0,1,0));
+        AgSource src; ag_source_init(&src, ag_vec3(5,0,0));
+        ag_source_set_dist(&src, 1.0f, 20.0f, 1.0f, AG_DIST_INVERSE);
+        float att = ag_3d_attenuation(&src, 5.0f);
+        expect(att>0.1f && att<=1.0f, "3d attenuation");
+        AgPanning pan = ag_3d_pan_stereo(&src, &lis);
+        expect(pan.l>=-0.01f && pan.r>=-0.01f, "3d pan");
+        expect(pan.l<=1.01f && pan.r<=1.01f, "3d pan range");
+        AgSpatializer spat; ag_spatializer_init(&spat, 44100);
+        float l,r; ag_spatializer_process(&spat, &src, &lis, 0.5f, &l, &r);
+        expect(fabsf(l)>0.001f || fabsf(r)>0.001f, "spatializer audible");
+    }
+
+    /* Water */
+    {
+        AgOcean ocean; ag_ocean_init(&ocean, 44100);
+        float sum=0; for(int i=0;i<4410;i++) sum+=fabsf(ag_ocean_next(&ocean));
+        expect(sum>0.5f, "ocean audible");
+        AgRiver river; ag_river_init(&river, 44100);
+        sum=0; for(int i=0;i<4410;i++) sum+=fabsf(ag_river_next(&river));
+        expect(sum>0.5f, "river audible");
+        AgDrip drip; ag_drip_init(&drip, 44100);
+        ag_drip_trigger(&drip, 1200, 0.8f);
+        sum=0; for(int i=0;i<4410;i++) sum+=fabsf(ag_drip_next(&drip));
+        expect(sum>0.1f, "drip audible");
+    }
+
+    /* Fire */
+    {
+        AgFire fire; ag_fire_init(&fire, 44100);
+        float sum=0; for(int i=0;i<4410;i++) sum+=fabsf(ag_fire_next(&fire));
+        expect(sum>0.5f, "fire audible");
+    }
+
+    /* Nature */
+    {
+        AgBird bird; ag_bird_init(&bird, 44100, 0);
+        ag_bird_trigger(&bird);
+        float sum=0; for(int i=0;i<4410;i++) sum+=fabsf(ag_bird_next(&bird));
+        expect(sum>0.1f, "bird audible");
+        AgCricket cricket; ag_cricket_init(&cricket, 44100);
+        sum=0; for(int i=0;i<4410;i++) sum+=fabsf(ag_cricket_next(&cricket));
+        expect(sum>0.05f, "cricket audible");
+    }
+
+    /* Weather */
+    {
+        AgWeatherMixer wm; ag_weather_mixer_init(&wm, 44100);
+        ag_weather_mixer_set(&wm, AG_WEATHER_RAIN_MEDIUM, 0.7f);
+        float sum=0; for(int i=0;i<4410;i++){ float l,r; ag_weather_mixer_next_stereo(&wm,&l,&r); sum+=fabsf(l)+fabsf(r); }
+        expect(sum>0.5f, "weather rain audible");
+        ag_weather_mixer_set(&wm, AG_WEATHER_THUNDERSTORM, 0.8f);
+        sum=0; for(int i=0;i<44100;i++){ float l,r; ag_weather_mixer_next_stereo(&wm,&l,&r); sum+=fabsf(l)+fabsf(r); }
+        expect(sum>0.5f, "thunderstorm audible");
+    }
+
+    /* Biome */
+    {
+        AgBiomeParams bp; ag_biome_params_default(&bp, AG_BIOME_FOREST);
+        bp.seed=123;
+        AgBiome biome; ag_biome_init(&biome, &bp, 44100);
+        float buf[44100*2]; ag_biome_render(&biome, buf, 4410);
+        expect(rms(buf, 8820)>0.0005f, "biome forest audible");
+    }
+
+    /* 3D Ambience */
+    {
+        AgAmbience3D amb; ag_ambience_3d_init(&amb, 44100, ag_vec3(0,0,0));
+        ag_ambience_3d_preset_forest(&amb);
+        float buf[44100*2]; ag_ambience_3d_render(&amb, buf, 4410);
+        expect(rms(buf, 8820)>0.0005f, "3d forest audible");
+        ag_reverb_free(&amb.reverb);
+    }
+
+    /* Soundscape */
+    {
+        AgSoundscapeParams ssp; ag_soundscape_params_for_scene("grove",&ssp, 42);
+        AgSoundscape ss; ag_soundscape_init(&ss, &ssp, 44100);
+        float buf[44100*2]; ag_soundscape_render(&ss, buf, 4410);
+        expect(rms(buf, 8820)>0.0005f, "soundscape grove audible");
+        ag_reverb_free(&ss.ambience_3d.reverb);
+        for(int i=0;i<AG_PROC_LAYERS;i++){ ag_reverb_free(&ss.music_mixer.layers[i].reverb); ag_delay_free(&ss.music_mixer.layers[i].delay); }
+    }
+
     /* WAV */
     {
         float buf[4410];

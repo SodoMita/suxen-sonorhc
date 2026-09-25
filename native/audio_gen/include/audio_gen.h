@@ -48,6 +48,14 @@
 #include "ag_sampler.h"
 #include "ag_formant.h"
 #include "ag_presets.h"
+#include "ag_3d.h"
+#include "ag_water.h"
+#include "ag_fire.h"
+#include "ag_nature.h"
+#include "ag_weather.h"
+#include "ag_biome.h"
+#include "ag_ambience_3d.h"
+#include "ag_soundscape.h"
 
 #ifdef __cplusplus
 extern "C" {

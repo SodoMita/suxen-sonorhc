@@ -64,8 +64,25 @@ static NameBuf sn_type;
 static NameBuf sn_preset;
 static NameBuf sn_freq;
 static NameBuf sn_vel;
+static NameBuf sn_biome;
+static NameBuf sn_weather;
+static NameBuf sn_intensity;
+static NameBuf sn_tod;
+static NameBuf sn_pos;
+static NameBuf sn_forward;
+static NameBuf sn_up;
+static NameBuf sn_amb_class;
+static NameBuf sn_amb_render;
+static NameBuf sn_amb_set_biome;
+static NameBuf sn_amb_set_weather;
+static NameBuf sn_amb_set_listener;
+static NameBuf sn_amb_set_gain;
+static NameBuf sn_amb_add_source;
+static NameBuf sn_min_dist;
+static NameBuf sn_max_dist;
 static NameBuf empty_string;
 static int registered=0;
+static int registered_amb=0;
 
 static void make_name(NameBuf *n, const char *t) { memset(n,0,sizeof(*n)); api.string_name_new_with_utf8_chars(n,t); }
 static void make_string(NameBuf *n, const char *t) { memset(n,0,sizeof(*n)); api.string_new_with_utf8_chars(n,t); }
@@ -98,6 +115,11 @@ typedef struct AgGDE {
     int sr;
 } AgGDE;
 
+typedef struct AgAmbienceGDE {
+    AgAmbience3D amb;
+    int sr;
+} AgAmbienceGDE;
+
 static GDExtensionObjectPtr create_instance(void *userdata, GDExtensionBool notify) {
     (void)userdata; (void)notify;
     AgGDE *g = (AgGDE*)api.mem_alloc(sizeof(AgGDE));
@@ -119,6 +141,27 @@ static void free_instance(void *userdata, GDExtensionClassInstancePtr inst) {
             ag_reverb_free(&g->mixer.layers[i].reverb);
             ag_delay_free(&g->mixer.layers[i].delay);
         }
+        api.mem_free(inst);
+    }
+}
+static GDExtensionObjectPtr create_amb_instance(void *userdata, GDExtensionBool notify) {
+    (void)userdata; (void)notify;
+    AgAmbienceGDE *g = (AgAmbienceGDE*)api.mem_alloc(sizeof(AgAmbienceGDE));
+    if(!g) return 0;
+    memset(g,0,sizeof(*g));
+    g->sr=44100;
+    ag_ambience_3d_init(&g->amb, g->sr, ag_vec3(0,0,0));
+    ag_ambience_3d_preset_forest(&g->amb);
+    GDExtensionObjectPtr obj = api.classdb_construct_object3(&sn_parent);
+    if(!obj){ api.mem_free(g); return 0; }
+    api.object_set_instance(obj, &sn_amb_class, g);
+    return obj;
+}
+static void free_amb_instance(void *userdata, GDExtensionClassInstancePtr inst) {
+    (void)userdata;
+    if(inst){
+        AgAmbienceGDE *g = (AgAmbienceGDE*)inst;
+        ag_reverb_free(&g->amb.reverb);
         api.mem_free(inst);
     }
 }
@@ -314,6 +357,64 @@ static void m_transition(void *userdata, GDExtensionClassInstancePtr inst, const
     return_nil(ret,err);
 }
 
+/* Ambience3D methods */
+static void m_amb_render(void *userdata, GDExtensionClassInstancePtr inst, const GDExtensionConstVariantPtr *args, GDExtensionInt argc, GDExtensionVariantPtr ret, GDExtensionCallError *err) {
+    (void)userdata;
+    if(!inst || argc<1){ api.variant_new_nil(ret); if(err){ err->error=GDEXTENSION_CALL_ERROR_TOO_FEW_ARGUMENTS; err->argument=argc; err->expected=1; } return; }
+    AgAmbienceGDE *gde = (AgAmbienceGDE*)inst;
+    void *arr = api.packed_v2_ptr((GDExtensionVariantPtr)args[0]);
+    int64_t n = call_size(args[0]);
+    if(n<=0){ return_nil(ret,err); return; }
+    float *base = (float*)api.packed_v2_op(arr,0);
+    int contiguous=0;
+    if(n>=2){ float *second=(float*)api.packed_v2_op(arr,1); contiguous = second==base+2; } else contiguous=1;
+    if(contiguous){
+        ag_ambience_3d_render(&gde->amb, base, (int)n);
+    } else {
+        float *tmp=(float*)api.mem_alloc(sizeof(float)*n*2);
+        if(tmp){
+            ag_ambience_3d_render(&gde->amb, tmp, (int)n);
+            for(int64_t i=0;i<n;i++){
+                float *slot=(float*)api.packed_v2_op(arr,i);
+                if(slot){ slot[0]=tmp[i*2]; slot[1]=tmp[i*2+1]; }
+            }
+            api.mem_free(tmp);
+        }
+    }
+    return_nil(ret,err);
+}
+static void m_amb_set_biome(void *userdata, GDExtensionClassInstancePtr inst, const GDExtensionConstVariantPtr *args, GDExtensionInt argc, GDExtensionVariantPtr ret, GDExtensionCallError *err) {
+    (void)userdata;
+    if(!inst || argc<3){ api.variant_new_nil(ret); if(err){ err->error=GDEXTENSION_CALL_ERROR_TOO_FEW_ARGUMENTS; err->argument=argc; err->expected=3; } return; }
+    AgAmbienceGDE *gde = (AgAmbienceGDE*)inst;
+    int biome = (int)read_int_arg(args[0]);
+    double tod = read_float_arg(args[1]);
+    double weather = read_float_arg(args[2]);
+    if(biome<0) biome=0; if(biome>=AG_BIOME_COUNT) biome=0;
+    ag_ambience_3d_set_biome(&gde->amb, (AgBiomeType)biome, (float)tod, (float)weather);
+    return_nil(ret,err);
+}
+static void m_amb_set_weather(void *userdata, GDExtensionClassInstancePtr inst, const GDExtensionConstVariantPtr *args, GDExtensionInt argc, GDExtensionVariantPtr ret, GDExtensionCallError *err) {
+    (void)userdata;
+    if(!inst || argc<2){ api.variant_new_nil(ret); if(err){ err->error=GDEXTENSION_CALL_ERROR_TOO_FEW_ARGUMENTS; err->argument=argc; err->expected=2; } return; }
+    AgAmbienceGDE *gde = (AgAmbienceGDE*)inst;
+    int wtype = (int)read_int_arg(args[0]);
+    double intens = read_float_arg(args[1]);
+    if(wtype<0) wtype=0; if(wtype>=AG_WEATHER_COUNT) wtype=0;
+    ag_ambience_3d_set_weather(&gde->amb, (AgWeatherType)wtype, (float)intens);
+    return_nil(ret,err);
+}
+static void m_amb_set_gain(void *userdata, GDExtensionClassInstancePtr inst, const GDExtensionConstVariantPtr *args, GDExtensionInt argc, GDExtensionVariantPtr ret, GDExtensionCallError *err) {
+    (void)userdata;
+    if(!inst || argc<1){ api.variant_new_nil(ret); if(err){ err->error=GDEXTENSION_CALL_ERROR_TOO_FEW_ARGUMENTS; err->argument=argc; err->expected=1; } return; }
+    AgAmbienceGDE *gde = (AgAmbienceGDE*)inst;
+    double gain = read_float_arg(args[0]);
+    double fade = 0.5;
+    if(argc>=2) fade = read_float_arg(args[1]);
+    ag_ambience_3d_set_master_gain(&gde->amb, (float)gain, (float)fade);
+    return_nil(ret,err);
+}
+
 static void bind_method(const NameBuf *name, GDExtensionClassMethodCall call, GDExtensionVariantType ret_type, int has_ret, const GDExtensionVariantType *arg_types, const NameBuf *const *arg_names, uint32_t argc) {
     GDExtensionPropertyInfo args[4]; GDExtensionClassMethodArgumentMetadata meta[4];
     GDExtensionPropertyInfo ret_info; GDExtensionClassMethodInfo info;
@@ -352,10 +453,49 @@ static void bind_method(const NameBuf *name, GDExtensionClassMethodCall call, GD
     api.classdb_register_extension_class_method(lib_ptr, &sn_class, &info);
 }
 
+static void bind_method_amb(const NameBuf *name, GDExtensionClassMethodCall call, GDExtensionVariantType ret_type, int has_ret, const GDExtensionVariantType *arg_types, const NameBuf *const *arg_names, uint32_t argc) {
+    GDExtensionPropertyInfo args[4]; GDExtensionClassMethodArgumentMetadata meta[4];
+    GDExtensionPropertyInfo ret_info; GDExtensionClassMethodInfo info;
+    memset(&info,0,sizeof(info)); memset(args,0,sizeof(args)); memset(&ret_info,0,sizeof(ret_info));
+    for(uint32_t i=0;i<argc && i<4;i++){
+        args[i].type=arg_types[i];
+        args[i].name=(GDExtensionStringNamePtr)arg_names[i];
+        args[i].class_name=&sn_empty;
+        args[i].hint=0;
+        args[i].hint_string=&empty_string;
+        args[i].usage=6;
+        if(arg_types[i]==GDEXTENSION_VARIANT_TYPE_INT) meta[i]=GDEXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT64;
+        else if(arg_types[i]==GDEXTENSION_VARIANT_TYPE_FLOAT) meta[i]=GDEXTENSION_METHOD_ARGUMENT_METADATA_REAL_IS_DOUBLE;
+        else meta[i]=GDEXTENSION_METHOD_ARGUMENT_METADATA_NONE;
+    }
+    if(has_ret){
+        ret_info.type=ret_type;
+        ret_info.name=&sn_empty;
+        ret_info.class_name=&sn_empty;
+        ret_info.hint_string=&empty_string;
+        ret_info.usage=6;
+    }
+    info.name=(GDExtensionStringNamePtr)name;
+    info.method_userdata=0;
+    info.call_func=call;
+    info.ptrcall_func=0;
+    info.method_flags=GDEXTENSION_METHOD_FLAGS_DEFAULT;
+    info.has_return_value=has_ret?1:0;
+    info.return_value_info=has_ret?&ret_info:0;
+    info.return_value_metadata=has_ret && ret_type==GDEXTENSION_VARIANT_TYPE_INT ? GDEXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT64 : GDEXTENSION_METHOD_ARGUMENT_METADATA_NONE;
+    info.argument_count=argc;
+    info.arguments_info=argc?args:0;
+    info.arguments_metadata=argc?meta:0;
+    info.default_argument_count=0;
+    info.default_arguments=0;
+    api.classdb_register_extension_class_method(lib_ptr, &sn_amb_class, &info);
+}
+
 static void register_class(void) {
     GDExtensionClassCreationInfo6 info; memset(&info,0,sizeof(info));
-    if(registered) return;
+    if(registered && registered_amb) return;
     make_name(&sn_class,"AudioGen");
+    make_name(&sn_amb_class,"Ambience3D");
     make_name(&sn_parent,"RefCounted");
     make_name(&sn_empty,"");
     make_name(&sn_size,"size");
@@ -373,37 +513,79 @@ static void register_class(void) {
     make_name(&sn_preset,"preset");
     make_name(&sn_freq,"freq");
     make_name(&sn_vel,"vel");
+    make_name(&sn_biome,"biome");
+    make_name(&sn_weather,"weather");
+    make_name(&sn_intensity,"intensity");
+    make_name(&sn_tod,"time_of_day");
+    make_name(&sn_pos,"pos");
+    make_name(&sn_forward,"forward");
+    make_name(&sn_up,"up");
+    make_name(&sn_amb_render,"render_ambience");
+    make_name(&sn_amb_set_biome,"set_biome");
+    make_name(&sn_amb_set_weather,"set_weather");
+    make_name(&sn_amb_set_listener,"set_listener");
+    make_name(&sn_amb_set_gain,"set_gain");
+    make_name(&sn_amb_add_source,"add_point_source");
+    make_name(&sn_min_dist,"min_dist");
+    make_name(&sn_max_dist,"max_dist");
     make_string(&empty_string,"");
-    info.is_exposed=1;
-    info.create_instance_func=create_instance;
-    info.free_instance_func=free_instance;
-    api.classdb_register_extension_class6(lib_ptr, &sn_class, &sn_parent, &info);
 
-    GDExtensionVariantType t_v2[1]={GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY};
-    const NameBuf *n_frames[1]={&sn_frames};
-    GDExtensionVariantType t_int_v2[2]={GDEXTENSION_VARIANT_TYPE_INT, GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY};
-    const NameBuf *n_type_frames[2]={&sn_type,&sn_frames};
-    GDExtensionVariantType t_int_v2_float[3]={GDEXTENSION_VARIANT_TYPE_INT, GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY, GDEXTENSION_VARIANT_TYPE_FLOAT};
-    const NameBuf *n_preset_frames_freq[3]={&sn_preset,&sn_frames,&sn_freq};
-    GDExtensionVariantType t_mood_root_bpm_fade[4]={GDEXTENSION_VARIANT_TYPE_INT,GDEXTENSION_VARIANT_TYPE_FLOAT,GDEXTENSION_VARIANT_TYPE_FLOAT,GDEXTENSION_VARIANT_TYPE_FLOAT};
-    const NameBuf *n_mood_root_bpm_fade[4]={&sn_mood,&sn_root,&sn_bpm,&sn_gain};
+    if(!registered){
+        info.is_exposed=1;
+        info.create_instance_func=create_instance;
+        info.free_instance_func=free_instance;
+        api.classdb_register_extension_class6(lib_ptr, &sn_class, &sn_parent, &info);
 
-    bind_method(&sn_render_sfx, m_render_sfx, GDEXTENSION_VARIANT_TYPE_NIL,0, t_int_v2, n_type_frames,2);
-    bind_method(&sn_render_drum, m_render_drum, GDEXTENSION_VARIANT_TYPE_NIL,0, t_int_v2, n_type_frames,2);
-    bind_method(&sn_render_fm, m_render_fm, GDEXTENSION_VARIANT_TYPE_NIL,0, t_int_v2_float, n_preset_frames_freq,3);
-    bind_method(&sn_render_proc, m_render_proc, GDEXTENSION_VARIANT_TYPE_NIL,0, t_v2, n_frames,1);
-    bind_method(&sn_class, m_transition, GDEXTENSION_VARIANT_TYPE_NIL,0, t_mood_root_bpm_fade, n_mood_root_bpm_fade,4); /* actually transition */
-    /* rename transition method: we bound with sn_class name by mistake, fix */
-    /* Re-bind with proper name "transition" */
-    NameBuf sn_trans; make_name(&sn_trans,"transition");
-    bind_method(&sn_trans, m_transition, GDEXTENSION_VARIANT_TYPE_NIL,0, t_mood_root_bpm_fade, n_mood_root_bpm_fade,4);
+        GDExtensionVariantType t_v2[1]={GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY};
+        const NameBuf *n_frames[1]={&sn_frames};
+        GDExtensionVariantType t_int_v2[2]={GDEXTENSION_VARIANT_TYPE_INT, GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY};
+        const NameBuf *n_type_frames[2]={&sn_type,&sn_frames};
+        GDExtensionVariantType t_int_v2_float[3]={GDEXTENSION_VARIANT_TYPE_INT, GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY, GDEXTENSION_VARIANT_TYPE_FLOAT};
+        const NameBuf *n_preset_frames_freq[3]={&sn_preset,&sn_frames,&sn_freq};
+        GDExtensionVariantType t_mood_root_bpm_fade[4]={GDEXTENSION_VARIANT_TYPE_INT,GDEXTENSION_VARIANT_TYPE_FLOAT,GDEXTENSION_VARIANT_TYPE_FLOAT,GDEXTENSION_VARIANT_TYPE_FLOAT};
+        const NameBuf *n_mood_root_bpm_fade[4]={&sn_mood,&sn_root,&sn_bpm,&sn_gain};
 
-    registered=1;
+        bind_method(&sn_render_sfx, m_render_sfx, GDEXTENSION_VARIANT_TYPE_NIL,0, t_int_v2, n_type_frames,2);
+        bind_method(&sn_render_drum, m_render_drum, GDEXTENSION_VARIANT_TYPE_NIL,0, t_int_v2, n_type_frames,2);
+        bind_method(&sn_render_fm, m_render_fm, GDEXTENSION_VARIANT_TYPE_NIL,0, t_int_v2_float, n_preset_frames_freq,3);
+        bind_method(&sn_render_proc, m_render_proc, GDEXTENSION_VARIANT_TYPE_NIL,0, t_v2, n_frames,1);
+        NameBuf sn_trans; make_name(&sn_trans,"transition");
+        bind_method(&sn_trans, m_transition, GDEXTENSION_VARIANT_TYPE_NIL,0, t_mood_root_bpm_fade, n_mood_root_bpm_fade,4);
+        registered=1;
+    }
+
+    if(!registered_amb){
+        GDExtensionClassCreationInfo6 info2; memset(&info2,0,sizeof(info2));
+        info2.is_exposed=1;
+        info2.create_instance_func=create_amb_instance;
+        info2.free_instance_func=free_amb_instance;
+        api.classdb_register_extension_class6(lib_ptr, &sn_amb_class, &sn_parent, &info2);
+
+        GDExtensionVariantType t_v2[1]={GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY};
+        const NameBuf *n_frames[1]={&sn_frames};
+        GDExtensionVariantType t_biome_tod_weather[3]={GDEXTENSION_VARIANT_TYPE_INT,GDEXTENSION_VARIANT_TYPE_FLOAT,GDEXTENSION_VARIANT_TYPE_FLOAT};
+        const NameBuf *n_biome_tod_weather[3]={&sn_biome,&sn_tod,&sn_weather};
+        GDExtensionVariantType t_weather_int[2]={GDEXTENSION_VARIANT_TYPE_INT,GDEXTENSION_VARIANT_TYPE_FLOAT};
+        const NameBuf *n_weather_int[2]={&sn_weather,&sn_intensity};
+        GDExtensionVariantType t_gain_fade[2]={GDEXTENSION_VARIANT_TYPE_FLOAT,GDEXTENSION_VARIANT_TYPE_FLOAT};
+        const NameBuf *n_gain_fade[2]={&sn_gain,&sn_bpm};
+
+        bind_method_amb(&sn_amb_render, m_amb_render, GDEXTENSION_VARIANT_TYPE_NIL,0, t_v2, n_frames,1);
+        bind_method_amb(&sn_amb_set_biome, m_amb_set_biome, GDEXTENSION_VARIANT_TYPE_NIL,0, t_biome_tod_weather, n_biome_tod_weather,3);
+        bind_method_amb(&sn_amb_set_weather, m_amb_set_weather, GDEXTENSION_VARIANT_TYPE_NIL,0, t_weather_int, n_weather_int,2);
+        bind_method_amb(&sn_amb_set_gain, m_amb_set_gain, GDEXTENSION_VARIANT_TYPE_NIL,0, t_gain_fade, n_gain_fade,2);
+        registered_amb=1;
+    }
 }
 static void unregister_class(void){
-    if(!registered) return;
-    api.classdb_unregister_extension_class(lib_ptr,&sn_class);
-    registered=0;
+    if(registered){
+        api.classdb_unregister_extension_class(lib_ptr,&sn_class);
+        registered=0;
+    }
+    if(registered_amb){
+        api.classdb_unregister_extension_class(lib_ptr,&sn_amb_class);
+        registered_amb=0;
+    }
 }
 static void init_level(void *ud, GDExtensionInitializationLevel lvl){
     (void)ud; if(lvl==GDEXTENSION_INITIALIZATION_SCENE) register_class();
