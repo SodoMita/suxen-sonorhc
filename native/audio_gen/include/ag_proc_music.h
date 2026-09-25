@@ -17,10 +17,6 @@
 extern "C" {
 #endif
 
-/* High-level procedural music generator - combines all previous generators
- * into genre-specific live scores, similar to SceneScore but more varied.
- */
-
 typedef enum {
     AG_MOOD_CALM = 0,
     AG_MOOD_WARM,
@@ -51,29 +47,31 @@ typedef struct AgProcSpec {
     int bass_hits_per_bar;
     int pluck_shift;
     int bass_shift;
-    int shape; /* 0=sine,1=warm,2=hard */
+    int shape;
+    float humanize; /* 0..1 */
+    float swing;    /* 0..1 */
+    float width;    /* stereo width */
     uint64_t seed;
     uint64_t id;
 } AgProcSpec;
 
-/* Voice pool for proc music */
 #define AG_PROC_MAX_VOICES 64
 #define AG_PROC_QUEUE 256
 
 typedef struct AgProcEvent {
     double time;
     int midi;
-    int kind; /* 0 pad,1 pluck,2 bass,3 drum */
+    int kind;
     float vel;
     float pan;
     float dur;
 } AgProcEvent;
 
 typedef struct AgProcVoice {
-    AgOsc osc;
-    AgOsc osc2;
+    AgOsc osc, osc2, osc3;
     AgEnv env;
-    AgBiquad filter;
+    AgBiquad filter, filter2;
+    AgDCBlock dc;
     double t;
     double dur;
     float peak;
@@ -81,6 +79,7 @@ typedef struct AgProcVoice {
     float gl, gr;
     int kind;
     int active;
+    double age;
 } AgProcVoice;
 
 typedef struct AgProcMusic {
@@ -105,6 +104,8 @@ typedef struct AgProcMusic {
     int use_delay;
     AgDrumMachine drums;
     int has_drums;
+    AgBiquad master_lp;
+    AgDCBlock master_dc;
 } AgProcMusic;
 
 void ag_proc_spec_default(AgProcSpec *spec, AgMood mood, uint64_t seed);
@@ -116,7 +117,6 @@ void ag_proc_set_gain(AgProcMusic *pm, float gain, float fade_sec);
 void ag_proc_render(AgProcMusic *pm, float *interleaved_stereo, int frames);
 int ag_proc_active(const AgProcMusic *pm);
 
-/* Mixer of 2 proc layers for crossfading, like SceneScore */
 #define AG_PROC_LAYERS 2
 
 typedef struct AgProcMixer {
@@ -127,6 +127,8 @@ typedef struct AgProcMixer {
     float master_step;
     double sr;
     int notes_scheduled;
+    AgBiquad master_lp;
+    AgDCBlock master_dc;
 } AgProcMixer;
 
 void ag_proc_mixer_init(AgProcMixer *mix, double sr);
@@ -137,7 +139,6 @@ void ag_proc_mixer_set_gain(AgProcMixer *mix, float gain, float fade_sec);
 void ag_proc_mixer_render(AgProcMixer *mix, float *interleaved, int frames);
 int ag_proc_mixer_active(const AgProcMixer *mix);
 
-/* Helper to get spec from string mood */
 AgMood ag_mood_from_string(const char *str);
 const char* ag_mood_to_string(AgMood mood);
 
