@@ -57,6 +57,9 @@
 #include "ag_ambience_3d.h"
 #include "ag_soundscape.h"
 #include "ag_material.h"
+#include "ag_terrain.h"
+#include "ag_scifi.h"
+#include "ag_magic.h"
 
 #ifdef __cplusplus
 extern "C" {
